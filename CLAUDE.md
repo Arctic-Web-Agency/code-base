@@ -4,149 +4,168 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-**Arctic Web** is a Turborepo monorepo containing a Next.js frontend and NestJS backend with shared TypeScript packages. The project uses PNPM workspaces and includes internationalization (i18n), theming, and Redux state management.
+Arctic Web (acw) is a Turborepo monorepo with a Next.js frontend, NestJS backend, and shared packages. The project is containerized with Docker and uses pnpm workspaces.
 
-## Development Commands
+## Tech Stack
 
-### Root-level Commands (run from project root)
-- `pnpm dev` - Start all dev servers concurrently (frontend on :3000, backend on :3001)
-- `pnpm build` - Build all apps and packages
-- `pnpm lint` - Run ESLint across all workspaces
-- `pnpm format` - Format code with Prettier
+- **Frontend**: Next.js 16 with App Router, React 19, TailwindCSS 4, Redux Toolkit, next-intl for i18n
+- **Backend**: NestJS with MongoDB (Mongoose), ConfigModule for environment management
+- **Monorepo**: Turborepo with pnpm workspaces
+- **Package Manager**: pnpm 10.20.0
+- **TypeScript**: Project references for cross-package type checking
 
-### Frontend (apps/web)
-Navigate to `apps/web` for these commands:
-- `pnpm dev` - Start Next.js dev server with Turbopack
-- `pnpm build` - Production build (outputs to `.next/`)
-- `pnpm start` - Start production server
-- `pnpm lint` - Run Next.js linter
+## Common Commands
 
-### Backend (apps/api)
-Navigate to `apps/api` for these commands:
-- `pnpm dev` or `pnpm start:dev` - Start NestJS in watch mode
-- `pnpm build` - Build to `dist/` directory
-- `pnpm start` - Start without watch mode
-- `pnpm start:prod` - Start production build (runs `dist/main.js`)
-- `pnpm test` - Run Jest unit tests
-- `pnpm test:e2e` - Run end-to-end tests
-- `pnpm test:watch` - Run tests in watch mode
+### Development
+
+```bash
+# Run all apps in dev mode
+pnpm dev
+
+# Run specific app
+pnpm --filter ./apps/web dev
+pnpm --filter ./apps/api dev
+
+# API-specific dev commands
+cd apps/api
+pnpm start:dev          # Standard dev mode
+pnpm start:debug        # Debug mode with watch
+```
+
+### Build and Lint
+
+```bash
+# Build all apps (Turbo will handle dependencies)
+pnpm build
+
+# Lint all apps
+pnpm lint
+
+# Format code with Prettier
+pnpm format
+
+# Build specific app
+pnpm --filter ./apps/web build
+pnpm --filter ./apps/api build
+```
+
+### Testing (API)
+
+```bash
+cd apps/api
+pnpm test              # Run unit tests
+pnpm test:watch        # Watch mode
+pnpm test:cov          # Coverage report
+pnpm test:e2e          # E2E tests
+pnpm test:debug        # Debug tests
+```
+
+### Docker
+
+```bash
+# Development with local MongoDB
+docker compose -f docker-compose.dev.yml up --build
+
+# Production (requires Atlas MongoDB URI in .env)
+docker compose up --build -d
+
+# Stop containers
+docker compose -f docker-compose.dev.yml down
+docker compose down
+```
 
 ## Architecture
 
 ### Monorepo Structure
-```
-apps/
-  web/          # Next.js 16 frontend
-  api/          # NestJS backend
-packages/
-  types/        # Shared TypeScript types (referenced as @acw/types)
-  shared/       # Shared utilities/components (currently minimal)
-```
 
-The root `tsconfig.json` uses TypeScript project references to link all workspaces. Turborepo manages build orchestration with task dependencies defined in `turbo.json`.
+The project uses TypeScript project references (`tsconfig.json` at root) to ensure proper type checking across packages:
+
+- `apps/web` → Next.js frontend (depends on `@acw/types`)
+- `apps/api` → NestJS backend
+- `packages/types` → Shared TypeScript types (`@acw/types`)
+- `packages/shared` → Shared utilities (`@acw/shared`)
 
 ### Frontend Architecture (apps/web)
 
-**Internationalization:**
-- Uses `next-intl` for i18n with UK (Ukrainian) as default locale
-- Routing: `apps/web/src/i18n/routing.ts` defines available locales (uk, en)
-- Translations: `apps/web/messages/{locale}.json`
-- Middleware: `apps/web/src/middleware.ts` handles locale detection and routing
-- All routes are prefixed with locale: `/{locale}/...`
+**App Router Pattern**: Uses Next.js App Router with internationalized routing via `[locale]` dynamic segment.
 
-**State Management:**
-- Redux Toolkit with a single store in `apps/web/src/stores/store.ts`
-- Currently manages settings slice (theme, language)
-- Store Provider: Wraps app in `apps/web/src/stores/providers/StoreProvider.tsx`
-- Hooks: `apps/web/src/stores/hooks.ts` exports typed `useAppDispatch` and `useAppSelector`
+**State Management**: Redux Toolkit with custom hooks (`@/stores/hooks`), providers in `StoreProvider`.
 
-**Theming:**
-- CSS-based theming with light/dark modes
-- Theme styles: `apps/web/src/shared/styles/themes.css`
-- Theme is persisted to localStorage
-- Initial theme script in `apps/web/src/app/[locale]/layout.tsx` prevents flash of unstyled content
-- Theme state managed via Redux settings slice
+**Feature-Sliced Design**: Features organized in `src/features/` (e.g., `change-theme`, `change-lang`), shared UI in `src/shared/ui/`.
 
-**Code Organization:**
-- `features/` - Feature-specific components (e.g., ChangeLang, ChangeTheme)
-- `shared/ui/` - Reusable UI components (UiLogo, UiSelect, UiSwitch)
-- `shared/icons/` - SVG icon components
-- `shared/config/` - Environment variable loading
-- `shared/seo/` - SEO metadata configuration
-- `stores/` - Redux store, slices, and selectors
+**Theme System**: Client-side theme switching with localStorage persistence and SSR flash prevention via inline script in layout.
 
-**Next.js Configuration:**
-- Output mode: `standalone`
-- Uses `next-intl` plugin
-- Turbopack enabled for dev mode
-- Tailwind CSS v4 for styling
+**Internationalization**: next-intl with locale routing, messages in `messages/` directory.
+
+**Path Aliases**: Uses `@/` for `src/` directory (configured in `tsconfig.json`).
 
 ### Backend Architecture (apps/api)
 
-**NestJS Structure:**
-- Entry point: `apps/api/src/main.ts` (listens on port 4000 by default)
-- Module-based architecture with `AppModule` as root
-- MongoDB connection via Mongoose (`@nestjs/mongoose`)
-- CORS enabled for all origins with credentials
+**Module Pattern**: NestJS modules in `src/modules/` (e.g., `kv` module for key-value storage).
 
-**Environment Configuration:**
-- Centralized in `apps/api/src/config/env.ts`
-- Required vars: `MONGODB_URI`, `MONGODB_DB_NAME`
-- Optional: `PORT` (defaults to 4000)
-- Uses helper function that throws on missing required variables
+**Database**: MongoDB with Mongoose, connection configured in `app.module.ts` using environment variables.
 
-**Modules:**
-- `modules/kv/` - Key-value store module (example implementation)
-  - Schema defined in `kv.schema.ts`
-  - Service layer in `kv.service.ts`
-  - REST controller in `kv.controller.ts`
+**Configuration**: Environment variables loaded via `@nestjs/config` and typed in `src/config/env.ts`.
 
-**Testing:**
-- Jest configuration in `apps/api/package.json`
-- Unit tests: `*.spec.ts` files
-- E2E tests: `test/` directory with separate config (`test/jest-e2e.json`)
+**CORS**: Enabled globally with credentials support in `main.ts`.
 
 ### Shared Packages
 
-**@acw/types (packages/types):**
-- Exports TypeScript types used across frontend and backend
-- Example: `CLang` constant and `TLang` type for language codes
-- Import as: `import { CLang } from '@acw/types'`
+**@acw/types**: TypeScript types exported from `src/index.ts`, consumed directly (no build step).
 
-**packages/shared:**
-- Currently minimal, intended for shared utilities/components
+**@acw/shared**: Compiled utilities with build step (`tsc -b`), outputs to `dist/`.
+
+### Docker Architecture
+
+**Development**: Uses `docker-compose.dev.yml` with local MongoDB container, hot reloading enabled via polling for compatibility.
+
+**Production**: Uses `docker-compose.yml` expecting external MongoDB Atlas URI.
+
+**Build Strategy**: Multi-stage Dockerfiles for both apps, using pnpm with frozen lockfile and workspace filtering.
 
 ## Environment Variables
 
-Create a `.env` file in the project root:
+Required variables in `.env`:
 
 ```env
-NODE_ENV=development
-MONGODB_URI=mongodb://localhost:27017/myapp
+NODE_ENV=production
+WEB_PORT=3000
+API_PORT=3001
+MONGODB_URI=mongodb://localhost:27017  # or Atlas URI for production
 MONGODB_DB_NAME=myapp
 NEXT_PUBLIC_BASE_URL=http://localhost:3000
 NEXT_PUBLIC_API_URL=http://localhost:3001
 ```
 
-For production, use MongoDB Atlas URI:
-```env
-MONGODB_URI=mongodb+srv://user:pass@cluster.example.mongodb.net/myapp
-```
+## Code Style
 
-## Key Technical Details
+- **Prettier**: Single quotes, 4-space tabs, semicolons, 80-char width
+- **Tailwind Plugin**: Applied only to `apps/web` files
+- **ESLint**: Configured per-app (Next.js for web, TypeScript ESLint for api)
 
-- **Package Manager:** PNPM 10.20.0 (specified in `package.json`)
-- **TypeScript:** v5.9.3 with strict mode enabled
-- **Build Tool:** Turborepo with task caching (dev tasks have `cache: false`)
-- **Frontend Framework:** Next.js 16 with App Router
-- **Backend Framework:** NestJS with Express platform
-- **Database:** MongoDB via Mongoose ODM
-- **Styling:** Tailwind CSS v4 with custom themes
-- **Font:** Mulish (Google Fonts) with Cyrillic and Latin subsets
+## Key Patterns
 
-## Important Notes
+### Adding a New API Module
 
-- The monorepo uses TypeScript project references - changes to `packages/*` are automatically picked up by dependent apps
-- Frontend uses standalone output mode, suitable for deployment
-- All locale-aware routes must be prefixed with `[locale]` dynamic segment
-- Theme initialization script must run before React hydration to prevent flashing
+1. Create module directory in `apps/api/src/modules/`
+2. Create module, controller, service, and schema files
+3. Import module in `app.module.ts`
+
+### Adding a Shared Type
+
+1. Export from `packages/types/src/index.ts`
+2. Use in web with `@acw/types` import
+3. No build step required (direct TypeScript consumption)
+
+### Adding a Redux Slice
+
+1. Create slice in `apps/web/src/stores/<name>/`
+2. Export from `index.ts` with selectors
+3. Register in `store.ts`
+4. Use via custom hooks from `@/stores/hooks`
+
+### Working with Internationalization
+
+1. Add translations to `apps/web/messages/<locale>.json`
+2. Use `useTranslations()` hook in components
+3. Locale routing handled automatically via middleware

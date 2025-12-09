@@ -1,29 +1,31 @@
 # Repository Guidelines
 
 ## Project Structure & Module Organization
-- Monorepo managed by Turborepo and PNPM workspaces; root configs live beside `pnpm-workspace.yaml`, `tsconfig.json`, and `turbo.json`.
-- Apps: `apps/web` (Next.js frontend) and `apps/api` (NestJS backend). Use `src/` within each app for feature code; public assets stay under each app’s `public/`.
-- Shared code: `packages/shared` for reusable UI pieces and `packages/types` for cross-cutting TypeScript contracts. Prefer importing from these packages instead of duplicating logic.
+- Monorepo managed by Turborepo with `pnpm` workspaces: apps live in `apps/` (`web` for Next.js, `api` for NestJS), shared code in `packages/` (`shared` UI utilities, `types` for shared TypeScript contracts).
+- Root configs (`tsconfig.json`, `turbo.json`, `.prettierrc`) define cross-project standards; app-specific configs sit under each app (for example `apps/web/tsconfig.json`, `apps/api/tsconfig.json`).
+- Keep features colocated: React feature components under `apps/web/src/features`, Redux state under `apps/web/src/stores`, and Nest modules/controllers under `apps/api/src`.
 
 ## Build, Test, and Development Commands
-- `pnpm dev` — runs all dev servers via Turbo (`web` on `:3000`, `api` on `:3001`).
-- `pnpm --filter web dev` / `pnpm --filter api start:dev` — work on a single app.
-- `pnpm build` — builds all apps; outputs land in `.next/` (web) and `dist/` (api).
-- `pnpm lint` — runs linting for every package; `pnpm format` — Prettier write across the repo.
-- API tests: `pnpm --filter api test` (unit), `test:watch`, `test:cov`, or `test:e2e` for the e2e suite.
+- Run everything: `pnpm dev` (all dev servers), `pnpm build` (full build), `pnpm lint` (ESLint across workspace), `pnpm format` (Prettier).
+- App-specific examples: `pnpm --filter web dev` (Next.js with Turbopack), `pnpm --filter api start:dev` (NestJS watch mode).
+- Tests: `pnpm --filter api test` for unit tests, `pnpm --filter api test:cov` for coverage, `pnpm --filter api test:e2e` for e2e suites.
+- Containers: `docker compose -f docker-compose.dev.yml up --build` for local stack; use `docker-compose.yml` for production-like runs.
 
 ## Coding Style & Naming Conventions
-- Language: TypeScript everywhere. Keep modules small and co-locate tests with the code when practical.
-- Prettier: single quotes, trailing commas (es5), tabs set to 4 spaces, semicolons enforced, `printWidth` 80; Tailwind class sorting is enabled for `apps/web`.
-- ESLint: Next.js rules in `apps/web`; NestJS/TypeScript rules in `apps/api`. Resolve lint warnings before pushing.
-- Naming: camelCase for variables/functions, PascalCase for React components and Nest providers, SCREAMING_SNAKE_CASE for constants. Prefer `*.tsx` for React components and `*.spec.ts` for tests.
+- Prettier rules: 4-space indent, single quotes, semicolons, trailing commas (es5), 80-char width; Tailwind plugin enabled for web app formatting.
+- TypeScript strict mode is on; prefer explicit types over `any`. Keep imports ordered and dead code removed.
+- Naming: React components and files in `features/` use PascalCase (e.g., `ChangeTheme.tsx`); Redux slices live under `stores/` and end with `Slice`. NestJS files follow `*.module.ts`, `*.controller.ts`, `*.service.ts`.
 
 ## Testing Guidelines
-- Backend: Jest with `*.spec.ts` under `apps/api/src`; coverage output lives in `apps/api/coverage` when using `test:cov`. Add unit specs alongside new providers/controllers and mock external services.
-- Frontend: add component/integration tests near the feature (Testing Library + Jest is the expected stack even if not yet scaffolded). At minimum, cover critical UI states and locale-dependent rendering.
-- Keep tests deterministic; avoid live network/DB calls by stubbing or using in-memory fixtures.
+- API uses Jest with `*.spec.ts` (see `apps/api/src/app.controller.spec.ts`). Place unit tests near the code under test.
+- Aim for meaningful coverage via `test:cov`; add e2e cases when touching controllers/routes.
+- For web features, add React tests alongside components (e.g., `ChangeTheme.spec.tsx`) and favor integration-style checks over snapshots.
 
 ## Commit & Pull Request Guidelines
-- Commits: concise, imperative subjects (e.g., `Add user locale switcher`); group related changes and keep noise low.
-- PRs: include a summary of the change, linked issue/task, testing notes (`pnpm test`, `pnpm lint`, etc.), and screenshots or API examples when UI or contract changes occur.
-- Ensure `.env` values are provided locally but never committed; document new env keys in PR descriptions and update `.env.example` if added.
+- Commits: keep short, imperative subjects (e.g., `api: add health check`, `web: fix locale middleware`); group related changes and avoid mixed concerns.
+- Pull requests: include a succinct summary, testing notes (`pnpm --filter api test`, `pnpm --filter web lint`), linked issue/feature, and UI screenshots or Loom when UI changes occur.
+- Ensure new code passes `pnpm lint` and relevant tests before requesting review.
+
+## Security & Configuration
+- Never commit secrets; `.env` belongs at repo root and is excluded from Git. Keep API/DB credentials out of sample configs.
+- When adding new config values, document them in `.env` (or an example file) and wire them through `@nestjs/config` or Next.js runtime envs as appropriate.

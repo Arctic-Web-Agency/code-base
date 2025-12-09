@@ -22,6 +22,10 @@ acw/
 ├── .prettierrc               # Конфіг Prettier
 ├── .prettierignore           # Ігнор для Prettier
 │
+├── .dockerignore             # Ігнор для Docker
+├── docker-compose.dev.yml    # дев-середовище в Docker
+├── docker-compose.yml        # прод-середовище в Docker
+│
 ├── package.json              # Скрипти та загальні залежності
 ├── pnpm-lock.yaml
 ├── pnpm-workspace.yaml       # Робоча область для монорепозиторію
@@ -62,18 +66,12 @@ acw/
 
 ---
 
-### 2️⃣ Встановлення залежностей
+### 2️⃣ Запуск Docker
 
 Переконайся, що встановлено:
 
-* **Node.js** (версія 18 або новіша)
-* **PNPM** (рекомендується версія 10+)
-
-Встанови залежності:
-
-```bash
-pnpm install
-```
+* **Docker**
+* **Docker Compose**
 
 ---
 
@@ -82,8 +80,10 @@ pnpm install
 Приклад вмісту:
 
 ```env
-NODE_ENV=development
-MONGODB_URI=mongodb://localhost:27017/myapp
+NODE_ENV=production
+WEB_PORT=3000
+API_PORT=3001
+MONGODB_DB_NAME=myapp
 NEXT_PUBLIC_BASE_URL=http://localhost:3000
 NEXT_PUBLIC_API_URL=http://localhost:3001
 ```
@@ -96,31 +96,48 @@ NEXT_PUBLIC_API_URL=http://localhost:3001
 
 ---
 
-### 4️⃣ Запуск для розробки
-
-Запусти всі dev-сервери одночасно:
+### 4️⃣ Запуск для розробки (з локальною Mongo)
 
 ```bash
-pnpm dev
+  docker compose -f docker-compose.dev.yml up --build
 ```
 
 * Frontend: [http://localhost:3000](http://localhost:3000)
 * Backend: [http://localhost:3001](http://localhost:3001)
+* MongoDB: порт 27017 (для перевірки, якщо потрібно)
 
-> **Примітка:** Переконайся, що MongoDB запущена локально на порту 27017 або використовуй Atlas URI у `.env`.
+Зупинити:
+
+```bash
+  docker compose -f docker-compose.dev.yml down
+```
 
 ---
 
-### 5️⃣ Збірка проєкту
+### 5️⃣ Запуск для продакшну (Atlas DB)
+
+1. У `.env` додай свій Atlas `MONGODB_URI`.
+2. Запусти:
+
+    ```bash
+    docker compose up --build -d
+    ```
+3. Відкрий:
+
+    * Frontend → [http://localhost:3000](http://localhost:3000)
+    * Backend → [http://localhost:3001](http://localhost:3001)
+
+Зупинити:
 
 ```bash
-pnpm build
+  docker compose down
 ```
 
 ---
 
 ### 6️⃣ Все готово
 
-* Весь код (фронт, бек, спільні пакети) вже зв'язані через **Turborepo**.
-* Використовуй `pnpm dev` для розробки та `pnpm build` для збірки.
+* Весь код (фронт, бек, спільні пакети) вже зв’язані через **Turborepo**.
+* Нічого додатково встановлювати локально не потрібно.
+* Всі залежності інсталюються всередині контейнерів.
 
