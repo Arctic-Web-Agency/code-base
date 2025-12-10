@@ -1,7 +1,7 @@
 const UiLogo = () => {
     return (
         <p className="flex items-center gap-0.5 text-5xl">
-            <span className="text-snow font-bold">Arctic Web</span>
+            <span className="text-text-primary font-bold">Arctic Web</span>
         </p>
     );
 };

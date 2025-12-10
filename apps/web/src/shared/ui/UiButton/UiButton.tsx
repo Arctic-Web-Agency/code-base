@@ -23,24 +23,24 @@ const getVariantClasses = (
     const base = ['transition-colors', 'duration-200'];
     const variants: Record<UiButtonVariant, string[]> = {
         primary: [
-            'bg-blue-600',
+            'bg-primary',
             'text-white',
-            withHover ? 'hover:bg-blue-700' : '',
-            'active:bg-blue-800',
-            withFocus ? 'focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2' : '',
+            withHover ? 'hover:bg-primary-light' : '',
+            'active:bg-primary-dark',
+            withFocus ? 'focus-visible:ring-2 focus-visible:ring-primary-light focus-visible:ring-offset-2' : '',
         ],
         secondary: [
-            'border border-blue-600',
-            'text-blue-700',
-            withHover ? 'hover:bg-blue-50' : '',
-            'active:bg-blue-100',
-            withFocus ? 'focus-visible:ring-2 focus-visible:ring-blue-200 focus-visible:ring-offset-2' : '',
+            'border border-primary',
+            'text-primary-dark',
+            withHover ? 'hover:bg-primary-light/30' : '',
+            'active:bg-primary-light/50',
+            withFocus ? 'focus-visible:ring-2 focus-visible:ring-primary-light focus-visible:ring-offset-2' : '',
         ],
         ghost: [
-            'text-gray-800',
-            withHover ? 'hover:bg-gray-100' : '',
-            'active:bg-gray-200',
-            withFocus ? 'focus-visible:ring-2 focus-visible:ring-gray-200 focus-visible:ring-offset-2' : '',
+            'text-text-secondary',
+            withHover ? 'hover:bg-surface-hover' : '',
+            'active:bg-surface-hover/80',
+            withFocus ? 'focus-visible:ring-2 focus-visible:ring-surface-hover focus-visible:ring-offset-2' : '',
         ],
     };
 
