@@ -38,7 +38,6 @@ export default function HomePage() {
                     <UiButton as="link" href={`/${locale}/universal-components`} size="lg">
                         {welcomeT('cta')}
                     </UiButton>
-                    <p className="text-sm text-text-secondary">{welcomeT('cta_helper')}</p>
                 </div>
             </section>
         </main>
