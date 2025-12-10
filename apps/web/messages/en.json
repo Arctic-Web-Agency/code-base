@@ -2,6 +2,22 @@
     "all_pages": {
         "title": "We build digital solutions that grow your business"
     },
+    "universal_components_page": {
+        "head": {
+            "title": "Universal components index — Arctic Web",
+            "description": "Browse reusable Arctic Web components starting with the universal button."
+        },
+        "heading": "Universal components",
+        "intro": "Reusable building blocks shared across CodeBase projects. Explore previews and jump to the source folders for implementation details.",
+        "components": {
+            "button": {
+                "name": "Universal button",
+                "description": "Flexible call-to-action with primary, secondary, and ghost styles.",
+                "preview": "Primary action"
+            }
+        },
+        "github_label": "View on GitHub"
+    },
     "welcome_page": {
         "head": {
             "title": "Full-Cycle Website Design and Development — Arctic Web",
