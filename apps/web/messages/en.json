@@ -8,7 +8,7 @@
             "description": "Browse reusable Arctic Web components starting with the universal button."
         },
         "heading": "Universal components",
-        "intro": "Reusable building blocks shared across CodeBase projects. Explore previews and jump to the source folders for implementation details.",
+        "intro": "List of shared components with previews and links to source files.",
         "back_button": "Back to home",
         "components": {
             "button": {
