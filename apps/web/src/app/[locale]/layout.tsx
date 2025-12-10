@@ -6,6 +6,7 @@ import { Mulish } from 'next/font/google';
 import '@/app/globals.css';
 import { IPageParams } from '@/shared/types/settings';
 import StoreProvider from '@/stores/providers/StoreProvider';
+import UiHeader from '@/shared/ui/UiHeader';
 
 const setInitialTheme = `
     (function() {
@@ -49,7 +50,10 @@ export default async function LocaleLayout({
 
             <body className={`${mulish.className} bg-background text-text-primary`}>
                 <NextIntlClientProvider>
-                    <StoreProvider>{children}</StoreProvider>
+                    <StoreProvider>
+                        <UiHeader />
+                        {children}
+                    </StoreProvider>
                 </NextIntlClientProvider>
             </body>
         </html>
