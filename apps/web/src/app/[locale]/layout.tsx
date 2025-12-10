@@ -47,7 +47,7 @@ export default async function LocaleLayout({
                 <script dangerouslySetInnerHTML={{ __html: setInitialTheme }} />
             </head>
 
-            <body className={`${mulish.className} bg-onyx text-snow`}>
+            <body className={`${mulish.className} bg-background text-text-primary`}>
                 <NextIntlClientProvider>
                     <StoreProvider>{children}</StoreProvider>
                 </NextIntlClientProvider>

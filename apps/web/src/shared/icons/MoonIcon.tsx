@@ -1,6 +1,6 @@
 import { IIconProps } from '@/shared/icons/types';
 
-const MoonIcon = ({ classes = 'h-5 w-5 fill-ocean' }: IIconProps) => {
+const MoonIcon = ({ classes = 'h-5 w-5 fill-primary' }: IIconProps) => {
     return (
         <svg
             className={`${classes} transition-all duration-300 ease-in-out`}

@@ -30,15 +30,15 @@ export default function HomePage() {
             </header>
 
             <section className="container flex flex-1 flex-col justify-center gap-6 py-12">
-                <p className="text-sm uppercase tracking-[0.25em] text-graphite">CodeBase</p>
-                <h1 className="text-4xl font-semibold text-snow">{welcomeT('heading')}</h1>
-                <p className="max-w-2xl text-lg text-graphite">{welcomeT('description')}</p>
+                <p className="text-sm uppercase tracking-[0.25em] text-text-secondary">CodeBase</p>
+                <h1 className="text-4xl font-semibold text-text-primary">{welcomeT('heading')}</h1>
+                <p className="max-w-2xl text-lg text-text-secondary">{welcomeT('description')}</p>
 
                 <div className="flex flex-wrap items-center gap-4">
                     <UiButton as="link" href={`/${locale}/universal-components`} size="lg">
                         {welcomeT('cta')}
                     </UiButton>
-                    <p className="text-sm text-graphite">{welcomeT('cta_helper')}</p>
+                    <p className="text-sm text-text-secondary">{welcomeT('cta_helper')}</p>
                 </div>
             </section>
         </main>

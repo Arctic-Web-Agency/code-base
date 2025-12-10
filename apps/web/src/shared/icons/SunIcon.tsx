@@ -1,6 +1,6 @@
 import { IIconProps } from '@/shared/icons/types';
 
-const SunIcon = ({ classes = 'h-5 w-5 stroke-ember' }: IIconProps) => {
+const SunIcon = ({ classes = 'h-5 w-5 stroke-primary' }: IIconProps) => {
     return (
         <svg
             className={`${classes} transition-all duration-300 ease-in-out`}
