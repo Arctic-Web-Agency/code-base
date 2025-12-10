@@ -28,7 +28,7 @@ export default function UniversalComponentsPage() {
             description: t('components.button.description'),
             githubUrl: 'https://github.com/KhOlAn/code-base/tree/main/apps/web/src/shared/ui/UiButton',
             preview: (
-                <UiButton variant="primary" size="md">
+                <UiButton variant="filled" size="md">
                     {t('components.button.preview')}
                 </UiButton>
             ),
@@ -38,7 +38,7 @@ export default function UniversalComponentsPage() {
     return (
         <main className="container flex min-h-screen flex-col gap-10 py-12">
             <Link href="/">
-                <UiButton variant="ghost" size="sm">
+                <UiButton variant="text" size="sm">
                     ← {t('back_button')}
                 </UiButton>
             </Link>

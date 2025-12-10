@@ -1,13 +1,10 @@
 import { ButtonHTMLAttributes, ComponentType, ReactNode, SVGProps } from 'react';
 import { LinkProps } from 'next/link';
 
-export type UiButtonVariant = 'primary' | 'secondary' | 'ghost';
+export type UiButtonVariant = 'filled' | 'text';
 export type UiButtonSize = 'sm' | 'md' | 'lg';
 
-export interface UiButtonProps
-    extends ButtonHTMLAttributes<HTMLButtonElement>,
-        Partial<LinkProps>
-{
+interface BaseButtonProps {
     children?: ReactNode;
     variant?: UiButtonVariant;
     size?: UiButtonSize;
@@ -16,8 +13,16 @@ export interface UiButtonProps
     IconAfter?: ComponentType<SVGProps<SVGSVGElement>>;
     IconRight?: ComponentType<SVGProps<SVGSVGElement>>;
     disabled?: boolean;
-    withHover?: boolean;
-    withFocus?: boolean;
-    as?: 'button' | 'link';
-    href?: LinkProps['href'];
 }
+
+interface ButtonAsButton extends BaseButtonProps, ButtonHTMLAttributes<HTMLButtonElement> {
+    as?: 'button';
+    href?: never;
+}
+
+interface ButtonAsLink extends BaseButtonProps, Omit<LinkProps, 'href'> {
+    as: 'link';
+    href: LinkProps['href'];
+}
+
+export type UiButtonProps = ButtonAsButton | ButtonAsLink;
