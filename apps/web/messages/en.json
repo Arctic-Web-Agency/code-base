@@ -22,6 +22,10 @@
         "head": {
             "title": "Full-Cycle Website Design and Development — Arctic Web",
             "description": "Arctic Web is a leading company in website and web application development. We craft custom, efficient, and reliable digital solutions tailored to your business needs."
-        }
+        },
+        "heading": "Explore the CodeBase component showcase",
+        "description": "Discover shared, production-ready UI pieces your teams can reuse across projects. Start with the universal button and expand the library together.",
+        "cta": "Browse components",
+        "cta_helper": "Begin with the universal button and continue through the shared catalog."
     }
 }

@@ -1,17 +1,19 @@
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { Metadata } from 'next';
 import ChangeLang from '@/features/change-lang';
 import { fetchMetadata } from '@/shared/seo/metadata';
 import { IMetaProps } from '@/shared/types/settings';
 import ChangeTheme from '@/features/change-theme';
 import UiLogo from '@/shared/ui/UiLogo';
+import UiButton from '@/shared/ui/UiButton/UiButton';
 
 export async function generateMetadata(props: IMetaProps): Promise<Metadata> {
     return await fetchMetadata({ ...props, page: 'welcome', href: 'welcome' });
 }
 
 export default function HomePage() {
-    const allPagesT = useTranslations('all_pages');
+    const locale = useLocale();
+    const welcomeT = useTranslations('welcome_page');
 
     return (
         <main className="tablet-md:p-0 flex h-full min-h-screen flex-col pb-14">
@@ -27,8 +29,17 @@ export default function HomePage() {
                 </div>
             </header>
 
-            <section className="container text-4xl">
-                <h1>{allPagesT('title')}</h1>
+            <section className="container flex flex-1 flex-col justify-center gap-6 py-12">
+                <p className="text-sm uppercase tracking-[0.25em] text-graphite">CodeBase</p>
+                <h1 className="text-4xl font-semibold text-snow">{welcomeT('heading')}</h1>
+                <p className="max-w-2xl text-lg text-graphite">{welcomeT('description')}</p>
+
+                <div className="flex flex-wrap items-center gap-4">
+                    <UiButton as="link" href={`/${locale}/universal-components`} size="lg">
+                        {welcomeT('cta')}
+                    </UiButton>
+                    <p className="text-sm text-graphite">{welcomeT('cta_helper')}</p>
+                </div>
             </section>
         </main>
     );
