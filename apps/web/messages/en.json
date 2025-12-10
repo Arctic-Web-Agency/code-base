@@ -9,6 +9,7 @@
         },
         "heading": "Universal components",
         "intro": "Reusable building blocks shared across CodeBase projects. Explore previews and jump to the source folders for implementation details.",
+        "back_button": "Back to home",
         "components": {
             "button": {
                 "name": "Universal button",

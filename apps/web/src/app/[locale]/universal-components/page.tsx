@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import { useTranslations } from 'next-intl';
 import { ReactNode } from 'react';
+import Link from 'next/link';
 import UiButton from '@/shared/ui/UiButton/UiButton';
 import { fetchMetadata } from '@/shared/seo/metadata';
 import { IMetaProps } from '@/shared/types/settings';
@@ -36,6 +37,12 @@ export default function UniversalComponentsPage() {
 
     return (
         <main className="container flex min-h-screen flex-col gap-10 py-12">
+            <Link href="/">
+                <UiButton variant="ghost" size="sm">
+                    ← {t('back_button')}
+                </UiButton>
+            </Link>
+
             <header className="max-w-3xl space-y-4">
                 <p className="text-sm uppercase tracking-[0.25em] text-text-secondary">CodeBase</p>
                 <h1 className="text-4xl font-semibold text-text-primary">{t('heading')}</h1>
