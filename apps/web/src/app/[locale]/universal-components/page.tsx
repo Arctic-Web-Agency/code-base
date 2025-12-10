@@ -61,9 +61,7 @@ export default function UniversalComponentsPage() {
                         </div>
 
                         <div className="flex flex-wrap items-center justify-between gap-4">
-                            <div className="rounded-xl border border-border/40 bg-background p-4 shadow-inner">
-                                {component.preview}
-                            </div>
+                            {component.preview}
 
                             <a
                                 className="text-sm font-semibold text-primary transition-colors duration-200 hover:text-primary/80"
