@@ -43,26 +43,27 @@ const renderContent = ({ IconLeft, IconRight, children }: RenderContentProps) =>
     </>
 );
 
-interface CommonLinkProps {
+/**
+ * Shared UI attributes for all button/link variants
+ */
+interface CommonProps {
     className: string;
     variant: UiButtonVariant;
     size: UiButtonSize;
-    disabled?: boolean;
-    tabIndex?: number;
 }
 
-const getCommonLinkProps = ({
-    className,
-    variant,
-    size,
-    disabled,
-    tabIndex,
-}: CommonLinkProps) => ({
+const getCommonProps = ({ className, variant, size }: CommonProps) => ({
     className,
     'data-variant': variant,
     'data-size': size,
+});
+
+/**
+ * Additional props for link elements (internal and external)
+ */
+const getLinkAccessibilityProps = (disabled?: boolean) => ({
     'aria-disabled': disabled,
-    tabIndex,
+    tabIndex: disabled ? -1 : undefined,
 });
 
 const UiButton = forwardRef<HTMLButtonElement | HTMLAnchorElement, UiButtonProps>(
@@ -88,13 +89,8 @@ const UiButton = forwardRef<HTMLButtonElement | HTMLAnchorElement, UiButtonProps
         );
 
         const content = renderContent({ IconLeft, IconRight, children });
-        const commonProps = getCommonLinkProps({
-            className: classes,
-            variant,
-            size,
-            disabled,
-            tabIndex: disabled ? -1 : undefined,
-        });
+        const commonProps = getCommonProps({ className: classes, variant, size });
+        const accessibilityProps = getLinkAccessibilityProps(disabled);
 
         // Type guard: External link
         if (props.as === 'link' && props.external === true) {
@@ -104,6 +100,7 @@ const UiButton = forwardRef<HTMLButtonElement | HTMLAnchorElement, UiButtonProps
                 <a
                     {...anchorProps}
                     {...commonProps}
+                    {...accessibilityProps}
                     href={href}
                     target={anchorProps.target || '_blank'}
                     rel={anchorProps.rel || 'noopener noreferrer'}
@@ -129,6 +126,7 @@ const UiButton = forwardRef<HTMLButtonElement | HTMLAnchorElement, UiButtonProps
                 <Link
                     {...linkProps}
                     {...commonProps}
+                    {...accessibilityProps}
                     href={href}
                     onClick={(e) => {
                         if (disabled) {
@@ -150,10 +148,8 @@ const UiButton = forwardRef<HTMLButtonElement | HTMLAnchorElement, UiButtonProps
         return (
             <button
                 {...buttonProps}
+                {...commonProps}
                 type={buttonProps.type ?? 'button'}
-                className={classes}
-                data-variant={variant}
-                data-size={size}
                 disabled={disabled}
                 ref={ref as Ref<HTMLButtonElement>}
             >
