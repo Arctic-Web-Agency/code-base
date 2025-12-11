@@ -47,6 +47,7 @@ const UiButton = forwardRef<HTMLButtonElement | HTMLAnchorElement, UiButtonProps
             'inline-flex items-center justify-center gap-2',
             'cursor-pointer disabled:cursor-not-allowed',
             'focus:outline-none',
+            disabled && 'opacity-50 cursor-not-allowed pointer-events-none',
             sizeStyles[size],
             variantStyles[variant],
             className
@@ -67,12 +68,18 @@ const UiButton = forwardRef<HTMLButtonElement | HTMLAnchorElement, UiButtonProps
             return (
                 <Link
                     {...linkProps}
-                    href={href}
+                    href={disabled ? '#' : href}
                     className={buttonClasses}
                     data-variant={variant}
                     data-size={size}
                     ref={ref as Ref<HTMLAnchorElement>}
                     aria-disabled={disabled}
+                    onClick={(e) => {
+                        if (disabled) {
+                            e.preventDefault();
+                        }
+                    }}
+                    tabIndex={disabled ? -1 : undefined}
                 >
                     {content}
                 </Link>
