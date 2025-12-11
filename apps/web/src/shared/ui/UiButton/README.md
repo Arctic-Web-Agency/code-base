@@ -128,8 +128,8 @@ All variants accept these props:
 | `variant` | `'filled' \| 'text'` | `'filled'` | Visual style variant |
 | `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Button size (controls padding) |
 | `className` | `string` | - | Additional CSS classes |
-| `IconLeft` | `ComponentType<SVGProps>` | - | Icon component for left side |
-| `IconRight` | `ComponentType<SVGProps>` | - | Icon component for right side |
+| `IconLeft` | `ComponentType<SVGProps<SVGSVGElement>>` | - | Icon component for left side |
+| `IconRight` | `ComponentType<SVGProps<SVGSVGElement>>` | - | Icon component for right side |
 | `disabled` | `boolean` | `false` | Disable button/link |
 
 #### Button-specific Props
@@ -139,8 +139,8 @@ When `as` is `'button'` or omitted:
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `type` | `'button' \| 'submit' \| 'reset'` | `'button'` | Button type |
-| `onClick` | `(e: MouseEvent) => void` | - | Click handler |
-| All other standard button HTML attributes |
+| `onClick` | `(e: MouseEvent<HTMLButtonElement>) => void` | - | Click handler |
+| All other standard `ButtonHTMLAttributes<HTMLButtonElement>` |
 
 #### Internal Link Props
 
@@ -148,11 +148,11 @@ When `as="link"` (without `external` or `external={false}`):
 
 | Prop | Type | Description |
 |------|------|-------------|
-| `href` | `string \| UrlObject` | Next.js route |
+| `href` | `LinkProps['href']` (string \| UrlObject) | Next.js route |
 | `prefetch` | `boolean` | Enable route prefetching |
 | `replace` | `boolean` | Replace history instead of push |
 | `scroll` | `boolean` | Scroll to top after navigation |
-| All other Next.js Link props |
+| All other `Omit<LinkProps, 'href'>` |
 
 #### External Link Props
 
@@ -160,10 +160,10 @@ When `as="link"` and `external={true}`:
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `href` | `string` | - | External URL |
+| `href` | `string` | - | External URL (required) |
 | `target` | `string` | `'_blank'` | Link target |
 | `rel` | `string` | `'noopener noreferrer'` | Link relationship |
-| All other standard anchor HTML attributes |
+| All other `AnchorHTMLAttributes<HTMLAnchorElement>` |
 
 ## Variants
 
