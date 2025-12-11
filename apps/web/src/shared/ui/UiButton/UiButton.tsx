@@ -16,23 +16,15 @@ const composeClasses = (
     ...classes: Array<string | false | undefined>
 ): string => classes.filter(Boolean).join(' ');
 
-const getVariantClasses = (variant: UiButtonVariant) => {
-    const variants: Record<UiButtonVariant, string> = {
-        filled: 'bg-neutral-800 text-white hover:bg-neutral-700 active:bg-neutral-900',
-        text: 'text-neutral-800 hover:bg-neutral-100 active:bg-neutral-200',
-    };
-
-    return variants[variant];
+const sizeStyles: Record<UiButtonSize, string> = {
+    sm: 'px-3 py-1.5 text-sm',
+    md: 'px-4 py-2 text-base',
+    lg: 'px-6 py-3 text-lg',
 };
 
-const getSizeClasses = (size: UiButtonSize) => {
-    const sizes: Record<UiButtonSize, string> = {
-        sm: 'px-3 py-1.5 text-sm',
-        md: 'px-4 py-2 text-base',
-        lg: 'px-5 py-3 text-lg',
-    };
-
-    return sizes[size];
+const variantStyles: Record<UiButtonVariant, string> = {
+    filled: 'bg-blue-600 text-white hover:bg-blue-700 disabled:bg-gray-300',
+    text: 'bg-transparent text-blue-600 hover:bg-blue-50 disabled:text-gray-400',
 };
 
 const UiButton = forwardRef<HTMLButtonElement | HTMLAnchorElement, UiButtonProps>(
@@ -52,12 +44,12 @@ const UiButton = forwardRef<HTMLButtonElement | HTMLAnchorElement, UiButtonProps
         } = props;
 
         const buttonClasses = composeClasses(
-            'inline-flex items-center justify-center gap-2 rounded-md font-semibold leading-tight',
-            'transition-colors duration-200',
-            'focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-500 focus-visible:ring-offset-2',
-            'disabled:cursor-not-allowed disabled:opacity-50',
-            getVariantClasses(variant),
-            getSizeClasses(size),
+            'inline-flex items-center justify-center gap-2',
+            'disabled:cursor-not-allowed',
+            'focus:outline-none',
+            'rounded transition-colors',
+            sizeStyles[size],
+            variantStyles[variant],
             className
         );
 
@@ -78,6 +70,8 @@ const UiButton = forwardRef<HTMLButtonElement | HTMLAnchorElement, UiButtonProps
                     {...linkProps}
                     href={href}
                     className={buttonClasses}
+                    data-variant={variant}
+                    data-size={size}
                     ref={ref as Ref<HTMLAnchorElement>}
                     aria-disabled={disabled}
                 >
@@ -91,6 +85,8 @@ const UiButton = forwardRef<HTMLButtonElement | HTMLAnchorElement, UiButtonProps
                 {...(rest as ButtonHTMLAttributes<HTMLButtonElement>)}
                 type={(rest as ButtonHTMLAttributes<HTMLButtonElement>).type ?? 'button'}
                 className={buttonClasses}
+                data-variant={variant}
+                data-size={size}
                 disabled={disabled}
                 ref={ref as Ref<HTMLButtonElement>}
             >

@@ -19,7 +19,12 @@ export default function HomePage() {
             <p className="max-w-2xl text-lg text-text-secondary">{welcomeT('description')}</p>
 
             <div className="flex flex-wrap items-center gap-4">
-                <UiButton as="link" href={`/${locale}/universal-components`} size="lg">
+                <UiButton
+                    as="link"
+                    href={`/${locale}/universal-components`}
+                    size="lg"
+                    className="bg-neutral-800 text-white hover:bg-neutral-700 active:bg-neutral-900 font-semibold"
+                >
                     {welcomeT('cta')}
                 </UiButton>
             </div>
