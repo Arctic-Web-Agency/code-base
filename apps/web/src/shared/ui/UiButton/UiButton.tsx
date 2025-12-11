@@ -2,6 +2,7 @@
 
 import Link, { LinkProps } from 'next/link';
 import {
+    AnchorHTMLAttributes,
     ButtonHTMLAttributes,
     Ref,
     forwardRef,
@@ -39,6 +40,7 @@ const UiButton = forwardRef<HTMLButtonElement | HTMLAnchorElement, UiButtonProps
             disabled,
             as = 'button',
             href,
+            external,
             ...rest
         } = props;
 
@@ -61,6 +63,35 @@ const UiButton = forwardRef<HTMLButtonElement | HTMLAnchorElement, UiButtonProps
         );
 
         if (as === 'link' && href) {
+            // External link - use native <a> tag
+            if (external) {
+                const anchorProps = rest as AnchorHTMLAttributes<HTMLAnchorElement>;
+
+                return (
+                    <a
+                        {...anchorProps}
+                        href={disabled ? undefined : href}
+                        className={buttonClasses}
+                        data-variant={variant}
+                        data-size={size}
+                        ref={ref as Ref<HTMLAnchorElement>}
+                        aria-disabled={disabled}
+                        target={anchorProps.target || '_blank'}
+                        rel={anchorProps.rel || 'noopener noreferrer'}
+                        onClick={(e) => {
+                            if (disabled) {
+                                e.preventDefault();
+                            }
+                            anchorProps.onClick?.(e);
+                        }}
+                        tabIndex={disabled ? -1 : undefined}
+                    >
+                        {content}
+                    </a>
+                );
+            }
+
+            // Internal link - use Next.js Link
             const linkProps = rest as Partial<LinkProps>;
 
             return (

@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes, ComponentType, ReactNode, SVGProps } from 'react';
+import { AnchorHTMLAttributes, ButtonHTMLAttributes, ComponentType, ReactNode, SVGProps } from 'react';
 import { LinkProps } from 'next/link';
 
 export type UiButtonVariant = 'filled' | 'text';
@@ -17,11 +17,19 @@ interface BaseButtonProps {
 interface ButtonAsButton extends BaseButtonProps, ButtonHTMLAttributes<HTMLButtonElement> {
     as?: 'button';
     href?: never;
+    external?: never;
 }
 
-interface ButtonAsLink extends BaseButtonProps, Omit<LinkProps, 'href'> {
+interface ButtonAsInternalLink extends BaseButtonProps, Omit<LinkProps, 'href'> {
     as: 'link';
     href: LinkProps['href'];
+    external?: false;
 }
 
-export type UiButtonProps = ButtonAsButton | ButtonAsLink;
+interface ButtonAsExternalLink extends BaseButtonProps, AnchorHTMLAttributes<HTMLAnchorElement> {
+    as: 'link';
+    href: string;
+    external: true;
+}
+
+export type UiButtonProps = ButtonAsButton | ButtonAsInternalLink | ButtonAsExternalLink;
