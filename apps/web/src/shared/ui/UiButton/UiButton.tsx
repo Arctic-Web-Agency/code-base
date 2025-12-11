@@ -107,6 +107,7 @@ const UiButton = forwardRef<HTMLButtonElement | HTMLAnchorElement, UiButtonProps
                     onClick={(e) => {
                         if (disabled) {
                             e.preventDefault();
+                            e.stopPropagation();
                             return;
                         }
                         anchorProps.onClick?.(e);
@@ -131,6 +132,7 @@ const UiButton = forwardRef<HTMLButtonElement | HTMLAnchorElement, UiButtonProps
                     onClick={(e) => {
                         if (disabled) {
                             e.preventDefault();
+                            e.stopPropagation();
                             return;
                         }
                         linkProps.onClick?.(e);
@@ -151,6 +153,14 @@ const UiButton = forwardRef<HTMLButtonElement | HTMLAnchorElement, UiButtonProps
                 {...commonProps}
                 type={buttonProps.type ?? 'button'}
                 disabled={disabled}
+                onClick={(e) => {
+                    if (disabled) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        return;
+                    }
+                    buttonProps.onClick?.(e);
+                }}
                 ref={ref as Ref<HTMLButtonElement>}
             >
                 {content}
