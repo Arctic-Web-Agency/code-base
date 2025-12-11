@@ -12,6 +12,9 @@ export type UiButtonSize = 'sm' | 'md' | 'lg';
 
 type IconComponent = ComponentType<SVGProps<SVGSVGElement>>;
 
+/**
+ * Base props shared by all button variants
+ */
 interface BaseProps {
     children?: ReactNode;
     variant?: UiButtonVariant;
@@ -25,15 +28,17 @@ interface BaseProps {
 /**
  * Native button element
  */
-type ButtonProps = BaseProps &
+export type ButtonProps = BaseProps &
     Omit<ButtonHTMLAttributes<HTMLButtonElement>, keyof BaseProps> & {
         as?: 'button';
+        href?: never;
+        external?: never;
     };
 
 /**
  * Internal link using Next.js Link component (client-side navigation)
  */
-type InternalLinkProps = BaseProps &
+export type InternalLinkProps = BaseProps &
     Omit<LinkProps, keyof BaseProps | 'href'> & {
         as: 'link';
         href: LinkProps['href'];
@@ -43,7 +48,7 @@ type InternalLinkProps = BaseProps &
 /**
  * External link using native anchor element (opens in new tab)
  */
-type ExternalLinkProps = BaseProps &
+export type ExternalLinkProps = BaseProps &
     Omit<AnchorHTMLAttributes<HTMLAnchorElement>, keyof BaseProps | 'href'> & {
         as: 'link';
         href: string;

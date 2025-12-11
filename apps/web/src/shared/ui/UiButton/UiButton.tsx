@@ -1,9 +1,7 @@
 'use client';
 
-import Link, { LinkProps } from 'next/link';
+import Link from 'next/link';
 import {
-    AnchorHTMLAttributes,
-    ButtonHTMLAttributes,
     ReactNode,
     Ref,
     forwardRef,
@@ -77,10 +75,6 @@ const UiButton = forwardRef<HTMLButtonElement | HTMLAnchorElement, UiButtonProps
             IconLeft,
             IconRight,
             disabled,
-            as = 'button',
-            href,
-            external,
-            ...rest
         } = props;
 
         const classes = composeClasses(
@@ -94,7 +88,7 @@ const UiButton = forwardRef<HTMLButtonElement | HTMLAnchorElement, UiButtonProps
         );
 
         const content = renderContent({ IconLeft, IconRight, children });
-        const commonLinkProps = getCommonLinkProps({
+        const commonProps = getCommonLinkProps({
             className: classes,
             variant,
             size,
@@ -102,14 +96,14 @@ const UiButton = forwardRef<HTMLButtonElement | HTMLAnchorElement, UiButtonProps
             tabIndex: disabled ? -1 : undefined,
         });
 
-        // External link
-        if (as === 'link' && href && external) {
-            const anchorProps = rest as AnchorHTMLAttributes<HTMLAnchorElement>;
+        // Type guard: External link
+        if (props.as === 'link' && props.external === true) {
+            const { as, href, external, variant: _, size: __, className: ___, IconLeft: ____, IconRight: _____, disabled: ______, children: _______, ...anchorProps } = props;
 
             return (
                 <a
                     {...anchorProps}
-                    {...commonLinkProps}
+                    {...commonProps}
                     href={disabled ? undefined : href}
                     target={anchorProps.target || '_blank'}
                     rel={anchorProps.rel || 'noopener noreferrer'}
@@ -124,14 +118,14 @@ const UiButton = forwardRef<HTMLButtonElement | HTMLAnchorElement, UiButtonProps
             );
         }
 
-        // Internal link
-        if (as === 'link' && href) {
-            const linkProps = rest as Partial<LinkProps>;
+        // Type guard: Internal link
+        if (props.as === 'link') {
+            const { as, href, external, variant: _, size: __, className: ___, IconLeft: ____, IconRight: _____, disabled: ______, children: _______, ...linkProps } = props;
 
             return (
                 <Link
                     {...linkProps}
-                    {...commonLinkProps}
+                    {...commonProps}
                     href={disabled ? '#' : href}
                     onClick={(e) => {
                         if (disabled) e.preventDefault();
@@ -143,8 +137,8 @@ const UiButton = forwardRef<HTMLButtonElement | HTMLAnchorElement, UiButtonProps
             );
         }
 
-        // Button
-        const buttonProps = rest as ButtonHTMLAttributes<HTMLButtonElement>;
+        // Default: Button
+        const { as, variant: _, size: __, className: ___, IconLeft: ____, IconRight: _____, disabled: ______, children: _______, ...buttonProps } = props;
 
         return (
             <button
