@@ -4,6 +4,7 @@ import Link, { LinkProps } from 'next/link';
 import {
     AnchorHTMLAttributes,
     ButtonHTMLAttributes,
+    ReactNode,
     Ref,
     forwardRef,
 } from 'react';
@@ -12,6 +13,8 @@ import type {
     UiButtonSize,
     UiButtonVariant,
 } from './types';
+
+const ICON_SIZE = 20;
 
 const composeClasses = (
     ...classes: Array<string | false | undefined>
@@ -27,6 +30,42 @@ const variantStyles: Record<UiButtonVariant, string> = {
     filled: 'bg-blue-600 text-white hover:bg-blue-700 disabled:bg-gray-300',
     text: 'bg-transparent text-blue-600 hover:bg-blue-50 disabled:text-gray-400',
 };
+
+interface RenderContentProps {
+    IconLeft?: UiButtonProps['IconLeft'];
+    IconRight?: UiButtonProps['IconRight'];
+    children?: ReactNode;
+}
+
+const renderContent = ({ IconLeft, IconRight, children }: RenderContentProps) => (
+    <>
+        {IconLeft && <IconLeft width={ICON_SIZE} height={ICON_SIZE} aria-hidden />}
+        {children && <span>{children}</span>}
+        {IconRight && <IconRight width={ICON_SIZE} height={ICON_SIZE} aria-hidden />}
+    </>
+);
+
+interface CommonLinkProps {
+    className: string;
+    variant: UiButtonVariant;
+    size: UiButtonSize;
+    disabled?: boolean;
+    tabIndex?: number;
+}
+
+const getCommonLinkProps = ({
+    className,
+    variant,
+    size,
+    disabled,
+    tabIndex,
+}: CommonLinkProps) => ({
+    className,
+    'data-variant': variant,
+    'data-size': size,
+    'aria-disabled': disabled,
+    tabIndex,
+});
 
 const UiButton = forwardRef<HTMLButtonElement | HTMLAnchorElement, UiButtonProps>(
     (props, ref) => {
@@ -44,7 +83,7 @@ const UiButton = forwardRef<HTMLButtonElement | HTMLAnchorElement, UiButtonProps
             ...rest
         } = props;
 
-        const buttonClasses = composeClasses(
+        const classes = composeClasses(
             'inline-flex items-center justify-center gap-2',
             'cursor-pointer disabled:cursor-not-allowed',
             'focus:outline-none',
@@ -54,72 +93,64 @@ const UiButton = forwardRef<HTMLButtonElement | HTMLAnchorElement, UiButtonProps
             className
         );
 
-        const content = (
-            <>
-                {IconLeft && <IconLeft width={20} height={20} aria-hidden />}
-                {children && <span>{children}</span>}
-                {IconRight && <IconRight width={20} height={20} aria-hidden />}
-            </>
-        );
+        const content = renderContent({ IconLeft, IconRight, children });
+        const commonLinkProps = getCommonLinkProps({
+            className: classes,
+            variant,
+            size,
+            disabled,
+            tabIndex: disabled ? -1 : undefined,
+        });
 
+        // External link
+        if (as === 'link' && href && external) {
+            const anchorProps = rest as AnchorHTMLAttributes<HTMLAnchorElement>;
+
+            return (
+                <a
+                    {...anchorProps}
+                    {...commonLinkProps}
+                    href={disabled ? undefined : href}
+                    target={anchorProps.target || '_blank'}
+                    rel={anchorProps.rel || 'noopener noreferrer'}
+                    onClick={(e) => {
+                        if (disabled) e.preventDefault();
+                        anchorProps.onClick?.(e);
+                    }}
+                    ref={ref as Ref<HTMLAnchorElement>}
+                >
+                    {content}
+                </a>
+            );
+        }
+
+        // Internal link
         if (as === 'link' && href) {
-            // External link - use native <a> tag
-            if (external) {
-                const anchorProps = rest as AnchorHTMLAttributes<HTMLAnchorElement>;
-
-                return (
-                    <a
-                        {...anchorProps}
-                        href={disabled ? undefined : href}
-                        className={buttonClasses}
-                        data-variant={variant}
-                        data-size={size}
-                        ref={ref as Ref<HTMLAnchorElement>}
-                        aria-disabled={disabled}
-                        target={anchorProps.target || '_blank'}
-                        rel={anchorProps.rel || 'noopener noreferrer'}
-                        onClick={(e) => {
-                            if (disabled) {
-                                e.preventDefault();
-                            }
-                            anchorProps.onClick?.(e);
-                        }}
-                        tabIndex={disabled ? -1 : undefined}
-                    >
-                        {content}
-                    </a>
-                );
-            }
-
-            // Internal link - use Next.js Link
             const linkProps = rest as Partial<LinkProps>;
 
             return (
                 <Link
                     {...linkProps}
+                    {...commonLinkProps}
                     href={disabled ? '#' : href}
-                    className={buttonClasses}
-                    data-variant={variant}
-                    data-size={size}
-                    ref={ref as Ref<HTMLAnchorElement>}
-                    aria-disabled={disabled}
                     onClick={(e) => {
-                        if (disabled) {
-                            e.preventDefault();
-                        }
+                        if (disabled) e.preventDefault();
                     }}
-                    tabIndex={disabled ? -1 : undefined}
+                    ref={ref as Ref<HTMLAnchorElement>}
                 >
                     {content}
                 </Link>
             );
         }
 
+        // Button
+        const buttonProps = rest as ButtonHTMLAttributes<HTMLButtonElement>;
+
         return (
             <button
-                {...(rest as ButtonHTMLAttributes<HTMLButtonElement>)}
-                type={(rest as ButtonHTMLAttributes<HTMLButtonElement>).type ?? 'button'}
-                className={buttonClasses}
+                {...buttonProps}
+                type={buttonProps.type ?? 'button'}
+                className={classes}
                 data-variant={variant}
                 data-size={size}
                 disabled={disabled}

@@ -1,35 +1,53 @@
-import { AnchorHTMLAttributes, ButtonHTMLAttributes, ComponentType, ReactNode, SVGProps } from 'react';
+import {
+    AnchorHTMLAttributes,
+    ButtonHTMLAttributes,
+    ComponentType,
+    ReactNode,
+    SVGProps,
+} from 'react';
 import { LinkProps } from 'next/link';
 
 export type UiButtonVariant = 'filled' | 'text';
 export type UiButtonSize = 'sm' | 'md' | 'lg';
 
-interface BaseButtonProps {
+type IconComponent = ComponentType<SVGProps<SVGSVGElement>>;
+
+interface BaseProps {
     children?: ReactNode;
     variant?: UiButtonVariant;
     size?: UiButtonSize;
     className?: string;
-    IconLeft?: ComponentType<SVGProps<SVGSVGElement>>;
-    IconRight?: ComponentType<SVGProps<SVGSVGElement>>;
+    IconLeft?: IconComponent;
+    IconRight?: IconComponent;
     disabled?: boolean;
 }
 
-interface ButtonAsButton extends BaseButtonProps, ButtonHTMLAttributes<HTMLButtonElement> {
-    as?: 'button';
-    href?: never;
-    external?: never;
-}
+/**
+ * Native button element
+ */
+type ButtonProps = BaseProps &
+    Omit<ButtonHTMLAttributes<HTMLButtonElement>, keyof BaseProps> & {
+        as?: 'button';
+    };
 
-interface ButtonAsInternalLink extends BaseButtonProps, Omit<LinkProps, 'href'> {
-    as: 'link';
-    href: LinkProps['href'];
-    external?: false;
-}
+/**
+ * Internal link using Next.js Link component (client-side navigation)
+ */
+type InternalLinkProps = BaseProps &
+    Omit<LinkProps, keyof BaseProps | 'href'> & {
+        as: 'link';
+        href: LinkProps['href'];
+        external?: false;
+    };
 
-interface ButtonAsExternalLink extends BaseButtonProps, AnchorHTMLAttributes<HTMLAnchorElement> {
-    as: 'link';
-    href: string;
-    external: true;
-}
+/**
+ * External link using native anchor element (opens in new tab)
+ */
+type ExternalLinkProps = BaseProps &
+    Omit<AnchorHTMLAttributes<HTMLAnchorElement>, keyof BaseProps | 'href'> & {
+        as: 'link';
+        href: string;
+        external: true;
+    };
 
-export type UiButtonProps = ButtonAsButton | ButtonAsInternalLink | ButtonAsExternalLink;
+export type UiButtonProps = ButtonProps | InternalLinkProps | ExternalLinkProps;
