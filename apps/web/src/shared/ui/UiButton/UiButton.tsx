@@ -45,9 +45,8 @@ const UiButton = forwardRef<HTMLButtonElement | HTMLAnchorElement, UiButtonProps
 
         const buttonClasses = composeClasses(
             'inline-flex items-center justify-center gap-2',
-            'disabled:cursor-not-allowed',
+            'cursor-pointer disabled:cursor-not-allowed',
             'focus:outline-none',
-            'rounded transition-colors',
             sizeStyles[size],
             variantStyles[variant],
             className
