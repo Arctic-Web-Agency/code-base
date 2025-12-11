@@ -9,8 +9,7 @@ interface BaseButtonProps {
     variant?: UiButtonVariant;
     size?: UiButtonSize;
     className?: string;
-    Icon?: ComponentType<SVGProps<SVGSVGElement>>;
-    IconAfter?: ComponentType<SVGProps<SVGSVGElement>>;
+    IconLeft?: ComponentType<SVGProps<SVGSVGElement>>;
     IconRight?: ComponentType<SVGProps<SVGSVGElement>>;
     disabled?: boolean;
 }

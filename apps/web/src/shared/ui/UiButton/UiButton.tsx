@@ -34,8 +34,7 @@ const UiButton = forwardRef<HTMLButtonElement | HTMLAnchorElement, UiButtonProps
             className,
             variant = 'filled',
             size = 'md',
-            Icon,
-            IconAfter,
+            IconLeft,
             IconRight,
             disabled,
             as = 'button',
@@ -55,10 +54,9 @@ const UiButton = forwardRef<HTMLButtonElement | HTMLAnchorElement, UiButtonProps
 
         const content = (
             <>
-                {Icon && <Icon width={20} height={20} aria-hidden />}
+                {IconLeft && <IconLeft width={20} height={20} aria-hidden />}
                 {children && <span>{children}</span>}
-                {IconAfter && <IconAfter width={20} height={20} aria-hidden />}
-                {IconRight && <IconRight width={18} height={18} aria-hidden />}
+                {IconRight && <IconRight width={20} height={20} aria-hidden />}
             </>
         );
 
