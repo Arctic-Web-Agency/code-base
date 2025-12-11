@@ -23,7 +23,7 @@ export default function HomePage() {
                     as="link"
                     href={`/${locale}/universal-components`}
                     size="lg"
-                    className="bg-neutral-800 text-white hover:bg-neutral-700 active:bg-neutral-900 font-semibold"
+                    className="font-semibold"
                 >
                     {welcomeT('cta')}
                 </UiButton>

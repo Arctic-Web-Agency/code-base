@@ -31,7 +31,7 @@ export default function UniversalComponentsPage() {
                 <UiButton
                     variant="filled"
                     size="md"
-                    className="bg-neutral-800 text-white hover:bg-neutral-700 active:bg-neutral-900 font-semibold"
+                    className="font-semibold"
                 >
                     {t('components.button.preview')}
                 </UiButton>
@@ -45,7 +45,6 @@ export default function UniversalComponentsPage() {
                 <UiButton
                     variant="text"
                     size="sm"
-                    className="text-neutral-800 hover:bg-neutral-100 active:bg-neutral-200"
                 >
                     ← {t('back_button')}
                 </UiButton>

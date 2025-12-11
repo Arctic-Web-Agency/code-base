@@ -24,9 +24,13 @@ const sizeStyles: Record<UiButtonSize, string> = {
     lg: 'px-6 py-3 text-lg',
 };
 
+/**
+ * Theme-agnostic variant styles using neutral colors
+ * Override via className prop for custom design systems
+ */
 const variantStyles: Record<UiButtonVariant, string> = {
-    filled: 'bg-blue-600 text-white hover:bg-blue-700 disabled:bg-gray-300',
-    text: 'bg-transparent text-blue-600 hover:bg-blue-50 disabled:text-gray-400',
+    filled: 'bg-neutral-800 text-white hover:bg-neutral-700 active:bg-neutral-900 disabled:bg-neutral-300 disabled:text-neutral-500',
+    text: 'bg-transparent text-neutral-800 hover:bg-neutral-100 active:bg-neutral-200 disabled:text-neutral-400',
 };
 
 interface RenderContentProps {
