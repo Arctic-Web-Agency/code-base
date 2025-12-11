@@ -104,11 +104,14 @@ const UiButton = forwardRef<HTMLButtonElement | HTMLAnchorElement, UiButtonProps
                 <a
                     {...anchorProps}
                     {...commonProps}
-                    href={disabled ? undefined : href}
+                    href={href}
                     target={anchorProps.target || '_blank'}
                     rel={anchorProps.rel || 'noopener noreferrer'}
                     onClick={(e) => {
-                        if (disabled) e.preventDefault();
+                        if (disabled) {
+                            e.preventDefault();
+                            return;
+                        }
                         anchorProps.onClick?.(e);
                     }}
                     ref={ref as Ref<HTMLAnchorElement>}
@@ -126,9 +129,13 @@ const UiButton = forwardRef<HTMLButtonElement | HTMLAnchorElement, UiButtonProps
                 <Link
                     {...linkProps}
                     {...commonProps}
-                    href={disabled ? '#' : href}
+                    href={href}
                     onClick={(e) => {
-                        if (disabled) e.preventDefault();
+                        if (disabled) {
+                            e.preventDefault();
+                            return;
+                        }
+                        linkProps.onClick?.(e);
                     }}
                     ref={ref as Ref<HTMLAnchorElement>}
                 >
