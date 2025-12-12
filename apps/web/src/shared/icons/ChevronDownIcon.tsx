@@ -1,13 +1,18 @@
-import { IIconProps } from '@/shared/icons/types';
+import type { IconProps } from './types';
 
-const ChevronDownIcon = ({ classes = 'h-5 w-5' }: IIconProps) => {
+/**
+ * Chevron down icon component for dropdowns and toggles
+ * Uses currentColor for universal styling
+ */
+const ChevronDownIcon = ({ className = 'h-5 w-5', ...props }: IconProps) => {
     return (
         <svg
-            className={classes}
-            xmlns="http://www.w3.org/2000/svg"
+            className={className}
             viewBox="0 0 20 20"
             fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg"
             aria-hidden="true"
+            {...props}
         >
             <path
                 fillRule="evenodd"
