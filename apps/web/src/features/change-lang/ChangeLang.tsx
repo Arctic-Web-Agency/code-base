@@ -1,21 +1,20 @@
 'use client';
 
-import { FC, useState, useEffect } from 'react';
+import { FC } from 'react';
 import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 import { useLocale } from 'next-intl';
 import { UA, US } from 'country-flag-icons/react/3x2';
-import { CLang, TLang } from '@acw/types';
+import { CLang } from '@acw/types';
 import { IProps } from './types';
 import UiSelect from '@/shared/ui/UiSelect';
+import type { UiSelectOption } from '@/shared/ui/UiSelect';
 
-const LANGS = [
+const LANGS: UiSelectOption[] = [
     {
         label: (
             <div className="flex items-center gap-1.5">
                 <US title="United States" className="h-5 w-7" />
-                <span className="text-sm font-bold text-zinc-800 dark:text-zinc-300">
-                    Eng
-                </span>
+                <span className="text-sm font-bold">Eng</span>
             </div>
         ),
         value: CLang.EN,
@@ -24,9 +23,7 @@ const LANGS = [
         label: (
             <div className="flex items-center gap-1.5">
                 <UA title="Ukraine" className="h-5 w-7" />
-                <span className="text-sm font-bold text-zinc-800 dark:text-zinc-300">
-                    Укр
-                </span>
+                <span className="text-sm font-bold">Укр</span>
             </div>
         ),
         value: CLang.UK,
@@ -39,14 +36,6 @@ const ChangeLang: FC<IProps> = ({ withoutText, expandTop }) => {
     const searchParams = useSearchParams();
     const activeLocale = useLocale();
 
-    const [selected, setSelected] = useState(
-        () => LANGS.find((l) => l.value === activeLocale) ?? LANGS[0]
-    );
-
-    useEffect(() => {
-        setSelected(LANGS.find((l) => l.value === activeLocale) ?? LANGS[0]);
-    }, [activeLocale]);
-
     const handleChangeLang = (value: string) => {
         const allSearchParams = searchParams.toString();
         const newPath = pathname.replace(`/${activeLocale}`, '');
@@ -58,8 +47,10 @@ const ChangeLang: FC<IProps> = ({ withoutText, expandTop }) => {
         <UiSelect
             label="Change language"
             options={LANGS}
-            value={selected.value}
+            value={activeLocale}
             onChange={handleChangeLang}
+            variant="outlined"
+            size="sm"
         />
     );
 };
