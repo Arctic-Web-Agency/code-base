@@ -1,7 +1,9 @@
 import { ReactNode } from 'react';
 
-export interface IProps {
+export interface UiSwitchProps {
     checked: boolean;
     onChange?: (event: boolean) => void;
     children?: ReactNode;
+    id?: string;
+    name?: string;
 }

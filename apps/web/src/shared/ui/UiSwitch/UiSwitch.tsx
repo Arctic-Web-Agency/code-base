@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import { Switch } from '@headlessui/react';
-import { IProps } from '@/shared/ui/UiSwitch/types';
+import { UiSwitchProps } from '@/shared/ui/UiSwitch/types';
 
-const UiSwitch: FC<IProps> = ({ checked, onChange, children }) => {
+const UiSwitch: FC<UiSwitchProps> = ({ checked, onChange, children }) => {
     return (
         <Switch
             style={{

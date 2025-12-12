@@ -4,8 +4,8 @@ import { FC } from 'react';
 import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 import { useLocale } from 'next-intl';
 import { UA, US } from 'country-flag-icons/react/3x2';
-import { CLang } from '@acw/types';
-import { IProps } from './types';
+import { LANG } from '@acw/types';
+import { ChangeLangProps } from './types';
 import UiSelect from '@/shared/ui/UiSelect';
 import type { UiSelectOption } from '@/shared/ui/UiSelect';
 
@@ -17,7 +17,7 @@ const LANGS: UiSelectOption[] = [
                 <span className="text-sm font-bold">Eng</span>
             </div>
         ),
-        value: CLang.EN,
+        value: LANG.EN,
     },
     {
         label: (
@@ -26,11 +26,11 @@ const LANGS: UiSelectOption[] = [
                 <span className="text-sm font-bold">Укр</span>
             </div>
         ),
-        value: CLang.UK,
+        value: LANG.UK,
     },
 ];
 
-const ChangeLang: FC<IProps> = ({ withoutText, expandTop }) => {
+const ChangeLang: FC<ChangeLangProps> = ({ withoutText, expandTop }) => {
     const router = useRouter();
     const pathname = usePathname();
     const searchParams = useSearchParams();

@@ -1,10 +1,10 @@
 import { useLocale, useTranslations } from 'next-intl';
 import { Metadata } from 'next';
 import { fetchMetadata } from '@/shared/seo/metadata';
-import { IMetaProps } from '@/shared/types/settings';
+import { MetaProps } from '@/shared/types/settings';
 import UiButton from '@/shared/ui/UiButton/UiButton';
 
-export async function generateMetadata(props: IMetaProps): Promise<Metadata> {
+export async function generateMetadata(props: MetaProps): Promise<Metadata> {
     return await fetchMetadata({ ...props, page: 'welcome', href: 'welcome' });
 }
 

@@ -1,16 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { CTheme, TTheme } from '@/shared/types/settings';
+import { THEME, Theme } from '@/shared/types/settings';
 import { SettingsState } from '@/stores/settings/types';
 
 const initialState: SettingsState = {
-    theme: CTheme.DARK,
+    theme: THEME.DARK,
 };
 
 const settingsSlice = createSlice({
     name: 'settings',
     initialState,
     reducers: {
-        setTheme: (state, action: PayloadAction<TTheme>) => {
+        setTheme: (state, action: PayloadAction<Theme>) => {
             state.theme = action.payload;
         },
     },

@@ -5,9 +5,9 @@ import UiButton from '@/shared/ui/UiButton/UiButton';
 import BackButton from '@/shared/ui/BackButton/BackButton';
 import UiSelectPreview from './UiSelectPreview';
 import { fetchMetadata } from '@/shared/seo/metadata';
-import { IMetaProps } from '@/shared/types/settings';
+import { MetaProps } from '@/shared/types/settings';
 
-export async function generateMetadata(props: IMetaProps): Promise<Metadata> {
+export async function generateMetadata(props: MetaProps): Promise<Metadata> {
     return await fetchMetadata({ ...props, page: 'universal_components', href: 'universal-components' });
 }
 

@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import { Mulish } from 'next/font/google';
 import '@/app/globals.css';
-import { IPageParams } from '@/shared/types/settings';
+import { PageParams } from '@/shared/types/settings';
 import StoreProvider from '@/stores/providers/StoreProvider';
 import UiHeader from '@/shared/ui/UiHeader';
 
@@ -28,14 +28,14 @@ const mulish = Mulish({
     weight: ['300', '400', '700'],
 });
 
-interface ILocaleLayoutProps extends IPageParams {
+interface LocaleLayoutProps extends PageParams {
     children: ReactNode;
 }
 
 export default async function LocaleLayout({
     children,
     params,
-}: ILocaleLayoutProps) {
+}: LocaleLayoutProps) {
     const { locale } = await params;
     if (!hasLocale(routing.locales, locale)) {
         notFound();
