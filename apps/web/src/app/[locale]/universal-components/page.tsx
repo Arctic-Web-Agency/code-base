@@ -74,7 +74,7 @@ export default function UniversalComponentsPage() {
                             <p className="text-base text-text-secondary">{component.description}</p>
                         </div>
 
-                        <div className="flex flex-wrap items-center justify-between gap-4">
+                        <div className="flex flex-col items-start gap-4">
                             {component.preview}
 
                             <UiButton
