@@ -15,6 +15,15 @@
                 "name": "Universal button",
                 "description": "Flexible call-to-action with primary, secondary, and ghost styles.",
                 "preview": "Primary action"
+            },
+            "select": {
+                "name": "Universal select",
+                "description": "Accessible dropdown component with multiple variants and sizes.",
+                "options": {
+                    "option1": "First option",
+                    "option2": "Second option",
+                    "option3": "Third option"
+                }
             }
         },
         "github_label": "View on GitHub"

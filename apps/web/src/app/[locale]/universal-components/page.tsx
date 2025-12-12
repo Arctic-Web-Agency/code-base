@@ -3,6 +3,7 @@ import { useTranslations } from 'next-intl';
 import { ReactNode } from 'react';
 import UiButton from '@/shared/ui/UiButton/UiButton';
 import BackButton from '@/shared/ui/BackButton/BackButton';
+import UiSelectPreview from './UiSelectPreview';
 import { fetchMetadata } from '@/shared/seo/metadata';
 import { IMetaProps } from '@/shared/types/settings';
 
@@ -32,6 +33,22 @@ export default function UniversalComponentsPage() {
                 <UiButton variant="filled" size="md" className="font-semibold">
                     {t('components.button.preview')}
                 </UiButton>
+            ),
+        },
+        {
+            key: 'universal-select',
+            name: t('components.select.name'),
+            description: t('components.select.description'),
+            githubUrl:
+                'https://github.com/Arctic-Web-Agency/code-base/tree/feature/ui-components/apps/web/src/shared/ui/UiSelect',
+            preview: (
+                <UiSelectPreview
+                    options={[
+                        { label: t('components.select.options.option1'), value: 'option1' },
+                        { label: t('components.select.options.option2'), value: 'option2' },
+                        { label: t('components.select.options.option3'), value: 'option3' },
+                    ]}
+                />
             ),
         },
     ];
