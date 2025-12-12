@@ -63,14 +63,15 @@ export default function UniversalComponentsPage() {
                         <div className="flex flex-wrap items-center justify-between gap-4">
                             {component.preview}
 
-                            <a
-                                className="text-sm font-semibold text-primary transition-colors duration-200 hover:text-primary/80"
+                            <UiButton
+                                variant="text"
+                                size="sm"
+                                as="link"
+                                external={true}
                                 href={component.githubUrl}
-                                target="_blank"
-                                rel="noreferrer"
                             >
                                 {t('github_label')}
-                            </a>
+                            </UiButton>
                         </div>
                     </article>
                 ))}
