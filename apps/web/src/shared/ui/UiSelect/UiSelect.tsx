@@ -58,14 +58,13 @@ const UiSelect = forwardRef<HTMLButtonElement, UiSelectProps>(
             'cursor-pointer disabled:cursor-not-allowed',
             'focus:outline-none focus:ring-2 focus:ring-neutral-500 focus:ring-offset-2',
             disabled && 'opacity-50 cursor-not-allowed pointer-events-none',
-            'rounded-md w-full',
             sizeStyles[size],
             variantStyles[variant],
             className
         );
 
         const optionsClasses = composeClasses(
-            'absolute z-50 mt-1 w-full rounded-md shadow-lg',
+            'absolute z-50 mt-1 w-full',
             'focus:outline-none',
             'border border-neutral-300',
             optionStyles[variant]
@@ -77,7 +76,7 @@ const UiSelect = forwardRef<HTMLButtonElement, UiSelectProps>(
                 onChange={onChange}
                 disabled={disabled}
             >
-                <div className="relative w-full">
+                <div className="relative">
                     <ListboxButton
                         ref={ref}
                         aria-label={label}
