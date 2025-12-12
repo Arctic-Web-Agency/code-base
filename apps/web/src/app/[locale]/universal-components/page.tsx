@@ -26,13 +26,10 @@ export default function UniversalComponentsPage() {
             key: 'universal-button',
             name: t('components.button.name'),
             description: t('components.button.description'),
-            githubUrl: 'https://github.com/KhOlAn/code-base/tree/main/apps/web/src/shared/ui/UiButton',
+            githubUrl:
+                'https://github.com/Arctic-Web-Agency/code-base/tree/feature/ui-components/apps/web/src/shared/ui/UiButton',
             preview: (
-                <UiButton
-                    variant="filled"
-                    size="md"
-                    className="font-semibold"
-                >
+                <UiButton variant="filled" size="md" className="font-semibold">
                     {t('components.button.preview')}
                 </UiButton>
             ),
@@ -41,7 +38,7 @@ export default function UniversalComponentsPage() {
 
     return (
         <main className="container flex min-h-screen flex-col gap-10 py-12">
-            <BackButton label={t('back_button')} />
+            <BackButton className="w-fit" label={t('back_button')} />
 
             <header className="max-w-3xl space-y-4">
                 <p className="text-sm uppercase tracking-[0.25em] text-text-secondary">CodeBase</p>
