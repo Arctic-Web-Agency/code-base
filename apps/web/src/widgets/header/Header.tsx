@@ -1,5 +1,3 @@
-'use client';
-
 import ChangeLang from '@/features/change-lang';
 import ChangeTheme from '@/features/change-theme';
 import UiLogo from '@/shared/ui/UiLogo';
