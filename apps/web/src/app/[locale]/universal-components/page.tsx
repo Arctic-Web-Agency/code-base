@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import { useTranslations } from 'next-intl';
 import { ReactNode } from 'react';
 import UiButton from '@/shared/ui/UiButton/UiButton';
-import BackButton from '@/shared/ui/BackButton/BackButton';
+import { GoBack } from '@/features/go-back';
 import UiSelectPreview from './UiSelectPreview';
 import { fetchMetadata } from '@/shared/seo/metadata';
 import { MetaProps } from '@/shared/types/settings';
@@ -55,7 +55,7 @@ export default function UniversalComponentsPage() {
 
     return (
         <main className="container flex min-h-screen flex-col gap-10 py-12">
-            <BackButton className="w-fit" label={t('back_button')} />
+            <GoBack className="w-fit" label={t('back_button')} />
 
             <header className="max-w-3xl space-y-4">
                 <p className="text-sm uppercase tracking-[0.25em] text-text-secondary">CodeBase</p>

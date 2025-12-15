@@ -3,13 +3,13 @@
 import { useRouter } from 'next/navigation';
 import UiButton from '@/shared/ui/UiButton/UiButton';
 
-interface BackButtonProps {
+interface GoBackProps {
     label: string;
     fallbackHref?: string;
     className?: string;
 }
 
-export default function BackButton({ label, fallbackHref = '/', className }: BackButtonProps) {
+export default function GoBack({ label, fallbackHref = '/', className }: GoBackProps) {
     const router = useRouter();
 
     const handleBack = () => {
