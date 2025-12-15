@@ -35,7 +35,7 @@ const variantStyles: Record<UiSelectVariant, string> = {
 
 const optionStyles: Record<UiSelectVariant, string> = {
     filled: 'bg-neutral-800 text-white data-[focus]:bg-neutral-700 data-[selected]:bg-neutral-900',
-    outlined: 'bg-white text-neutral-800 data-[focus]:bg-neutral-100 data-[selected]:bg-neutral-200',
+    outlined: 'bg-white text-neutral-800 border border-neutral-300 data-[focus]:bg-neutral-100 data-[selected]:bg-neutral-200',
 };
 
 const UiSelect = forwardRef<HTMLButtonElement, UiSelectProps>(
@@ -57,7 +57,7 @@ const UiSelect = forwardRef<HTMLButtonElement, UiSelectProps>(
         const buttonClasses = composeClasses(
             'inline-flex items-center justify-between gap-2',
             'cursor-pointer disabled:cursor-not-allowed',
-            'focus:outline-none focus:ring-2 focus:ring-neutral-500 focus:ring-offset-2',
+            'focus:outline-none',
             disabled && 'opacity-50 cursor-not-allowed pointer-events-none',
             sizeStyles[size],
             variantStyles[variant],
@@ -67,7 +67,6 @@ const UiSelect = forwardRef<HTMLButtonElement, UiSelectProps>(
         const optionsClasses = composeClasses(
             'absolute z-50 mt-1 w-full',
             'focus:outline-none',
-            'border border-neutral-300',
             optionStyles[variant]
         );
 
