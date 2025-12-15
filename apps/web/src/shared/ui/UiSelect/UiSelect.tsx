@@ -30,12 +30,13 @@ const sizeStyles: Record<UiSelectSize, string> = {
  */
 const variantStyles: Record<UiSelectVariant, string> = {
     filled: 'bg-neutral-800 text-white hover:bg-neutral-700 disabled:bg-neutral-300 disabled:text-neutral-500',
-    outlined: 'bg-transparent border border-neutral-300 text-neutral-800 hover:border-neutral-400 disabled:border-neutral-200 disabled:text-neutral-400',
+    outlined: 'bg-transparent border border-neutral-300 text-neutral-300 hover:border-neutral-400 disabled:border-neutral-200 disabled:text-neutral-400',
 };
 
 const optionStyles: Record<UiSelectVariant, string> = {
     filled: 'bg-neutral-800 text-white data-[focus]:bg-neutral-700 data-[selected]:bg-neutral-900',
-    outlined: 'bg-white text-neutral-800 border border-neutral-300 data-[focus]:bg-neutral-100 data-[selected]:bg-neutral-200',
+    outlined:
+        'bg-transparent text-neutral-300 border border-neutral-300 data-[focus]:bg-neutral-100 data-[selected]:bg-neutral-200',
 };
 
 const UiSelect = forwardRef<HTMLButtonElement, UiSelectProps>(
