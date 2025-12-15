@@ -1,12 +1,12 @@
 import ChangeLang from '@/features/change-lang';
 import ChangeTheme from '@/features/change-theme';
-import UiLogo from '@/shared/ui/UiLogo';
+import { Logo } from '@/entities/brand';
 
 const Header = () => {
     return (
         <header>
             <div className="container flex items-center justify-between gap-6 py-4">
-                <UiLogo />
+                <Logo />
 
                 <div className="flex items-center gap-4">
                     <ChangeTheme />
