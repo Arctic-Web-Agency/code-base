@@ -29,9 +29,9 @@ const toggleSizeStyles: Record<UiSwitchSize, string> = {
  * Toggle translate positions when checked
  */
 const toggleTranslateStyles: Record<UiSwitchSize, string> = {
-    sm: 'translate-x-3',
-    md: 'translate-x-4',
-    lg: 'translate-x-5',
+    sm: 'translate-x-5',
+    md: 'translate-x-6',
+    lg: 'translate-x-7',
 };
 
 /**
@@ -55,10 +55,8 @@ const UiSwitch = (props: UiSwitchProps) => {
         'cursor-pointer disabled:cursor-not-allowed',
         'focus:outline-none',
         'transition-colors duration-200',
-        'px-1',
-        checked
-            ? 'bg-neutral-700'
-            : 'bg-neutral-300',
+        'px-px',
+        checked ? 'bg-neutral-700' : 'bg-neutral-300',
         disabled && 'opacity-50 cursor-not-allowed pointer-events-none',
         containerSizeStyles[size],
         className

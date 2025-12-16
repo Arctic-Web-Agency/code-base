@@ -45,8 +45,8 @@ const ChangeTheme: FC = () => {
                 checked={theme === THEME.DARK}
                 onChange={handleToggleTheme}
             >
-                <SunIcon className="h-5 w-5 text-text-primary transition-all duration-300" />
-                <MoonIcon className="h-5 w-5 text-text-primary transition-all duration-300" />
+                <SunIcon className="h-4 w-4 ml-1 text-text-primary transition-all duration-300" />
+                <MoonIcon className="h-4 w-4 mr-1 text-text-primary transition-all duration-300" />
             </UiSwitch>
         </>
     );
