@@ -28,6 +28,10 @@
             "switch": {
                 "name": "Universal switch",
                 "description": "Interactive toggle component for enabling and disabling options."
+            },
+            "input": {
+                "name": "Universal input",
+                "description": "Text input field for data entry with support for various types and sizes."
             }
         },
         "github_label": "View on GitHub"

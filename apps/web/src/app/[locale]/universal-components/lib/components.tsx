@@ -3,6 +3,7 @@ import { useTranslations } from 'next-intl';
 import UiButton from '@/shared/ui/UiButton/UiButton';
 import UiSelectPreview from '../ui/UiSelectPreview';
 import UiSwitchPreview from '../ui/UiSwitchPreview';
+import UiInputPreview from '../ui/UiInputPreview';
 
 export interface ComponentItem {
     key: string;
@@ -51,6 +52,14 @@ export function getComponents(
             githubUrl:
                 'https://github.com/Arctic-Web-Agency/code-base/tree/feature/ui-components/apps/web/src/shared/ui/UiSwitch',
             preview: <UiSwitchPreview />,
+        },
+        {
+            key: 'universal-input',
+            name: t('components.input.name'),
+            description: t('components.input.description'),
+            githubUrl:
+                'https://github.com/Arctic-Web-Agency/code-base/tree/feature/ui-components/apps/web/src/shared/ui/UiInput',
+            preview: <UiInputPreview />,
         },
     ];
 }
