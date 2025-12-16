@@ -1,8 +1,8 @@
 import { ReactNode } from 'react';
 import { useTranslations } from 'next-intl';
 import UiButton from '@/shared/ui/UiButton/UiButton';
-import UiSelectPreview from './UiSelectPreview';
-import UiSwitchPreview from './UiSwitchPreview';
+import UiSelectPreview from '../ui/UiSelectPreview';
+import UiSwitchPreview from '../ui/UiSwitchPreview';
 
 export interface ComponentItem {
     key: string;

@@ -4,7 +4,7 @@ import UiButton from '@/shared/ui/UiButton/UiButton';
 import { GoBack } from '@/features/go-back';
 import { fetchMetadata } from '@/shared/seo/metadata';
 import { MetaProps } from '@/shared/types/settings';
-import { getComponents } from './components.config';
+import { getComponents } from './lib/components';
 
 export async function generateMetadata(props: MetaProps): Promise<Metadata> {
     return await fetchMetadata({ ...props, page: 'universal_components', href: 'universal-components' });
