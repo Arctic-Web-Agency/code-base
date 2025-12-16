@@ -4,6 +4,7 @@ import { ReactNode } from 'react';
 import UiButton from '@/shared/ui/UiButton/UiButton';
 import { GoBack } from '@/features/go-back';
 import UiSelectPreview from './UiSelectPreview';
+import UiSwitchPreview from './UiSwitchPreview';
 import { fetchMetadata } from '@/shared/seo/metadata';
 import { MetaProps } from '@/shared/types/settings';
 
@@ -50,6 +51,14 @@ export default function UniversalComponentsPage() {
                     ]}
                 />
             ),
+        },
+        {
+            key: 'universal-switch',
+            name: t('components.switch.name'),
+            description: t('components.switch.description'),
+            githubUrl:
+                'https://github.com/Arctic-Web-Agency/code-base/tree/feature/ui-components/apps/web/src/shared/ui/UiSwitch',
+            preview: <UiSwitchPreview />,
         },
     ];
 

@@ -29,9 +29,9 @@ const toggleSizeStyles: Record<UiSwitchSize, string> = {
  * Toggle translate positions when checked
  */
 const toggleTranslateStyles: Record<UiSwitchSize, string> = {
-    sm: 'translate-x-5',
-    md: 'translate-x-6',
-    lg: 'translate-x-7',
+    sm: 'translate-x-3',
+    md: 'translate-x-4',
+    lg: 'translate-x-5',
 };
 
 /**
@@ -67,7 +67,6 @@ const UiSwitch = (props: UiSwitchProps) => {
     const toggleClasses = composeClasses(
         'absolute rounded-full bg-white z-10',
         'transition-transform duration-200',
-        'shadow-sm',
         checked ? toggleTranslateStyles[size] : 'translate-x-0.5',
         toggleSizeStyles[size]
     );

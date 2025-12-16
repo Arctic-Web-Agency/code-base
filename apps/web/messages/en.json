@@ -24,6 +24,10 @@
                     "option2": "Second option",
                     "option3": "Third option"
                 }
+            },
+            "switch": {
+                "name": "Universal switch",
+                "description": "Interactive toggle component for enabling and disabling options."
             }
         },
         "github_label": "View on GitHub"
