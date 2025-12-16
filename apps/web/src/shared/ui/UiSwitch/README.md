@@ -356,11 +356,6 @@ UiSwitch/
 └── README.md          # Documentation
 ```
 
-## Dependencies
-
-- `@headlessui/react` - Headless UI Switch component for accessibility
-- `react` - React 18+
-
 ## Switch vs Checkbox
 
 **Use Switch when:**

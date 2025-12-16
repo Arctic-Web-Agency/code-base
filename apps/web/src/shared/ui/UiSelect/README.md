@@ -346,39 +346,3 @@ UiSelect/
 ├── index.ts           # Exports
 └── README.md          # Documentation
 ```
-
-## Dependencies
-
-- `@headlessui/react` - Headless UI Listbox component for accessibility
-- `react` - React 18+
-
-## Migration from Old Version
-
-If migrating from the previous version:
-
-```tsx
-// Old
-<UiSelect
-    options={options}
-    value={value}
-    onChange={onChange}
-/>
-
-// New - same API, but with additional options
-<UiSelect
-    options={options}
-    value={value}
-    onChange={onChange}
-    variant="filled"  // New: choose style
-    size="md"         // New: choose size
-    disabled={false}  // New: disable state
-/>
-```
-
-The main changes:
-- Interface renamed from `IProps` to `UiSelectProps`
-- Option type renamed from `IOption` to `UiSelectOption`
-- Added `variant`, `size`, `disabled` props
-- Uses theme-agnostic neutral colors instead of custom theme colors
-- Added forwardRef support
-- Exported all types from index
