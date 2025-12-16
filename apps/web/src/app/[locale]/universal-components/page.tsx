@@ -20,10 +20,8 @@ interface ComponentItem {
     preview: ReactNode;
 }
 
-export default function UniversalComponentsPage() {
-    const t = useTranslations('universal_components_page');
-
-    const components: ComponentItem[] = [
+function getComponents(t: ReturnType<typeof useTranslations<'universal_components_page'>>): ComponentItem[] {
+    return [
         {
             key: 'universal-button',
             name: t('components.button.name'),
@@ -61,6 +59,11 @@ export default function UniversalComponentsPage() {
             preview: <UiSwitchPreview />,
         },
     ];
+}
+
+export default function UniversalComponentsPage() {
+    const t = useTranslations('universal_components_page');
+    const components = getComponents(t);
 
     return (
         <main className="container flex min-h-screen flex-col gap-10 py-12">
