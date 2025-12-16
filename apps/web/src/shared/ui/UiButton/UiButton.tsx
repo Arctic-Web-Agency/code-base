@@ -30,7 +30,7 @@ const sizeStyles: Record<UiButtonSize, string> = {
  */
 const variantStyles: Record<UiButtonVariant, string> = {
     filled: 'bg-neutral-800 text-white hover:bg-neutral-700 active:bg-neutral-900 disabled:bg-neutral-300 disabled:text-neutral-500',
-    text: 'bg-transparent text-neutral-400 dark:text-neutral-100 hover:text-neutral-400 active:text-neutral-200 disabled:text-neutral-500',
+    text: 'bg-transparent text-neutral-600 dark:text-neutral-300 hover:text-neutral-400 active:text-neutral-200 disabled:text-neutral-500',
 };
 
 interface RenderContentProps {
