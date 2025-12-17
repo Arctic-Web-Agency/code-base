@@ -89,7 +89,7 @@ const UiInput = forwardRef<HTMLInputElement, UiInputProps>((props, ref) => {
     );
 
     return (
-        <div className="w-full">
+        <div>
             {label && (
                 <label
                     htmlFor={id}
