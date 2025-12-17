@@ -4,6 +4,7 @@ import UiButton from '@/shared/ui/UiButton/UiButton';
 import UiSelectPreview from '../ui/UiSelectPreview';
 import UiSwitchPreview from '../ui/UiSwitchPreview';
 import UiInputPreview from '../ui/UiInputPreview';
+import UiPasswordInputPreview from '../ui/UiPasswordInputPreview';
 
 export interface ComponentItem {
     key: string;
@@ -60,6 +61,14 @@ export function getComponents(
             githubUrl:
                 'https://github.com/Arctic-Web-Agency/code-base/tree/feature/ui-components/apps/web/src/shared/ui/UiInput',
             preview: <UiInputPreview />,
+        },
+        {
+            key: 'universal-password-input',
+            name: t('components.password_input.name'),
+            description: t('components.password_input.description'),
+            githubUrl:
+                'https://github.com/Arctic-Web-Agency/code-base/tree/feature/ui-components/apps/web/src/shared/ui/UiPasswordInput',
+            preview: <UiPasswordInputPreview />,
         },
     ];
 }

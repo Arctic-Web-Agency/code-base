@@ -32,6 +32,10 @@
             "input": {
                 "name": "Universal input",
                 "description": "Text input field for data entry with support for various types and sizes."
+            },
+            "password_input": {
+                "name": "Password input",
+                "description": "Password input field with visibility toggle functionality."
             }
         },
         "github_label": "View on GitHub"
