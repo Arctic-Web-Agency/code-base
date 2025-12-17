@@ -1,4 +1,4 @@
-import { InputHTMLAttributes } from 'react';
+import { InputHTMLAttributes, ReactNode } from 'react';
 
 export type UiInputVariant = 'filled' | 'outlined';
 export type UiInputSize = 'sm' | 'md' | 'lg';
@@ -12,4 +12,6 @@ export interface UiInputProps
     size?: UiInputSize;
     error?: boolean;
     label?: string;
+    leftIcon?: ReactNode;
+    rightIcon?: ReactNode;
 }

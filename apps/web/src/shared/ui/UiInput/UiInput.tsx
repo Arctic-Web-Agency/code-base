@@ -15,6 +15,33 @@ const sizeStyles: Record<UiInputSize, string> = {
 };
 
 /**
+ * Icon container positioning styles based on size
+ */
+const iconContainerStyles: Record<UiInputSize, string> = {
+    sm: 'w-4 h-4',
+    md: 'w-5 h-5',
+    lg: 'w-6 h-6',
+};
+
+/**
+ * Icon positioning from edges
+ */
+const iconPositionStyles: Record<UiInputSize, { left: string; right: string }> = {
+    sm: { left: 'left-3', right: 'right-3' },
+    md: { left: 'left-4', right: 'right-4' },
+    lg: { left: 'left-6', right: 'right-6' },
+};
+
+/**
+ * Input padding adjustments when icons are present
+ */
+const iconPaddingStyles: Record<UiInputSize, { left: string; right: string }> = {
+    sm: { left: 'pl-9', right: 'pr-9' },
+    md: { left: 'pl-10', right: 'pr-10' },
+    lg: { left: 'pl-12', right: 'pr-12' },
+};
+
+/**
  * Variant styles for background, border, and text colors
  */
 const variantStyles: Record<UiInputVariant, string> = {
@@ -37,18 +64,28 @@ const UiInput = forwardRef<HTMLInputElement, UiInputProps>((props, ref) => {
         className,
         disabled = false,
         required = false,
+        leftIcon,
+        rightIcon,
         id,
         ...rest
     } = props;
 
     const inputClasses = composeClasses(
-        'transition-colors duration-200',
+        'w-full transition-colors duration-200',
         'focus:outline-none',
         'disabled:cursor-not-allowed disabled:opacity-50',
         sizeStyles[size],
         variantStyles[variant],
         error && 'border-red-500 focus:border-red-500',
+        leftIcon ? iconPaddingStyles[size].left : false,
+        rightIcon ? iconPaddingStyles[size].right : false,
         className
+    );
+
+    const iconClasses = composeClasses(
+        'absolute top-1/2 -translate-y-1/2 pointer-events-none',
+        'text-neutral-400',
+        iconContainerStyles[size]
     );
 
     return (
@@ -64,14 +101,36 @@ const UiInput = forwardRef<HTMLInputElement, UiInputProps>((props, ref) => {
                     )}
                 </label>
             )}
-            <input
-                ref={ref}
-                id={id}
-                disabled={disabled}
-                required={required}
-                className={inputClasses}
-                {...rest}
-            />
+            <div className="relative">
+                {leftIcon && (
+                    <div
+                        className={composeClasses(
+                            iconClasses,
+                            iconPositionStyles[size].left
+                        )}
+                    >
+                        {leftIcon}
+                    </div>
+                )}
+                <input
+                    ref={ref}
+                    id={id}
+                    disabled={disabled}
+                    required={required}
+                    className={inputClasses}
+                    {...rest}
+                />
+                {rightIcon && (
+                    <div
+                        className={composeClasses(
+                            iconClasses,
+                            iconPositionStyles[size].right
+                        )}
+                    >
+                        {rightIcon}
+                    </div>
+                )}
+            </div>
         </div>
     );
 });
