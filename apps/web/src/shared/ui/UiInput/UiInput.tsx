@@ -41,12 +41,12 @@ const UiInput = forwardRef<HTMLInputElement, UiInputProps>((props, ref) => {
     } = props;
 
     const inputClasses = composeClasses(
-        'w-full rounded-lg transition-colors duration-200',
-        'focus:outline-none focus:ring-2 focus:ring-neutral-500 focus:ring-offset-2',
+        'transition-colors duration-200',
+        'focus:outline-none',
         'disabled:cursor-not-allowed disabled:opacity-50',
         sizeStyles[size],
         variantStyles[variant],
-        error && 'border-red-500 focus:border-red-500 focus:ring-red-500',
+        error && 'border-red-500 focus:border-red-500',
         className
     );
 
