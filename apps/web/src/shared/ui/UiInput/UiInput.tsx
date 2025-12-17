@@ -36,6 +36,7 @@ const UiInput = forwardRef<HTMLInputElement, UiInputProps>((props, ref) => {
         label,
         className,
         disabled = false,
+        required = false,
         id,
         ...rest
     } = props;
@@ -58,12 +59,16 @@ const UiInput = forwardRef<HTMLInputElement, UiInputProps>((props, ref) => {
                     className="mb-1.5 block text-sm font-medium text-neutral-700 dark:text-neutral-300"
                 >
                     {label}
+                    {required && (
+                        <span className="ml-1 text-red-500">*</span>
+                    )}
                 </label>
             )}
             <input
                 ref={ref}
                 id={id}
                 disabled={disabled}
+                required={required}
                 className={inputClasses}
                 {...rest}
             />
