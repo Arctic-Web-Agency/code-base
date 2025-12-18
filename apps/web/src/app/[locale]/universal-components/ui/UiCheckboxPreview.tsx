@@ -12,6 +12,7 @@ export default function UiCheckboxPreview() {
             onChange={(e) => setChecked(e.target.checked)}
             label="Subscribe to newsletter"
             size="md"
+            id="universal-checkbox"
         />
     );
 }

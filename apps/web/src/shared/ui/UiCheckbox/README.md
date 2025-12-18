@@ -201,6 +201,7 @@ const MyForm = () => {
 ## Accessibility
 
 - Proper label association via `htmlFor` and `id`
+- Auto-generated `id` using React's `useId()` hook (label works even without explicit id prop)
 - Required fields marked with red asterisk
 - ARIA attributes supported via spread props
 - Disabled state properly communicated

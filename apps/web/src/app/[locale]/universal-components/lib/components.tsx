@@ -7,6 +7,7 @@ import UiInputPreview from '../ui/UiInputPreview';
 import UiPasswordInputPreview from '../ui/UiPasswordInputPreview';
 import UiTextareaPreview from '../ui/UiTextareaPreview';
 import UiCheckboxPreview from '../ui/UiCheckboxPreview';
+import UiCheckboxGroupPreview from '../ui/UiCheckboxGroupPreview';
 
 export interface ComponentItem {
     key: string;
@@ -87,6 +88,14 @@ export function getComponents(
             githubUrl:
                 'https://github.com/Arctic-Web-Agency/code-base/tree/feature/ui-components/apps/web/src/shared/ui/UiCheckbox',
             preview: <UiCheckboxPreview />,
+        },
+        {
+            key: 'universal-checkbox-group',
+            name: t('components.checkbox_group.name'),
+            description: t('components.checkbox_group.description'),
+            githubUrl:
+                'https://github.com/Arctic-Web-Agency/code-base/tree/feature/ui-components/apps/web/src/shared/ui/UiCheckboxGroup',
+            preview: <UiCheckboxGroupPreview />,
         },
     ];
 }

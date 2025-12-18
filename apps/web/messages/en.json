@@ -44,6 +44,10 @@
             "checkbox": {
                 "name": "Checkbox",
                 "description": "Component for selecting one or multiple options with state and validation support."
+            },
+            "checkbox_group": {
+                "name": "Checkbox Group",
+                "description": "Component for managing a group of checkboxes with shared state and validation."
             }
         },
         "github_label": "View on GitHub"

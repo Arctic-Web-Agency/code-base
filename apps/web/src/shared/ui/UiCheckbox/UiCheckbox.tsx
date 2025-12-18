@@ -1,4 +1,4 @@
-import { forwardRef, useEffect, useRef, type RefObject } from 'react';
+import { forwardRef, useEffect, useRef, useId, type RefObject } from 'react';
 import type { UiCheckboxProps, UiCheckboxSize } from './types';
 
 const composeClasses = (
@@ -49,6 +49,9 @@ const UiCheckbox = forwardRef<HTMLInputElement, UiCheckboxProps>(
             ...rest
         } = props;
 
+        const autoId = useId();
+        const checkboxId = id || autoId;
+
         const internalRef = useRef<HTMLInputElement>(null);
         const checkboxRef = (ref ||
             internalRef) as RefObject<HTMLInputElement>;
@@ -95,7 +98,7 @@ const UiCheckbox = forwardRef<HTMLInputElement, UiCheckboxProps>(
                         <input
                             ref={checkboxRef}
                             type="checkbox"
-                            id={id}
+                            id={checkboxId}
                             disabled={disabled}
                             required={required}
                             checked={checked}
@@ -105,7 +108,7 @@ const UiCheckbox = forwardRef<HTMLInputElement, UiCheckboxProps>(
                     </div>
                     {label && (
                         <label
-                            htmlFor={id}
+                            htmlFor={checkboxId}
                             className={composeClasses(
                                 'ml-3 cursor-pointer',
                                 labelSizeStyles[size],
