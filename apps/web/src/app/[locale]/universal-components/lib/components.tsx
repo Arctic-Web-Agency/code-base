@@ -5,6 +5,7 @@ import UiSelectPreview from '../ui/UiSelectPreview';
 import UiSwitchPreview from '../ui/UiSwitchPreview';
 import UiInputPreview from '../ui/UiInputPreview';
 import UiPasswordInputPreview from '../ui/UiPasswordInputPreview';
+import UiTextareaPreview from '../ui/UiTextareaPreview';
 
 export interface ComponentItem {
     key: string;
@@ -69,6 +70,14 @@ export function getComponents(
             githubUrl:
                 'https://github.com/Arctic-Web-Agency/code-base/tree/feature/ui-components/apps/web/src/shared/ui/UiPasswordInput',
             preview: <UiPasswordInputPreview />,
+        },
+        {
+            key: 'universal-textarea',
+            name: t('components.textarea.name'),
+            description: t('components.textarea.description'),
+            githubUrl:
+                'https://github.com/Arctic-Web-Agency/code-base/tree/feature/ui-components/apps/web/src/shared/ui/UiTextarea',
+            preview: <UiTextareaPreview />,
         },
     ];
 }
