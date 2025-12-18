@@ -40,6 +40,10 @@
             "textarea": {
                 "name": "Textarea",
                 "description": "Multi-line text input field with support for various sizes and states."
+            },
+            "checkbox": {
+                "name": "Checkbox",
+                "description": "Component for selecting one or multiple options with state and validation support."
             }
         },
         "github_label": "View on GitHub"
