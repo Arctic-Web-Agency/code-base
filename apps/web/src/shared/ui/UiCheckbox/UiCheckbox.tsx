@@ -14,6 +14,24 @@ const checkboxSizeStyles: Record<UiCheckboxSize, string> = {
     lg: 'w-6 h-6',
 };
 
+/**
+ * Checkmark size styles (width and height for rotated border trick)
+ */
+const checkmarkSizeStyles: Record<UiCheckboxSize, string> = {
+    sm: 'w-1.5 h-2.5',
+    md: 'w-2 h-3.5',
+    lg: 'w-2.5 h-4',
+};
+
+/**
+ * Indeterminate line size styles
+ */
+const indeterminateSizeStyles: Record<UiCheckboxSize, string> = {
+    sm: 'w-2 h-0.5',
+    md: 'w-2.5 h-0.5',
+    lg: 'w-3 h-0.5',
+};
+
 const labelSizeStyles: Record<UiCheckboxSize, string> = {
     sm: 'text-sm',
     md: 'text-base',
@@ -28,7 +46,7 @@ const textSizeStyles: Record<UiCheckboxSize, string> = {
 
 /**
  * Theme-agnostic checkbox component using neutral colors
- * Override via className prop for custom design systems
+ * Uses custom checkbox for cross-browser consistency
  */
 const UiCheckbox = forwardRef<HTMLInputElement, UiCheckboxProps>(
     (props, ref) => {
@@ -63,23 +81,31 @@ const UiCheckbox = forwardRef<HTMLInputElement, UiCheckboxProps>(
             }
         }, [indeterminate, checkboxRef]);
 
-        const checkboxClasses = composeClasses(
+        // Border color based on state
+        let borderColor = 'border-neutral-300';
+        if (error) borderColor = 'border-red-500';
+        if (success) borderColor = 'border-green-500';
+
+        // Background and border when checked/indeterminate
+        let activeBgColor = 'bg-neutral-700 border-neutral-700';
+        if (error) activeBgColor = 'bg-red-500 border-red-500';
+        if (success) activeBgColor = 'bg-green-500 border-green-500';
+
+        // Ring color for focus
+        let ringColor = 'peer-focus:ring-neutral-400';
+        if (error) ringColor = 'peer-focus:ring-red-500';
+        if (success) ringColor = 'peer-focus:ring-green-500';
+
+        const customCheckboxClasses = composeClasses(
             checkboxSizeStyles[size],
+            'border-2 rounded',
+            'flex items-center justify-center',
+            'cursor-pointer',
             'transition-colors duration-200',
-            'cursor-pointer disabled:cursor-not-allowed disabled:opacity-50',
-            'focus:outline-none',
-            error
-                ? 'border-red-500 focus:ring-red-500'
-                : success
-                ? 'border-green-500 focus:ring-green-500'
-                : 'border-neutral-300 focus:ring-neutral-400',
-            checked || indeterminate
-                ? error
-                    ? 'bg-red-500 border-red-500'
-                    : success
-                    ? 'bg-green-500 border-green-500'
-                    : 'bg-neutral-700 border-neutral-700'
-                : 'bg-white',
+            'peer-focus:ring-2',
+            ringColor,
+            'peer-disabled:opacity-50 peer-disabled:cursor-not-allowed',
+            checked || indeterminate ? activeBgColor : `bg-white ${borderColor}`,
             className
         );
 
@@ -94,7 +120,8 @@ const UiCheckbox = forwardRef<HTMLInputElement, UiCheckboxProps>(
         return (
             <div>
                 <div className="flex items-start">
-                    <div className="flex items-center h-5">
+                    <div className="relative flex items-center h-5">
+                        {/* Hidden native input for accessibility and functionality */}
                         <input
                             ref={checkboxRef}
                             type="checkbox"
@@ -102,9 +129,35 @@ const UiCheckbox = forwardRef<HTMLInputElement, UiCheckboxProps>(
                             disabled={disabled}
                             required={required}
                             checked={checked}
-                            className={checkboxClasses}
+                            className="peer sr-only"
                             {...rest}
                         />
+
+                        {/* Custom visual checkbox */}
+                        <label
+                            htmlFor={checkboxId}
+                            className={customCheckboxClasses}
+                        >
+                            {/* Show checkmark when checked (not indeterminate) */}
+                            {checked && !indeterminate && (
+                                <div
+                                    className={composeClasses(
+                                        checkmarkSizeStyles[size],
+                                        'border-white border-r-2 border-b-2 rotate-45 -mt-0.5'
+                                    )}
+                                />
+                            )}
+
+                            {/* Show minus when indeterminate */}
+                            {indeterminate && (
+                                <div
+                                    className={composeClasses(
+                                        indeterminateSizeStyles[size],
+                                        'bg-white rounded-full'
+                                    )}
+                                />
+                            )}
+                        </label>
                     </div>
                     {label && (
                         <label
