@@ -273,7 +273,7 @@ const [selectedItems, setSelectedItems] = useState<string[]>([]);
 const allSelected = selectedItems.length === allItems.length;
 const someSelected = selectedItems.length > 0 && !allSelected;
 
-const handleSelectAll = (e: React.ChangeEvent<HTMLInputElement>) => {
+const handleSelectAll = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.checked) {
         setSelectedItems(allItems);
     } else {
