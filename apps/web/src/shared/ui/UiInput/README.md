@@ -20,6 +20,27 @@ Universal input component with full TypeScript support and theme-agnostic stylin
 - 🎭 **Customizable**: Theme-agnostic neutral colors, easy to override
 - ⚡ **Lightweight**: Minimal styling, no unnecessary dependencies
 
+## Architecture Philosophy
+
+### Icons vs Decorative Elements
+
+**Icons (`leftIcon`/`rightIcon`)**: Should **always** be **interactive UiButton components**
+- ✅ Good UX: Users can click and interact
+- ✅ Better accessibility: Proper ARIA labels and keyboard navigation
+- ✅ Consistent behavior: All icons behave the same way
+- ✅ Natural spacing: Button padding creates proper edge spacing
+
+**Decorative elements (`prefix`/`suffix`)**: Use for **non-interactive text**
+- Currency symbols: `$`, `€`, `£`
+- Units: `kg`, `cm`, `USD`
+- Contextual indicators: `@`, `https://`
+
+**Why this matters:**
+- Icons attract attention and imply interactivity
+- Non-clickable icons frustrate users and harm UX
+- Screen readers can't understand decorative SVGs without proper ARIA
+- Mixing interactive and decorative icons creates inconsistent patterns
+
 ## Installation
 
 ```tsx
@@ -131,29 +152,52 @@ const [value, setValue] = useState('');
 
 ### Input with Icons
 
-```tsx
-import { SearchIcon, CheckIcon } from '@/shared/icons';
+**Philosophy**: Icons should always be **interactive buttons**, not decorative elements. Use `prefix`/`suffix` for decorative text instead.
 
+```tsx
+import { SearchIcon, EyeIcon } from '@/shared/icons';
+import UiButton from '@/shared/ui/UiButton';
+
+// Interactive icon button on the left
 <UiInput
-    leftIcon={<SearchIcon />}
+    leftIcon={
+        <UiButton
+            variant="icon"
+            size="md"
+            onClick={handleSearch}
+            aria-label="Search"
+        >
+            <SearchIcon />
+        </UiButton>
+    }
     value={search}
     onChange={(e) => setSearch(e.target.value)}
     placeholder="Search..."
 />
 
+// Interactive icon button on the right
 <UiInput
-    rightIcon={<CheckIcon />}
-    value={email}
-    onChange={(e) => setEmail(e.target.value)}
-    placeholder="Email"
+    rightIcon={
+        <UiButton
+            variant="icon"
+            size="md"
+            onClick={toggleVisibility}
+            aria-label="Toggle visibility"
+        >
+            <EyeIcon />
+        </UiButton>
+    }
+    value={password}
+    onChange={(e) => setPassword(e.target.value)}
+    placeholder="Password"
 />
 
+// For decorative indicators, use prefix/suffix instead
 <UiInput
-    leftIcon={<SearchIcon />}
-    rightIcon={<CheckIcon />}
-    value={query}
-    onChange={(e) => setQuery(e.target.value)}
-    placeholder="Search with validation"
+    prefix="@"
+    value={username}
+    onChange={(e) => setUsername(e.target.value)}
+    placeholder="username"
 />
 ```
 
@@ -275,15 +319,13 @@ import { SearchIcon, CheckIcon } from '@/shared/icons';
 ### Combined Features
 
 ```tsx
-import { MailIcon } from '@/shared/icons';
-
 <UiInput
     label="Email Address"
     required
     type="email"
     value={email}
     onChange={(e) => setEmail(e.target.value)}
-    leftIcon={<MailIcon />}
+    prefix="@"
     clearable
     onClear={() => setEmail('')}
     size="lg"
@@ -305,8 +347,8 @@ import { MailIcon } from '@/shared/icons';
 | `error` | `boolean` | `false` | Whether input is in error state |
 | `success` | `boolean` | `false` | Whether input is in success state |
 | `label` | `string` | - | Label text displayed above input |
-| `leftIcon` | `ReactNode` | - | Icon or element displayed on the left |
-| `rightIcon` | `ReactNode` | - | Icon or element displayed on the right |
+| `leftIcon` | `ReactNode` | - | Interactive button displayed on the left (should be UiButton) |
+| `rightIcon` | `ReactNode` | - | Interactive button displayed on the right (should be UiButton) |
 | `helperText` | `string` | - | Helper text displayed below input |
 | `errorText` | `string` | - | Error message (shown when error=true) |
 | `successText` | `string` | - | Success message (shown when success=true) |
@@ -385,8 +427,6 @@ Adornment priority:
 ### Login Form
 
 ```tsx
-import { MailIcon, LockIcon } from '@/shared/icons';
-
 const [email, setEmail] = useState('');
 const [password, setPassword] = useState('');
 
@@ -397,22 +437,21 @@ const [password, setPassword] = useState('');
         type="email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        leftIcon={<MailIcon />}
+        prefix="@"
         clearable
         onClear={() => setEmail('')}
-        placeholder="you@example.com"
+        placeholder="username"
         variant="outlined"
         size="md"
         required
     />
 
-    <UiInput
+    {/* Use UiPasswordInput for password fields with icon button */}
+    <UiPasswordInput
         id="password"
         label="Password"
-        type="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
-        leftIcon={<LockIcon />}
         placeholder="••••••••"
         variant="outlined"
         size="md"
@@ -427,14 +466,29 @@ const [password, setPassword] = useState('');
 
 ```tsx
 import { SearchIcon } from '@/shared/icons';
+import UiButton from '@/shared/ui/UiButton';
 
 const [search, setSearch] = useState('');
+
+const handleSearch = () => {
+    // Trigger search action
+    console.log('Searching for:', search);
+};
 
 <UiInput
     type="search"
     value={search}
     onChange={(e) => setSearch(e.target.value)}
-    leftIcon={<SearchIcon />}
+    leftIcon={
+        <UiButton
+            variant="icon"
+            size="sm"
+            onClick={handleSearch}
+            aria-label="Search"
+        >
+            <SearchIcon />
+        </UiButton>
+    }
     clearable
     onClear={() => setSearch('')}
     placeholder="Search..."
@@ -446,8 +500,6 @@ const [search, setSearch] = useState('');
 ### Validated Email Input
 
 ```tsx
-import { MailIcon } from '@/shared/icons';
-
 const [email, setEmail] = useState('');
 const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
@@ -457,12 +509,12 @@ const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     type="email"
     value={email}
     onChange={(e) => setEmail(e.target.value)}
-    leftIcon={<MailIcon />}
+    prefix="@"
     error={!isValid && email.length > 0}
     errorText="Please enter a valid email address"
     success={isValid && email.length > 0}
     successText="Valid email format"
-    placeholder="you@example.com"
+    placeholder="username"
 />
 ```
 
@@ -571,11 +623,14 @@ const [website, setWebsite] = useState('');
 3. **Success feedback**: Provide positive feedback with success state for important validations
 4. **Character counter**: Enable showCharCount for inputs with maxLength to help users
 5. **Clear button**: Use clearable for search and filter inputs for better UX
-6. **Icons**: Use leftIcon for context (search, email) and rightIcon for status (validation)
-7. **Prefix/Suffix**: Use for currency, units, or domain prefixes
-8. **Validation**: Validate on blur or submit, not on every keystroke
-9. **Type attribute**: Use appropriate `type` for different inputs (email, password, tel, url, etc.)
-10. **Controlled components**: Always manage value and onChange in state
+6. **Icons vs Decorative elements**:
+   - **Icons** (`leftIcon`/`rightIcon`): Always use **interactive UiButton** for clickable actions (search, toggle visibility, etc.)
+   - **Decorative text** (`prefix`/`suffix`): Use for non-interactive indicators (currency symbols, units, @ signs)
+   - Never use raw SVG icons without UiButton wrapper - this creates poor UX and accessibility issues
+7. **Validation**: Validate on blur or submit, not on every keystroke
+8. **Type attribute**: Use appropriate `type` for different inputs (email, password, tel, url, etc.)
+9. **Controlled components**: Always manage value and onChange in state
+10. **Size consistency**: Pass the same `size` prop to both UiInput and icon UiButtons for proper alignment
 
 ## Related Components
 

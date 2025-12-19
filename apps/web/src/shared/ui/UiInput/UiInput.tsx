@@ -17,11 +17,13 @@ const sizeStyles: Record<UiInputSize, string> = {
 
 /**
  * Icon positioning from edges
+ * Icons should always be interactive buttons, so they're positioned at the edge
+ * Button padding provides natural spacing from the edge
  */
 const iconPositionStyles: Record<UiInputSize, { left: string; right: string }> = {
-    sm: { left: 'left-3', right: 'right-3' },
-    md: { left: 'left-4', right: 'right-4' },
-    lg: { left: 'left-6', right: 'right-6' },
+    sm: { left: 'left-0', right: 'right-0' },
+    md: { left: 'left-0', right: 'right-0' },
+    lg: { left: 'left-0', right: 'right-0' },
 };
 
 /**
