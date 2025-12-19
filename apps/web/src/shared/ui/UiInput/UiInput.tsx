@@ -16,17 +16,6 @@ const sizeStyles: Record<UiInputSize, string> = {
 };
 
 /**
- * Icon positioning from edges
- * Icons should always be interactive buttons, so they're positioned at the edge
- * Button padding provides natural spacing from the edge
- */
-const iconPositionStyles: Record<UiInputSize, { left: string; right: string }> = {
-    sm: { left: 'left-0', right: 'right-0' },
-    md: { left: 'left-0', right: 'right-0' },
-    lg: { left: 'left-0', right: 'right-0' },
-};
-
-/**
  * Input padding adjustments when icons are present
  */
 const iconPaddingStyles: Record<UiInputSize, { left: string; right: string }> = {
@@ -135,19 +124,13 @@ const UiInput = forwardRef<HTMLInputElement, UiInputProps>((props, ref) => {
             )}
             <div className="relative">
                 {leftIcon ? (
-                    <div
-                        className={composeClasses(
-                            'absolute top-1/2 -translate-y-1/2',
-                            iconPositionStyles[size].left
-                        )}
-                    >
+                    <div className="absolute top-1/2 -translate-y-1/2 left-0">
                         {leftIcon}
                     </div>
                 ) : prefix ? (
                     <div
                         className={composeClasses(
-                            'absolute top-1/2 -translate-y-1/2 pointer-events-none',
-                            iconPositionStyles[size].left,
+                            'absolute top-1/2 -translate-y-1/2 left-0 pointer-events-none',
                             'text-neutral-500',
                             textSizeStyles[size]
                         )}
@@ -166,12 +149,7 @@ const UiInput = forwardRef<HTMLInputElement, UiInputProps>((props, ref) => {
                     {...rest}
                 />
                 {showClearButton ? (
-                    <div
-                        className={composeClasses(
-                            'absolute top-1/2 -translate-y-1/2',
-                            iconPositionStyles[size].right
-                        )}
-                    >
+                    <div className="absolute top-1/2 -translate-y-1/2 right-0">
                         <UiButton
                             variant="icon"
                             size="sm"
@@ -184,19 +162,13 @@ const UiInput = forwardRef<HTMLInputElement, UiInputProps>((props, ref) => {
                         </UiButton>
                     </div>
                 ) : rightIcon ? (
-                    <div
-                        className={composeClasses(
-                            'absolute top-1/2 -translate-y-1/2',
-                            iconPositionStyles[size].right
-                        )}
-                    >
+                    <div className="absolute top-1/2 -translate-y-1/2 right-0">
                         {rightIcon}
                     </div>
                 ) : suffix ? (
                     <div
                         className={composeClasses(
-                            'absolute top-1/2 -translate-y-1/2 pointer-events-none',
-                            iconPositionStyles[size].right,
+                            'absolute top-1/2 -translate-y-1/2 right-0 pointer-events-none',
                             'text-neutral-500',
                             textSizeStyles[size]
                         )}
