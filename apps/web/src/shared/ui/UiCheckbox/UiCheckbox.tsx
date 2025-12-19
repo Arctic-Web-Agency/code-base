@@ -95,8 +95,7 @@ const UiCheckbox = forwardRef<HTMLInputElement, UiCheckboxProps>(
             checkboxSizeStyles[size],
             'border-2',
             'flex items-center justify-center',
-            'cursor-pointer',
-            'peer-disabled:opacity-50 peer-disabled:cursor-not-allowed',
+            'peer-disabled:opacity-50',
             checked || indeterminate ? activeBgColor : `bg-white ${borderColor}`,
             className
         );
@@ -111,7 +110,12 @@ const UiCheckbox = forwardRef<HTMLInputElement, UiCheckboxProps>(
 
         return (
             <div>
-                <div className="flex items-start">
+                <label
+                    className={composeClasses(
+                        'flex items-start',
+                        disabled ? 'cursor-not-allowed' : 'cursor-pointer'
+                    )}
+                >
                     <div className="relative flex items-center h-5">
                         {/* Hidden native input for accessibility and functionality */}
                         <input
@@ -126,10 +130,7 @@ const UiCheckbox = forwardRef<HTMLInputElement, UiCheckboxProps>(
                         />
 
                         {/* Custom visual checkbox */}
-                        <label
-                            htmlFor={checkboxId}
-                            className={customCheckboxClasses}
-                        >
+                        <div className={customCheckboxClasses}>
                             {/* Show checkmark when checked (not indeterminate) */}
                             {checked && !indeterminate && (
                                 <div
@@ -149,25 +150,24 @@ const UiCheckbox = forwardRef<HTMLInputElement, UiCheckboxProps>(
                                     )}
                                 />
                             )}
-                        </label>
+                        </div>
                     </div>
                     {label && (
-                        <label
-                            htmlFor={checkboxId}
+                        <span
                             className={composeClasses(
-                                'ml-3 cursor-pointer',
+                                'ml-3',
                                 labelSizeStyles[size],
                                 'text-neutral-700 dark:text-neutral-300',
-                                disabled && 'cursor-not-allowed opacity-50'
+                                disabled && 'opacity-50'
                             )}
                         >
                             {label}
                             {required && (
                                 <span className="ml-1 text-red-500">*</span>
                             )}
-                        </label>
+                        </span>
                     )}
-                </div>
+                </label>
                 {displayText && (
                     <div
                         className={composeClasses(
