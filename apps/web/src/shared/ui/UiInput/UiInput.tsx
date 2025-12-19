@@ -1,4 +1,5 @@
 import { forwardRef, useMemo } from 'react';
+import UiButton from '../UiButton/UiButton';
 import type { UiInputProps, UiInputSize, UiInputVariant } from './types';
 
 const composeClasses = (
@@ -178,22 +179,23 @@ const UiInput = forwardRef<HTMLInputElement, UiInputProps>((props, ref) => {
                     {...rest}
                 />
                 {showClearButton ? (
-                    <button
-                        type="button"
-                        onClick={onClear}
+                    <div
                         className={composeClasses(
                             'absolute top-1/2 -translate-y-1/2',
-                            iconPositionStyles[size].right,
-                            'text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-200',
-                            'cursor-pointer transition-colors',
-                            iconContainerStyles[size],
-                            'flex items-center justify-center'
+                            iconPositionStyles[size].right
                         )}
-                        tabIndex={-1}
-                        aria-label="Clear input"
                     >
-                        ×
-                    </button>
+                        <UiButton
+                            variant="icon"
+                            size="sm"
+                            onClick={onClear}
+                            tabIndex={-1}
+                            aria-label="Clear input"
+                            className="text-xl leading-none"
+                        >
+                            ×
+                        </UiButton>
+                    </div>
                 ) : rightIcon ? (
                     <div
                         className={composeClasses(

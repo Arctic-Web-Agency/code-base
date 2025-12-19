@@ -2,6 +2,7 @@
 
 import { forwardRef, useState } from 'react';
 import UiInput from '../UiInput/UiInput';
+import UiButton from '../UiButton/UiButton';
 import { EyeIcon, EyeOffIcon } from '@/shared/icons';
 import type { UiPasswordInputProps } from './types';
 
@@ -24,17 +25,17 @@ const UiPasswordInput = forwardRef<HTMLInputElement, UiPasswordInputProps>(
                 ref={ref}
                 type={showPassword ? 'text' : 'password'}
                 rightIcon={
-                    <button
-                        type="button"
+                    <UiButton
+                        variant="icon"
+                        size="sm"
                         onClick={toggleVisibility}
-                        className="pointer-events-auto cursor-pointer text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-200 transition-colors"
+                        className="pointer-events-auto"
                         aria-label={
                             showPassword ? 'Hide password' : 'Show password'
                         }
                         tabIndex={-1}
-                    >
-                        {showPassword ? <EyeOffIcon /> : <EyeIcon />}
-                    </button>
+                        IconLeft={showPassword ? EyeOffIcon : EyeIcon}
+                    />
                 }
             />
         );

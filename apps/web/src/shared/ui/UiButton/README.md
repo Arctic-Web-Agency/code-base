@@ -6,10 +6,10 @@ Universal button component that supports native buttons, internal links (Next.js
 
 - 🎯 **Three variants**: Native button, internal link (Next.js), external link
 - 📐 **Three sizes**: Small, medium, large with consistent padding
-- 🎨 **Two styles**: Filled and text variants
+- 🎨 **Three styles**: Filled, text, and icon variants
 - ♿ **Accessible**: Full ARIA support and keyboard navigation
 - 🔒 **Type-safe**: Strict TypeScript with discriminated unions
-- 🎭 **Icons**: Support for left and right icons
+- 🎭 **Icons**: Support for left and right icons, or icon-only buttons
 - 🚫 **Disabled state**: Works consistently across all variants
 
 ## Installation
@@ -90,6 +90,23 @@ import { ArrowLeft, ArrowRight } from '@/icons';
 </UiButton>
 ```
 
+### Icon-only Button
+
+Perfect for toolbar buttons, input adornments, or compact actions:
+
+```tsx
+import { EyeIcon, EyeOffIcon, XMarkIcon } from '@/icons';
+
+// Toggle visibility button
+<UiButton variant="icon" size="sm" IconLeft={EyeIcon} aria-label="Show password" />
+
+// Close button
+<UiButton variant="icon" size="md" IconLeft={XMarkIcon} aria-label="Close" />
+
+// Large icon button
+<UiButton variant="icon" size="lg" IconLeft={EyeOffIcon} />
+```
+
 ### Disabled State
 
 ```tsx
@@ -124,11 +141,11 @@ All variants accept these props:
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `children` | `ReactNode` | - | Button content |
-| `variant` | `'filled' \| 'text'` | `'filled'` | Visual style variant |
+| `children` | `ReactNode` | - | Button content (optional for icon variant) |
+| `variant` | `'filled' \| 'text' \| 'icon'` | `'filled'` | Visual style variant |
 | `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Button size (controls padding) |
 | `className` | `string` | - | Additional CSS classes |
-| `IconLeft` | `ComponentType<SVGProps<SVGSVGElement>>` | - | Icon component for left side |
+| `IconLeft` | `ComponentType<SVGProps<SVGSVGElement>>` | - | Icon component for left side (or only icon for icon variant) |
 | `IconRight` | `ComponentType<SVGProps<SVGSVGElement>>` | - | Icon component for right side |
 | `disabled` | `boolean` | `false` | Disable button/link |
 
@@ -171,9 +188,15 @@ When `as="link"` and `external={true}`:
 
 Controls padding and text size:
 
+**Regular buttons (filled/text):**
 - `sm`: `px-3 py-1.5 text-sm`
 - `md`: `px-4 py-2 text-base`
 - `lg`: `px-6 py-3 text-lg`
+
+**Icon buttons:**
+- `sm`: `p-1.5`
+- `md`: `p-2`
+- `lg`: `p-3`
 
 ### Variant
 
@@ -181,6 +204,7 @@ Controls background and text colors:
 
 - `filled`: Background color with hover state
 - `text`: Transparent background with hover state
+- `icon`: Minimal styling for icon-only buttons, transparent background with color transitions
 
 ## TypeScript
 

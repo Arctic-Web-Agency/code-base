@@ -7,7 +7,7 @@ import {
 } from 'react';
 import { LinkProps } from 'next/link';
 
-export type UiButtonVariant = 'filled' | 'text';
+export type UiButtonVariant = 'filled' | 'text' | 'icon';
 export type UiButtonSize = 'sm' | 'md' | 'lg';
 
 type IconComponent = ComponentType<SVGProps<SVGSVGElement>>;
