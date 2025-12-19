@@ -135,7 +135,7 @@ const UiCheckbox = forwardRef<HTMLInputElement, UiCheckboxProps>(
                                 <div
                                     className={composeClasses(
                                         checkmarkSizeStyles[size],
-                                        'border-white border-r-2 border-b-2 rotate-45 -mt-0.5'
+                                        'border-white border-r-2 border-b-2 rotate-45 -mt-1'
                                     )}
                                 />
                             )}
