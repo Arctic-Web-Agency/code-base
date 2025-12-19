@@ -2,7 +2,7 @@
 
 import { FC } from 'react';
 import { useRouter, usePathname, useSearchParams } from 'next/navigation';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { UA, US } from 'country-flag-icons/react/3x2';
 import { LANG } from '@acw/types';
 import { ChangeLangProps } from './types';
@@ -35,6 +35,7 @@ const ChangeLang: FC<ChangeLangProps> = ({ withoutText, expandTop }) => {
     const pathname = usePathname();
     const searchParams = useSearchParams();
     const activeLocale = useLocale();
+    const t = useTranslations('components.change_lang');
 
     const handleChangeLang = (value: string) => {
         const allSearchParams = searchParams.toString();
@@ -45,7 +46,7 @@ const ChangeLang: FC<ChangeLangProps> = ({ withoutText, expandTop }) => {
 
     return (
         <UiSelect
-            label="Change language"
+            label={t('label')}
             options={LANGS}
             value={activeLocale}
             onChange={handleChangeLang}

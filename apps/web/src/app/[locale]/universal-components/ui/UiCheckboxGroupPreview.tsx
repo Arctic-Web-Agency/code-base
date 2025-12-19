@@ -1,16 +1,18 @@
 'use client';
 
 import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 import UiCheckboxGroup from '@/shared/ui/UiCheckboxGroup/UiCheckboxGroup';
 import UiCheckbox from '@/shared/ui/UiCheckbox/UiCheckbox';
 
 export default function UiCheckboxGroupPreview() {
     const [selected, setSelected] = useState<string[]>([]);
+    const t = useTranslations('previews.checkbox_group');
 
     const options = [
-        { value: 'tech', label: 'Technology', id: 'tech-checkbox' },
-        { value: 'design', label: 'Design', id: 'design-checkbox' },
-        { value: 'marketing', label: 'Marketing', id: 'marketing-checkbox' },
+        { value: 'tech', label: t('options.technology'), id: 'tech-checkbox' },
+        { value: 'design', label: t('options.design'), id: 'design-checkbox' },
+        { value: 'marketing', label: t('options.marketing'), id: 'marketing-checkbox' },
     ];
 
     const allValues = options.map((opt) => opt.value);
@@ -28,7 +30,7 @@ export default function UiCheckboxGroupPreview() {
     return (
         <div className="flex flex-col gap-3">
             <UiCheckbox
-                label="Select all"
+                label={t('master_label')}
                 checked={isAllSelected}
                 indeterminate={isIndeterminate}
                 onChange={handleMasterToggle}
@@ -39,7 +41,7 @@ export default function UiCheckboxGroupPreview() {
                     options={options}
                     value={selected}
                     onChange={setSelected}
-                    label="Select your interests"
+                    label={t('label')}
                     size="md"
                 />
             </div>

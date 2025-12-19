@@ -58,7 +58,35 @@
             "description": "Arctic Web is a leading company in website and web application development. We craft custom, efficient, and reliable digital solutions tailored to your business needs."
         },
         "heading": "CodeBase — a shared library of universal components.",
-        "description": "Here you’ll find reusable elements and patterns that teams can use across their projects.",
+        "description": "Here you'll find reusable elements and patterns that teams can use across their projects.",
         "cta": "Browse components"
+    },
+    "components": {
+        "change_lang": {
+            "label": "Change language"
+        }
+    },
+    "previews": {
+        "input": {
+            "placeholder": "Enter text..."
+        },
+        "password": {
+            "placeholder": "Enter password..."
+        },
+        "textarea": {
+            "placeholder": "Enter your message..."
+        },
+        "checkbox": {
+            "label": "Subscribe to newsletter"
+        },
+        "checkbox_group": {
+            "master_label": "Select all",
+            "label": "Select your interests",
+            "options": {
+                "technology": "Technology",
+                "design": "Design",
+                "marketing": "Marketing"
+            }
+        }
     }
 }
