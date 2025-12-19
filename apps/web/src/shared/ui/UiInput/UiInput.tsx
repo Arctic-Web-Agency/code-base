@@ -16,15 +16,6 @@ const sizeStyles: Record<UiInputSize, string> = {
 };
 
 /**
- * Icon container positioning styles based on size
- */
-const iconContainerStyles: Record<UiInputSize, string> = {
-    sm: 'w-4 h-4',
-    md: 'w-5 h-5',
-    lg: 'w-6 h-6',
-};
-
-/**
  * Icon positioning from edges
  */
 const iconPositionStyles: Record<UiInputSize, { left: string; right: string }> = {
@@ -113,12 +104,6 @@ const UiInput = forwardRef<HTMLInputElement, UiInputProps>((props, ref) => {
         className
     );
 
-    const iconClasses = composeClasses(
-        'absolute top-1/2 -translate-y-1/2 pointer-events-none',
-        'text-neutral-400',
-        iconContainerStyles[size]
-    );
-
     const currentLength = useMemo(() => {
         if (typeof value === 'string') return value.length;
         if (typeof value === 'number') return String(value).length;
@@ -150,7 +135,7 @@ const UiInput = forwardRef<HTMLInputElement, UiInputProps>((props, ref) => {
                 {leftIcon ? (
                     <div
                         className={composeClasses(
-                            iconClasses,
+                            'absolute top-1/2 -translate-y-1/2',
                             iconPositionStyles[size].left
                         )}
                     >
@@ -199,7 +184,7 @@ const UiInput = forwardRef<HTMLInputElement, UiInputProps>((props, ref) => {
                 ) : rightIcon ? (
                     <div
                         className={composeClasses(
-                            iconClasses,
+                            'absolute top-1/2 -translate-y-1/2',
                             iconPositionStyles[size].right
                         )}
                     >

@@ -12,7 +12,15 @@ import type {
     UiButtonVariant,
 } from './types';
 
-const ICON_SIZE = 20;
+/**
+ * Icon size mapping based on button size
+ * Aligns with UiInput icon sizes (w-4/w-5/w-6 = 16/20/24px)
+ */
+const iconSizeMap: Record<UiButtonSize, number> = {
+    sm: 16,
+    md: 20,
+    lg: 24,
+};
 
 const composeClasses = (
     ...classes: Array<string | false | undefined>
@@ -47,15 +55,19 @@ interface RenderContentProps {
     IconLeft?: UiButtonProps['IconLeft'];
     IconRight?: UiButtonProps['IconRight'];
     children?: ReactNode;
+    size: UiButtonSize;
 }
 
-const renderContent = ({ IconLeft, IconRight, children }: RenderContentProps) => (
-    <>
-        {IconLeft && <IconLeft width={ICON_SIZE} height={ICON_SIZE} aria-hidden />}
-        {children && <span>{children}</span>}
-        {IconRight && <IconRight width={ICON_SIZE} height={ICON_SIZE} aria-hidden />}
-    </>
-);
+const renderContent = ({ IconLeft, IconRight, children, size }: RenderContentProps) => {
+    const iconSize = iconSizeMap[size];
+    return (
+        <>
+            {IconLeft && <IconLeft width={iconSize} height={iconSize} aria-hidden />}
+            {children && <span>{children}</span>}
+            {IconRight && <IconRight width={iconSize} height={iconSize} aria-hidden />}
+        </>
+    );
+};
 
 /**
  * Shared UI attributes for all button/link variants
@@ -104,7 +116,7 @@ const UiButton = forwardRef<HTMLButtonElement | HTMLAnchorElement, UiButtonProps
             className
         );
 
-        const content = renderContent({ IconLeft, IconRight, children });
+        const content = renderContent({ IconLeft, IconRight, children, size });
         const commonProps = getCommonProps({ className: classes, variant, size });
         const accessibilityProps = getLinkAccessibilityProps(disabled);
 

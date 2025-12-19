@@ -12,7 +12,7 @@ import type { UiPasswordInputProps } from './types';
  */
 const UiPasswordInput = forwardRef<HTMLInputElement, UiPasswordInputProps>(
     (props, ref) => {
-        const { defaultVisible = false, ...rest } = props;
+        const { defaultVisible = false, size = 'md', ...rest } = props;
         const [showPassword, setShowPassword] = useState(defaultVisible);
 
         const toggleVisibility = () => {
@@ -23,11 +23,12 @@ const UiPasswordInput = forwardRef<HTMLInputElement, UiPasswordInputProps>(
             <UiInput
                 {...rest}
                 ref={ref}
+                size={size}
                 type={showPassword ? 'text' : 'password'}
                 rightIcon={
                     <UiButton
                         variant="icon"
-                        size="sm"
+                        size={size}
                         onClick={toggleVisibility}
                         className="pointer-events-auto"
                         aria-label={

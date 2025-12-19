@@ -14,7 +14,6 @@ export default function UiPasswordInputPreview() {
             onChange={(e) => setPassword(e.target.value)}
             placeholder={t('placeholder')}
             variant="filled"
-            size="md"
         />
     );
 }
