@@ -91,19 +91,11 @@ const UiCheckbox = forwardRef<HTMLInputElement, UiCheckboxProps>(
         if (error) activeBgColor = 'bg-red-500 border-red-500';
         if (success) activeBgColor = 'bg-green-500 border-green-500';
 
-        // Ring color for focus
-        let ringColor = 'peer-focus:ring-neutral-400';
-        if (error) ringColor = 'peer-focus:ring-red-500';
-        if (success) ringColor = 'peer-focus:ring-green-500';
-
         const customCheckboxClasses = composeClasses(
             checkboxSizeStyles[size],
-            'border-2 rounded',
+            'border-2',
             'flex items-center justify-center',
             'cursor-pointer',
-            'transition-colors duration-200',
-            'peer-focus:ring-2',
-            ringColor,
             'peer-disabled:opacity-50 peer-disabled:cursor-not-allowed',
             checked || indeterminate ? activeBgColor : `bg-white ${borderColor}`,
             className
@@ -153,7 +145,7 @@ const UiCheckbox = forwardRef<HTMLInputElement, UiCheckboxProps>(
                                 <div
                                     className={composeClasses(
                                         indeterminateSizeStyles[size],
-                                        'bg-white rounded-full'
+                                        'bg-white'
                                     )}
                                 />
                             )}
