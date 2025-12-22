@@ -81,15 +81,15 @@
             "placeholder": "Enter your message..."
         },
         "checkbox": {
-            "label": "Subscribe to newsletter"
+            "label": "Enable option"
         },
         "checkbox_group": {
             "master_label": "Select all",
-            "label": "Select your interests",
+            "label": "Choose options",
             "options": {
-                "technology": "Technology",
-                "design": "Design",
-                "marketing": "Marketing"
+                "option1": "First Option",
+                "option2": "Second Option",
+                "option3": "Third Option"
             }
         },
         "radio_group": {

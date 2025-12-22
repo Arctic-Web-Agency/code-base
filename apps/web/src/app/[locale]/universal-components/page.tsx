@@ -35,19 +35,20 @@ export default function UniversalComponentsPage() {
                             <p className="text-base text-text-secondary">{component.description}</p>
                         </div>
 
-                        <div className="flex flex-col items-start gap-4">
+                        <div className="w-fit">
                             {component.preview}
-
-                            <UiButton
-                                variant="text"
-                                size="sm"
-                                as="link"
-                                external={true}
-                                href={component.githubUrl}
-                            >
-                                {t('github_label')}
-                            </UiButton>
                         </div>
+
+                        <UiButton
+                            variant="text"
+                            size="sm"
+                            as="link"
+                            external={true}
+                            href={component.githubUrl}
+                            className="mt-auto w-fit"
+                        >
+                            {t('github_label')}
+                        </UiButton>
                     </article>
                 ))}
             </section>

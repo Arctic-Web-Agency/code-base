@@ -10,9 +10,9 @@ export default function UiCheckboxGroupPreview() {
     const t = useTranslations('previews.checkbox_group');
 
     const options = [
-        { value: 'tech', label: t('options.technology'), id: 'tech-checkbox' },
-        { value: 'design', label: t('options.design'), id: 'design-checkbox' },
-        { value: 'marketing', label: t('options.marketing'), id: 'marketing-checkbox' },
+        { value: 'option1', label: t('options.option1'), id: 'option1-checkbox' },
+        { value: 'option2', label: t('options.option2'), id: 'option2-checkbox' },
+        { value: 'option3', label: t('options.option3'), id: 'option3-checkbox' },
     ];
 
     const allValues = options.map((opt) => opt.value);
