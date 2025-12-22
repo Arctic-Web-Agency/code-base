@@ -48,6 +48,10 @@
             "checkbox_group": {
                 "name": "Universal checkbox group",
                 "description": "Component for managing a group of checkboxes with shared state and validation."
+            },
+            "radio_group": {
+                "name": "Universal radio group",
+                "description": "Component for managing a group of radio buttons with shared state and validation."
             }
         },
         "github_label": "View on GitHub"
@@ -86,6 +90,14 @@
                 "technology": "Technology",
                 "design": "Design",
                 "marketing": "Marketing"
+            }
+        },
+        "radio_group": {
+            "label": "Choose an option",
+            "options": {
+                "option1": "First Option",
+                "option2": "Second Option",
+                "option3": "Third Option"
             }
         }
     }
