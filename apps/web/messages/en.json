@@ -34,19 +34,19 @@
                 "description": "Text input field for data entry with support for various types and sizes."
             },
             "password_input": {
-                "name": "Password input",
+                "name": "Universal password input",
                 "description": "Password input field with visibility toggle functionality."
             },
             "textarea": {
-                "name": "Textarea",
+                "name": "Universal textarea",
                 "description": "Multi-line text input field with support for various sizes and states."
             },
             "checkbox": {
-                "name": "Checkbox",
+                "name": "Universal checkbox",
                 "description": "Component for selecting one or multiple options with state and validation support."
             },
             "checkbox_group": {
-                "name": "Checkbox Group",
+                "name": "Universal checkbox group",
                 "description": "Component for managing a group of checkboxes with shared state and validation."
             }
         },
