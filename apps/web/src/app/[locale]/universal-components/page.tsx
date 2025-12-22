@@ -28,7 +28,7 @@ export default function UniversalComponentsPage() {
                 {components.map((component) => (
                     <article
                         key={component.key}
-                        className="flex flex-col gap-6 rounded-2xl border border-border/40 bg-surface/40 p-6 shadow-lg backdrop-blur"
+                        className="flex flex-col gap-6 rounded-2xl border border-border/40 bg-surface/40 p-6 shadow-lg"
                     >
                         <div className="space-y-3">
                             <h2 className="text-2xl font-semibold text-text-primary">{component.name}</h2>
