@@ -52,6 +52,10 @@
             "radio_group": {
                 "name": "Universal radio group",
                 "description": "Component for managing a group of radio buttons with shared state and validation."
+            },
+            "modal": {
+                "name": "Universal modal",
+                "description": "Accessible dialog component with portal rendering, focus trap, and animations."
             }
         },
         "github_label": "View on GitHub"
@@ -99,6 +103,13 @@
                 "option2": "Second Option",
                 "option3": "Third Option"
             }
+        },
+        "modal": {
+            "open_button": "Open Modal",
+            "title": "Modal Title",
+            "content": "This is a universal modal component with accessibility features, animations, and portal rendering. Click outside, press ESC, or use the buttons to close.",
+            "cancel_button": "Cancel",
+            "confirm_button": "Confirm"
         }
     }
 }

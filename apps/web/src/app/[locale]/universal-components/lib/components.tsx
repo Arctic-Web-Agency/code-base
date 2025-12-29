@@ -9,6 +9,7 @@ import UiTextareaPreview from '../ui/UiTextareaPreview';
 import UiCheckboxPreview from '../ui/UiCheckboxPreview';
 import UiCheckboxGroupPreview from '../ui/UiCheckboxGroupPreview';
 import UiRadioGroupPreview from '../ui/UiRadioGroupPreview';
+import UiModalPreview from '../ui/UiModalPreview';
 
 export interface ComponentItem {
     key: string;
@@ -105,6 +106,14 @@ export function getComponents(
             githubUrl:
                 'https://github.com/Arctic-Web-Agency/code-base/tree/feature/ui-components/apps/web/src/shared/ui/UiRadioGroup',
             preview: <UiRadioGroupPreview />,
+        },
+        {
+            key: 'universal-modal',
+            name: t('components.modal.name'),
+            description: t('components.modal.description'),
+            githubUrl:
+                'https://github.com/Arctic-Web-Agency/code-base/tree/feature/ui-components/apps/web/src/shared/ui/UiModal',
+            preview: <UiModalPreview />,
         },
     ];
 }
