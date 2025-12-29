@@ -1,3 +1,4 @@
+import { useId } from 'react';
 import UiRadio from '../UiRadio/UiRadio';
 import type {
     UiRadioGroupProps,
@@ -46,6 +47,8 @@ const UiRadioGroup = (props: UiRadioGroupProps) => {
         name,
     } = props;
 
+    const helperId = `${useId()}-helper`;
+
     const handleChange = (optionValue: string) => {
         onChange(optionValue);
     };
@@ -72,6 +75,9 @@ const UiRadioGroup = (props: UiRadioGroupProps) => {
                 className={composeClasses('flex', orientationStyles[orientation])}
                 role="radiogroup"
                 aria-label={label}
+                aria-required={required}
+                aria-invalid={error}
+                aria-describedby={displayText ? helperId : undefined}
             >
                 {options.map((option) => (
                     <UiRadio
@@ -94,6 +100,7 @@ const UiRadioGroup = (props: UiRadioGroupProps) => {
             </div>
             {displayText && (
                 <div
+                    id={helperId}
                     className={composeClasses(
                         'mt-2',
                         textSizeStyles[size],

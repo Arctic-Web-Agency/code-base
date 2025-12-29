@@ -78,6 +78,7 @@ const UiRadio = forwardRef<HTMLInputElement, UiRadioProps>(
 
         const autoId = useId();
         const radioId = id || autoId;
+        const helperId = `${radioId}-helper`;
 
         // Border color based on state
         let borderColor = 'border-neutral-300';
@@ -126,6 +127,8 @@ const UiRadio = forwardRef<HTMLInputElement, UiRadioProps>(
                             disabled={disabled}
                             required={required}
                             checked={checked}
+                            aria-invalid={error}
+                            aria-describedby={displayText ? helperId : undefined}
                             className="peer sr-only"
                             {...rest}
                         />
@@ -161,6 +164,7 @@ const UiRadio = forwardRef<HTMLInputElement, UiRadioProps>(
                 </label>
                 {displayText && (
                     <div
+                        id={helperId}
                         className={composeClasses(
                             'mt-1.5',
                             helperTextMarginStyles[size],
