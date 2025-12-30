@@ -42,8 +42,11 @@ const UiModal = (props: UiModalProps) => {
     } = props;
 
     const modalRef = useRef<HTMLDivElement>(null);
-    const titleId = `${useId()}-title`;
-    const descriptionId = ariaDescribedBy || `${useId()}-description`;
+    const generatedTitleId = useId();
+    const generatedDescriptionId = useId();
+
+    const titleId = `${generatedTitleId}-title`;
+    const descriptionId = ariaDescribedBy || `${generatedDescriptionId}-description`;
 
     // Handle ESC key press
     useEffect(() => {
