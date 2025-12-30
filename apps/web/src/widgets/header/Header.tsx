@@ -4,7 +4,7 @@ import { Logo } from '@/entities/brand';
 
 const Header = () => {
     return (
-        <header className="sticky top-0 z-50 bg-background">
+        <header className="sticky top-0 z-50 bg-background shadow-sm">
             <div className="container flex items-center justify-between gap-6 py-4">
                 <Logo />
 
