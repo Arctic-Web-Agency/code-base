@@ -120,7 +120,8 @@ const UiModal = (props: UiModalProps) => {
         }
     };
 
-    if (!isOpen) return null;
+    // Early return if modal is closed or running on server
+    if (!isOpen || typeof window === 'undefined') return null;
 
     const modalContent = (
         <div
@@ -190,9 +191,6 @@ const UiModal = (props: UiModalProps) => {
             </div>
         </div>
     );
-
-    // Render modal in portal
-    if (typeof window === 'undefined') return null;
 
     return createPortal(modalContent, document.body);
 };
