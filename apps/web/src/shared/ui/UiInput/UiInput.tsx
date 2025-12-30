@@ -83,7 +83,7 @@ const UiInput = forwardRef<HTMLInputElement, UiInputProps>((props, ref) => {
     );
 
     const inputClasses = composeClasses(
-        'w-full transition-colors duration-200',
+        'w-full',
         'focus:outline-none',
         'disabled:cursor-not-allowed disabled:opacity-50',
         sizeStyles[size],
