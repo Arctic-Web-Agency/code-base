@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useId, useRef } from 'react';
+import { MouseEvent, useEffect, useId, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { CloseIcon } from '@/shared/icons';
 import type { UiModalProps, UiModalSize } from './types';
@@ -112,7 +112,7 @@ const UiModal = (props: UiModalProps) => {
 
     // Handle overlay click
     const handleOverlayClick = (
-        event: React.MouseEvent<HTMLDivElement>
+        event: MouseEvent<HTMLDivElement>
     ) => {
         if (closeOnOverlayClick && event.target === event.currentTarget) {
             onClose();
