@@ -156,12 +156,12 @@ const UiModal = (props: UiModalProps) => {
                 {(title || showCloseButton) && (
                     <div className="flex items-center justify-between px-6 py-4 border-b border-neutral-200 dark:border-neutral-700">
                         {title && (
-                            <h2
+                            <div
                                 id={titleId}
                                 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100"
                             >
                                 {title}
-                            </h2>
+                            </div>
                         )}
                         {showCloseButton && (
                             <button
