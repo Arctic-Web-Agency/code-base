@@ -3,6 +3,7 @@
 import { MouseEvent, useEffect, useId, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { CloseIcon } from '@/shared/icons';
+import UiButton from '../UiButton/UiButton';
 import type { UiModalProps, UiModalSize } from './types';
 
 const composeClasses = (
@@ -159,18 +160,15 @@ const UiModal = (props: UiModalProps) => {
                             </div>
                         )}
                         {showCloseButton && (
-                            <button
-                                type="button"
+                            <UiButton
+                                variant="icon"
+                                size="sm"
                                 onClick={onClose}
-                                className={composeClasses(
-                                    'p-1.5',
-                                    'focus:outline-none',
-                                    !title && 'ml-auto'
-                                )}
+                                className={!title ? 'ml-auto' : undefined}
                                 aria-label="Close modal"
                             >
                                 <CloseIcon />
-                            </button>
+                            </UiButton>
                         )}
                     </div>
                 )}
