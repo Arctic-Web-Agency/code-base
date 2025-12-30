@@ -127,6 +127,7 @@ const UiModal = (props: UiModalProps) => {
                 'fixed inset-0 z-50',
                 'flex items-center justify-center',
                 'p-4',
+                'bg-black/50',
                 'animate-fadeIn',
                 overlayClassName
             )}
@@ -142,6 +143,7 @@ const UiModal = (props: UiModalProps) => {
                 className={composeClasses(
                     'relative w-full',
                     sizeStyles[size],
+                    'bg-white dark:bg-neutral-800',
                     'animate-scaleIn',
                     'flex flex-col',
                     'max-h-[90vh]',
