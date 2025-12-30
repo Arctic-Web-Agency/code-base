@@ -2,6 +2,7 @@
 
 import { useEffect, useId, useRef } from 'react';
 import { createPortal } from 'react-dom';
+import { CloseIcon } from '@/shared/icons';
 import type { UiModalProps, UiModalSize } from './types';
 
 const composeClasses = (
@@ -18,28 +19,6 @@ const sizeStyles: Record<UiModalSize, string> = {
     xl: 'max-w-xl',
     full: 'max-w-full mx-4',
 };
-
-/**
- * Close icon SVG
- */
-const CloseIcon = () => (
-    <svg
-        width="20"
-        height="20"
-        viewBox="0 0 20 20"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        aria-hidden="true"
-    >
-        <path
-            d="M15 5L5 15M5 5L15 15"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-        />
-    </svg>
-);
 
 /**
  * Universal Modal component with Portal, animations, and accessibility
