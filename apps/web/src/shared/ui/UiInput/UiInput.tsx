@@ -1,10 +1,7 @@
 import { forwardRef, useMemo } from 'react';
+import { composeClasses } from '@/shared/lib';
 import UiButton from '../UiButton/UiButton';
 import type { UiInputProps, UiInputSize, UiInputVariant } from './types';
-
-const composeClasses = (
-    ...classes: Array<string | false | undefined>
-): string => classes.filter(Boolean).join(' ');
 
 /**
  * Size styles for input padding and text

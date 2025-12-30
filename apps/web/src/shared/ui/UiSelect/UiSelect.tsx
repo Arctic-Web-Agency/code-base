@@ -8,15 +8,12 @@ import {
     ListboxOptions,
 } from '@headlessui/react';
 import { ChevronDownIcon } from '@/shared/icons';
+import { composeClasses } from '@/shared/lib';
 import type {
     UiSelectProps,
     UiSelectSize,
     UiSelectVariant,
 } from './types';
-
-const composeClasses = (
-    ...classes: Array<string | false | undefined>
-): string => classes.filter(Boolean).join(' ');
 
 const sizeStyles: Record<UiSelectSize, string> = {
     sm: 'px-3 py-1.5 text-sm',

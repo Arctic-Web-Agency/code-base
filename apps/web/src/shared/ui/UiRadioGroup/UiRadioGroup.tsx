@@ -1,13 +1,10 @@
 import { useId } from 'react';
+import { composeClasses } from '@/shared/lib';
 import UiRadio from '../UiRadio/UiRadio';
 import type {
     UiRadioGroupProps,
     UiRadioGroupOrientation,
 } from './types';
-
-const composeClasses = (
-    ...classes: Array<string | false | undefined>
-): string => classes.filter(Boolean).join(' ');
 
 /**
  * Orientation styles for radio group layout

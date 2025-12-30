@@ -1,9 +1,6 @@
 import { forwardRef, useEffect, useRef, useId, type RefObject } from 'react';
+import { composeClasses } from '@/shared/lib';
 import type { UiCheckboxProps, UiCheckboxSize } from './types';
-
-const composeClasses = (
-    ...classes: Array<string | false | undefined>
-): string => classes.filter(Boolean).join(' ');
 
 /**
  * Size styles for checkbox and label

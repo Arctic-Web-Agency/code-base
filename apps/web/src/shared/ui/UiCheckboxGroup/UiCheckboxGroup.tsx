@@ -1,12 +1,9 @@
+import { composeClasses } from '@/shared/lib';
 import UiCheckbox from '../UiCheckbox/UiCheckbox';
 import type {
     UiCheckboxGroupProps,
     UiCheckboxGroupOrientation,
 } from './types';
-
-const composeClasses = (
-    ...classes: Array<string | false | undefined>
-): string => classes.filter(Boolean).join(' ');
 
 /**
  * Orientation styles for checkbox group layout

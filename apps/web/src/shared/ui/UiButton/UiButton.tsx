@@ -6,6 +6,7 @@ import {
     Ref,
     forwardRef,
 } from 'react';
+import { composeClasses } from '@/shared/lib';
 import type {
     UiButtonProps,
     UiButtonSize,
@@ -21,10 +22,6 @@ const iconSizeMap: Record<UiButtonSize, number> = {
     md: 20,
     lg: 24,
 };
-
-const composeClasses = (
-    ...classes: Array<string | false | undefined>
-): string => classes.filter(Boolean).join(' ');
 
 const sizeStyles: Record<UiButtonSize, string> = {
     sm: 'px-3 py-1.5 text-sm',

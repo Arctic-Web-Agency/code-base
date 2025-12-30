@@ -1,14 +1,11 @@
 import { forwardRef, useMemo } from 'react';
+import { composeClasses } from '@/shared/lib';
 import type {
     UiTextareaProps,
     UiTextareaSize,
     UiTextareaVariant,
     UiTextareaResize,
 } from './types';
-
-const composeClasses = (
-    ...classes: Array<string | false | undefined>
-): string => classes.filter(Boolean).join(' ');
 
 /**
  * Size styles for textarea padding and text

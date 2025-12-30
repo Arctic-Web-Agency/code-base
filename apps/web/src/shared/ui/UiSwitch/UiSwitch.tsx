@@ -1,11 +1,8 @@
 'use client';
 
 import { Switch } from '@headlessui/react';
+import { composeClasses } from '@/shared/lib';
 import type { UiSwitchProps, UiSwitchSize } from './types';
-
-const composeClasses = (
-    ...classes: Array<string | false | undefined>
-): string => classes.filter(Boolean).join(' ');
 
 /**
  * Container sizes for the switch track

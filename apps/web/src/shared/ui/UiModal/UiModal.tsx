@@ -3,12 +3,9 @@
 import { MouseEvent, useEffect, useId, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { CloseIcon } from '@/shared/icons';
+import { composeClasses } from '@/shared/lib';
 import UiButton from '../UiButton/UiButton';
 import type { UiModalProps, UiModalSize } from './types';
-
-const composeClasses = (
-    ...classes: Array<string | false | undefined>
-): string => classes.filter(Boolean).join(' ');
 
 /**
  * Size styles for modal content
