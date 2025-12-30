@@ -127,8 +127,6 @@ const UiModal = (props: UiModalProps) => {
                 'fixed inset-0 z-50',
                 'flex items-center justify-center',
                 'p-4',
-                'bg-black/50',
-                'backdrop-blur-sm',
                 'animate-fadeIn',
                 overlayClassName
             )}
@@ -144,8 +142,6 @@ const UiModal = (props: UiModalProps) => {
                 className={composeClasses(
                     'relative w-full',
                     sizeStyles[size],
-                    'bg-white dark:bg-neutral-800',
-                    'rounded-lg shadow-xl',
                     'animate-scaleIn',
                     'flex flex-col',
                     'max-h-[90vh]',
@@ -154,12 +150,9 @@ const UiModal = (props: UiModalProps) => {
             >
                 {/* Header */}
                 {(title || showCloseButton) && (
-                    <div className="flex items-center justify-between px-6 py-4 border-b border-neutral-200 dark:border-neutral-700">
+                    <div className="flex items-center justify-between px-6 py-4">
                         {title && (
-                            <div
-                                id={titleId}
-                                className="text-lg font-semibold text-neutral-900 dark:text-neutral-100"
-                            >
+                            <div id={titleId}>
                                 {title}
                             </div>
                         )}
@@ -168,12 +161,8 @@ const UiModal = (props: UiModalProps) => {
                                 type="button"
                                 onClick={onClose}
                                 className={composeClasses(
-                                    'p-1.5 rounded-lg',
-                                    'text-neutral-400 hover:text-neutral-600',
-                                    'dark:text-neutral-500 dark:hover:text-neutral-300',
-                                    'hover:bg-neutral-100 dark:hover:bg-neutral-700',
-                                    'transition-colors',
-                                    'focus:outline-none focus:ring-2 focus:ring-neutral-500',
+                                    'p-1.5',
+                                    'focus:outline-none',
                                     !title && 'ml-auto'
                                 )}
                                 aria-label="Close modal"
@@ -194,7 +183,7 @@ const UiModal = (props: UiModalProps) => {
 
                 {/* Footer */}
                 {footer && (
-                    <div className="px-6 py-4 border-t border-neutral-200 dark:border-neutral-700">
+                    <div className="px-6 py-4">
                         {footer}
                     </div>
                 )}
