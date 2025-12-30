@@ -144,7 +144,7 @@ const UiModal = (props: UiModalProps) => {
                 className={composeClasses(
                     'relative w-full',
                     sizeStyles[size],
-                    'bg-white dark:bg-neutral-800',
+                    'bg-white dark:bg-neutral-900',
                     'animate-scaleIn',
                     'flex flex-col',
                     'max-h-[90vh]',
