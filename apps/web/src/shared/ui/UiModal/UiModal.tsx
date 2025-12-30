@@ -133,11 +133,6 @@ const UiModal = (props: UiModalProps) => {
                 overlayClassName
             )}
             onClick={handleOverlayClick}
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby={title ? titleId : undefined}
-            aria-label={ariaLabel}
-            aria-describedby={descriptionId}
         >
             <div
                 ref={modalRef}
@@ -150,6 +145,11 @@ const UiModal = (props: UiModalProps) => {
                     'max-h-[90vh]',
                     className
                 )}
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby={title ? titleId : undefined}
+                aria-label={ariaLabel}
+                aria-describedby={descriptionId}
             >
                 {/* Header */}
                 {(title || showCloseButton) && (
