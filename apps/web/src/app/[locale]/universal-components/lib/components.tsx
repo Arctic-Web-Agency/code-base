@@ -134,27 +134,13 @@ export function getComponents(
                 'https://github.com/Arctic-Web-Agency/code-base/tree/feature/ui-components/apps/web/src/shared/ui/UiBadge',
             preview: (
                 <div className="flex flex-wrap gap-3">
-                    <UiBadge status="success" dot dismissible size="sm">
-                        Success
-                    </UiBadge>
-                    <UiBadge status="success" dot dismissible size="md">
-                        Success
-                    </UiBadge>
-                    <UiBadge status="success" dot dismissible size="lg">
-                        Success
-                    </UiBadge>
-                    <UiBadge status="success" dot variant="outline" dismissible>
+                    <UiBadge status="success" variant="outline">
                         Success
                     </UiBadge>
                     <UiBadge status="error" dot>
                         Error
                     </UiBadge>
-                    <UiBadge
-                        status="warning"
-                        icon={
-                            <SunIcon className="text-text-primary h-4 w-4 transition-all duration-300" />
-                        }
-                    >
+                    <UiBadge status="warning" dismissible>
                         Warning
                     </UiBadge>
                 </div>
