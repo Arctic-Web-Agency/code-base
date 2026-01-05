@@ -45,18 +45,6 @@ export default function UiBadgePreview() {
                 </h3>
                 <div className="space-y-3">
                     <div className="flex flex-wrap gap-3 items-center">
-                        <span className="w-20 text-sm">Solid:</span>
-                        <UiBadge status="success" variant="solid">
-                            Success
-                        </UiBadge>
-                        <UiBadge status="error" variant="solid">
-                            Error
-                        </UiBadge>
-                        <UiBadge status="warning" variant="solid">
-                            Warning
-                        </UiBadge>
-                    </div>
-                    <div className="flex flex-wrap gap-3 items-center">
                         <span className="w-20 text-sm">Outline:</span>
                         <UiBadge status="success" variant="outline">
                             Success

@@ -8,7 +8,7 @@ export type UiBadgeStatus = 'success' | 'error' | 'warning';
 /**
  * Badge visual variants
  */
-export type UiBadgeVariant = 'solid' | 'outline' | 'subtle';
+export type UiBadgeVariant = 'outline' | 'subtle';
 
 /**
  * Badge size variants

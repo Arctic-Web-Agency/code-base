@@ -19,17 +19,14 @@ const statusStyles: Record<
     Record<UiBadgeVariant, string>
 > = {
     success: {
-        solid: 'bg-green-600 text-white dark:bg-green-700',
         outline: 'border border-green-600 text-green-700 dark:border-green-500 dark:text-green-400',
         subtle: 'bg-green-100 text-green-800 dark:bg-green-950 dark:text-green-300',
     },
     error: {
-        solid: 'bg-red-600 text-white dark:bg-red-700',
         outline: 'border border-red-600 text-red-700 dark:border-red-500 dark:text-red-400',
         subtle: 'bg-red-100 text-red-800 dark:bg-red-950 dark:text-red-300',
     },
     warning: {
-        solid: 'bg-amber-600 text-white dark:bg-amber-700',
         outline: 'border border-amber-600 text-amber-700 dark:border-amber-500 dark:text-amber-400',
         subtle: 'bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300',
     },
@@ -63,6 +60,24 @@ const sizeStyles: Record<UiBadgeSize, { container: string; text: string; dot: st
         text: 'text-base',
         dot: 'w-2.5 h-2.5',
     },
+};
+
+/**
+ * Dismiss button size mapping based on badge size
+ */
+const dismissButtonSize: Record<UiBadgeSize, 'sm' | 'md'> = {
+    sm: 'sm',
+    md: 'sm',
+    lg: 'md',
+};
+
+/**
+ * Close icon size mapping based on badge size
+ */
+const closeIconSize: Record<UiBadgeSize, string> = {
+    sm: 'w-3 h-3',
+    md: 'w-3.5 h-3.5',
+    lg: 'w-4 h-4',
 };
 
 /**
@@ -140,7 +155,7 @@ const UiBadge = (props: UiBadgeProps) => {
             )}
 
             {/* Content */}
-            <span className="shrink-0">
+            <span className="min-w-0 truncate">
                 {children}
             </span>
 
@@ -148,12 +163,12 @@ const UiBadge = (props: UiBadgeProps) => {
             {dismissible && (
                 <UiButton
                     variant="icon"
-                    size="sm"
+                    size={dismissButtonSize[size]}
                     onClick={handleDismiss}
                     className="shrink-0"
                     aria-label="Dismiss badge"
                 >
-                    <CloseIcon className="w-3 h-3" />
+                    <CloseIcon className={closeIconSize[size]} />
                 </UiButton>
             )}
         </span>
