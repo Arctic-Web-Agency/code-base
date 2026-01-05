@@ -110,6 +110,15 @@
             "content": "This is a universal modal component with accessibility features, animations, and portal rendering. Click outside, press ESC, or use the buttons to close.",
             "cancel_button": "Cancel",
             "confirm_button": "Confirm"
+        },
+        "badge": {
+            "status_variants": "Status Variants",
+            "visual_variants": "Visual Variants",
+            "size_variants": "Size Variants",
+            "with_dot": "With Dot Indicator",
+            "with_icon": "With Icon",
+            "dismissible": "Dismissible",
+            "reset": "Reset"
         }
     }
 }
