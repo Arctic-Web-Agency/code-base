@@ -56,6 +56,10 @@
             "modal": {
                 "name": "Universal modal",
                 "description": "Accessible dialog component with portal rendering, focus trap, and animations."
+            },
+            "badge": {
+                "name": "Universal badge",
+                "description": "Status indicator component with success, error, and warning variants."
             }
         },
         "github_label": "View on GitHub"

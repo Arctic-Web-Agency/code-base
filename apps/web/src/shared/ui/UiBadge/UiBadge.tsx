@@ -3,6 +3,7 @@
 import { useId, useState } from 'react';
 import { CloseIcon } from '@/shared/icons';
 import { composeClasses } from '@/shared/lib';
+import UiButton from '../UiButton/UiButton';
 import type {
     UiBadgeProps,
     UiBadgeStatus,
@@ -145,24 +146,15 @@ const UiBadge = (props: UiBadgeProps) => {
 
             {/* Dismiss button */}
             {dismissible && (
-                <button
-                    type="button"
+                <UiButton
+                    variant="icon"
+                    size="sm"
                     onClick={handleDismiss}
-                    className={composeClasses(
-                        'shrink-0',
-                        'flex items-center justify-center',
-                        'rounded',
-                        'transition-opacity',
-                        'hover:opacity-70',
-                        'focus:outline-none focus:ring-2 focus:ring-offset-1',
-                        status === 'success' && 'focus:ring-green-600',
-                        status === 'error' && 'focus:ring-red-600',
-                        status === 'warning' && 'focus:ring-amber-600'
-                    )}
+                    className="shrink-0"
                     aria-label="Dismiss badge"
                 >
                     <CloseIcon className="w-3 h-3" />
-                </button>
+                </UiButton>
             )}
         </span>
     );

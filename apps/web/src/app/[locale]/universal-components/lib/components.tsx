@@ -10,6 +10,7 @@ import UiCheckboxPreview from '../ui/UiCheckboxPreview';
 import UiCheckboxGroupPreview from '../ui/UiCheckboxGroupPreview';
 import UiRadioGroupPreview from '../ui/UiRadioGroupPreview';
 import UiModalPreview from '../ui/UiModalPreview';
+import UiBadge from '@/shared/ui/UiBadge';
 
 export interface ComponentItem {
     key: string;
@@ -44,9 +45,18 @@ export function getComponents(
             preview: (
                 <UiSelectPreview
                     options={[
-                        { label: t('components.select.options.option1'), value: 'option1' },
-                        { label: t('components.select.options.option2'), value: 'option2' },
-                        { label: t('components.select.options.option3'), value: 'option3' },
+                        {
+                            label: t('components.select.options.option1'),
+                            value: 'option1',
+                        },
+                        {
+                            label: t('components.select.options.option2'),
+                            value: 'option2',
+                        },
+                        {
+                            label: t('components.select.options.option3'),
+                            value: 'option3',
+                        },
                     ]}
                 />
             ),
@@ -114,6 +124,22 @@ export function getComponents(
             githubUrl:
                 'https://github.com/Arctic-Web-Agency/code-base/tree/feature/ui-components/apps/web/src/shared/ui/UiModal',
             preview: <UiModalPreview />,
+        },
+        {
+            key: 'universal-badge',
+            name: t('components.badge.name'),
+            description: t('components.badge.description'),
+            githubUrl:
+                'https://github.com/Arctic-Web-Agency/code-base/tree/feature/ui-components/apps/web/src/shared/ui/UiBadge',
+            preview: (
+                <div className="flex flex-wrap gap-3">
+                    <UiBadge status="success" dismissible>
+                        Success
+                    </UiBadge>
+                    <UiBadge status="error">Error</UiBadge>
+                    <UiBadge status="warning">Warning</UiBadge>
+                </div>
+            ),
         },
     ];
 }
