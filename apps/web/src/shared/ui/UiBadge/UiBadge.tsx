@@ -63,15 +63,6 @@ const sizeStyles: Record<UiBadgeSize, { container: string; text: string; dot: st
 };
 
 /**
- * Dismiss button size mapping based on badge size
- */
-const dismissButtonSize: Record<UiBadgeSize, 'sm' | 'md'> = {
-    sm: 'sm',
-    md: 'sm',
-    lg: 'md',
-};
-
-/**
  * Close icon size mapping based on badge size
  */
 const closeIconSize: Record<UiBadgeSize, string> = {
@@ -164,8 +155,8 @@ const UiBadge = (props: UiBadgeProps) => {
             {/* Dismiss button */}
             {dismissible && (
                 <UiButton
-                    variant="icon"
-                    size={dismissButtonSize[size]}
+                    variant="icon-compact"
+                    size={size}
                     onClick={handleDismiss}
                     className="shrink-0"
                     aria-label="Dismiss badge"

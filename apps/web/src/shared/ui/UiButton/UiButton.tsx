@@ -39,6 +39,15 @@ const iconSizeStyles: Record<UiButtonSize, string> = {
 };
 
 /**
+ * Compact icon buttons without padding (size only affects icon scale)
+ */
+const iconCompactSizeStyles: Record<UiButtonSize, string> = {
+    sm: 'p-0',
+    md: 'p-0',
+    lg: 'p-0',
+};
+
+/**
  * Theme-agnostic variant styles using neutral colors
  * Override via className prop for custom design systems
  */
@@ -46,6 +55,7 @@ const variantStyles: Record<UiButtonVariant, string> = {
     filled: 'bg-neutral-800 text-white hover:bg-neutral-700 active:bg-neutral-900 disabled:bg-neutral-300 disabled:text-neutral-500',
     text: 'bg-transparent text-neutral-600 dark:text-neutral-300 hover:text-neutral-400 active:text-neutral-200 disabled:text-neutral-500',
     icon: 'bg-transparent text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-200 active:text-neutral-800 dark:active:text-neutral-100 disabled:text-neutral-300',
+    'icon-compact': 'bg-transparent text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-200 active:text-neutral-800 dark:active:text-neutral-100 disabled:text-neutral-300',
 };
 
 interface RenderContentProps {
@@ -103,12 +113,16 @@ const UiButton = forwardRef<HTMLButtonElement | HTMLAnchorElement, UiButtonProps
 
         const classes = composeClasses(
             'inline-flex items-center justify-center',
-            variant !== 'icon' && 'gap-2',
+            variant !== 'icon' && variant !== 'icon-compact' && 'gap-2',
             'cursor-pointer disabled:cursor-not-allowed',
             'focus:outline-none',
             'transition-colors',
             disabled && 'opacity-50 cursor-not-allowed pointer-events-none',
-            variant === 'icon' ? iconSizeStyles[size] : sizeStyles[size],
+            variant === 'icon'
+                ? iconSizeStyles[size]
+                : variant === 'icon-compact'
+                    ? iconCompactSizeStyles[size]
+                    : sizeStyles[size],
             variantStyles[variant],
             className
         );

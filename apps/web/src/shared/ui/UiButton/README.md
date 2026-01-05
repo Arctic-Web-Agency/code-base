@@ -6,7 +6,7 @@ Universal button component that supports native buttons, internal links (Next.js
 
 - 🎯 **Three variants**: Native button, internal link (Next.js), external link
 - 📐 **Three sizes**: Small, medium, large with consistent padding
-- 🎨 **Three styles**: Filled, text, and icon variants
+- 🎨 **Four styles**: Filled, text, icon, and compact icon variants
 - ♿ **Accessible**: Full ARIA support and keyboard navigation
 - 🔒 **Type-safe**: Strict TypeScript with discriminated unions
 - 🎭 **Icons**: Support for left and right icons, or icon-only buttons
@@ -105,6 +105,9 @@ import { EyeIcon, EyeOffIcon, XMarkIcon } from '@/icons';
 
 // Large icon button
 <UiButton variant="icon" size="lg" IconLeft={EyeOffIcon} />
+
+// Compact icon button (no padding)
+<UiButton variant="icon-compact" size="sm" IconLeft={XMarkIcon} aria-label="Dismiss" />
 ```
 
 ### Disabled State
@@ -142,7 +145,7 @@ All variants accept these props:
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `children` | `ReactNode` | - | Button content (optional for icon variant) |
-| `variant` | `'filled' \| 'text' \| 'icon'` | `'filled'` | Visual style variant |
+| `variant` | `'filled' \| 'text' \| 'icon' \| 'icon-compact'` | `'filled'` | Visual style variant |
 | `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Button size (controls padding) |
 | `className` | `string` | - | Additional CSS classes |
 | `IconLeft` | `ComponentType<SVGProps<SVGSVGElement>>` | - | Icon component for left side (or only icon for icon variant) |
@@ -198,6 +201,11 @@ Controls padding and text size:
 - `md`: `p-2`
 - `lg`: `p-3`
 
+**Compact icon buttons:**
+- `sm`: `p-0`
+- `md`: `p-0`
+- `lg`: `p-0`
+
 ### Variant
 
 Controls background and text colors:
@@ -205,6 +213,7 @@ Controls background and text colors:
 - `filled`: Background color with hover state
 - `text`: Transparent background with hover state
 - `icon`: Minimal styling for icon-only buttons, transparent background with color transitions
+- `icon-compact`: Icon-only buttons without padding, useful for tight UI like badges
 
 ## TypeScript
 
