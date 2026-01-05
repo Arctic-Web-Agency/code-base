@@ -122,9 +122,11 @@ const UiBadge = (props: UiBadgeProps) => {
             aria-live="polite"
             className={composeClasses(
                 'inline-flex items-center justify-center',
+                'h-fit w-fit',
                 'font-medium',
                 'rounded',
                 'select-none',
+                'leading-tight',
                 statusStyle,
                 sizeStyle.container,
                 sizeStyle.text,
