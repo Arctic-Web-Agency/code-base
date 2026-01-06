@@ -10,8 +10,8 @@ import UiCheckboxPreview from '../ui/UiCheckboxPreview';
 import UiCheckboxGroupPreview from '../ui/UiCheckboxGroupPreview';
 import UiRadioGroupPreview from '../ui/UiRadioGroupPreview';
 import UiModalPreview from '../ui/UiModalPreview';
+import UiAlertPreview from '../ui/UiAlertPreview';
 import UiBadge from '@/shared/ui/UiBadge';
-import { SunIcon } from '@/shared/icons';
 
 export interface ComponentItem {
     key: string;
@@ -145,6 +145,14 @@ export function getComponents(
                     </UiBadge>
                 </div>
             ),
+        },
+        {
+            key: 'universal-alert',
+            name: t('components.alert.name'),
+            description: t('components.alert.description'),
+            githubUrl:
+                'https://github.com/Arctic-Web-Agency/code-base/tree/feature/ui-components/apps/web/src/shared/ui/UiAlert',
+            preview: <UiAlertPreview />,
         },
     ];
 }

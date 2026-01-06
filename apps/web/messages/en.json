@@ -60,6 +60,10 @@
             "badge": {
                 "name": "Universal badge",
                 "description": "Status indicator component with success, error, and warning variants."
+            },
+            "alert": {
+                "name": "Universal alert",
+                "description": "Toast notification system with multiple statuses, positions, actions, and promise support."
             }
         },
         "github_label": "View on GitHub"
@@ -123,6 +127,27 @@
             "with_icon": "With Icon",
             "dismissible": "Dismissible",
             "reset": "Reset"
+        },
+        "alert": {
+            "button_success": "Success",
+            "button_error": "Error",
+            "button_warning": "Warning",
+            "button_info": "Info",
+            "button_promise": "Promise",
+            "success_title": "Success",
+            "success_message": "Operation completed successfully!",
+            "error_title": "Error",
+            "error_message": "An error occurred while processing your request.",
+            "warning_title": "Warning",
+            "warning_message": "This action requires confirmation.",
+            "info_title": "Information",
+            "info_message": "Here's something you should know.",
+            "promise_loading": "Processing request...",
+            "promise_success": "Request completed successfully!",
+            "promise_error": "Request failed!",
+            "action_confirm": "Confirm",
+            "action_cancel": "Cancel",
+            "action_confirmed": "Action confirmed!"
         }
     }
 }

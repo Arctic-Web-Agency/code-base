@@ -60,6 +60,10 @@
             "badge": {
                 "name": "Універсальний бейдж",
                 "description": "Компонент індикації статусу з варіантами success, error та warning."
+            },
+            "alert": {
+                "name": "Універсальний алерт",
+                "description": "Система toast-сповіщень з кількома статусами, позиціями, діями та підтримкою промісів."
             }
         },
         "github_label": "Переглянути на GitHub"
@@ -123,6 +127,27 @@
             "with_icon": "З іконкою",
             "dismissible": "З можливістю закриття",
             "reset": "Скинути"
+        },
+        "alert": {
+            "button_success": "Успіх",
+            "button_error": "Помилка",
+            "button_warning": "Попередження",
+            "button_info": "Інформація",
+            "button_promise": "Проміс",
+            "success_title": "Успіх",
+            "success_message": "Операція успішно завершена!",
+            "error_title": "Помилка",
+            "error_message": "Сталася помилка під час обробки вашого запиту.",
+            "warning_title": "Попередження",
+            "warning_message": "Ця дія вимагає підтвердження.",
+            "info_title": "Інформація",
+            "info_message": "Ось що вам варто знати.",
+            "promise_loading": "Обробка запиту...",
+            "promise_success": "Запит успішно виконано!",
+            "promise_error": "Запит не виконано!",
+            "action_confirm": "Підтвердити",
+            "action_cancel": "Скасувати",
+            "action_confirmed": "Дію підтверджено!"
         }
     }
 }

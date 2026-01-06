@@ -4,5 +4,9 @@ export { default as ChevronDownIcon } from './ChevronDownIcon';
 export { default as EyeIcon } from './EyeIcon';
 export { default as EyeOffIcon } from './EyeOffIcon';
 export { default as CloseIcon } from './CloseIcon';
+export { default as CheckCircleIcon } from './CheckCircleIcon';
+export { default as XCircleIcon } from './XCircleIcon';
+export { default as AlertCircleIcon } from './AlertCircleIcon';
+export { default as InfoCircleIcon } from './InfoCircleIcon';
 
 export type { IconProps } from './types';
