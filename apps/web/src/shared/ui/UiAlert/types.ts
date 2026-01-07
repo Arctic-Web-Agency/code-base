@@ -106,11 +106,6 @@ export interface UiAlertOptions {
      * Custom className for the alert
      */
     className?: string;
-
-    /**
-     * Custom description ID for accessibility
-     */
-    ariaDescribedBy?: string;
 }
 
 /**

@@ -15,7 +15,7 @@ import type {
     UiAlertOptions,
     UiAlertProviderProps,
     UiAlertPromiseOptions,
-    UiAlertPosition,
+    UiAlertStatus,
 } from './types';
 
 /**
@@ -26,16 +26,23 @@ const statusIcons = {
     error: XCircleIcon,
     warning: AlertCircleIcon,
     info: InfoCircleIcon,
-};
+} as const;
 
 /**
- * Convert position to Sonner format
+ * Status color classes for icons and text
  */
-const convertPosition = (
-    position: UiAlertPosition
-): 'top-left' | 'top-center' | 'top-right' | 'bottom-left' | 'bottom-center' | 'bottom-right' => {
-    return position;
-};
+const STATUS_COLORS: Record<UiAlertStatus, string> = {
+    success: 'text-green-600 dark:text-green-500',
+    error: 'text-red-600 dark:text-red-500',
+    warning: 'text-amber-600 dark:text-amber-500',
+    info: 'text-blue-600 dark:text-blue-500',
+} as const;
+
+/**
+ * Common style constants
+ */
+const ICON_SIZE = 'w-5 h-5';
+const TEXT_SIZE = 'text-sm';
 
 /**
  * Build alert content with title, message, and actions
@@ -56,30 +63,23 @@ const buildAlertContent = (
     const StatusIcon = statusIcons[status];
     const showIcon = !hideIcon && (icon || StatusIcon);
 
-    const iconColorClasses = {
-        success: 'text-green-600 dark:text-green-500',
-        error: 'text-red-600 dark:text-red-500',
-        warning: 'text-amber-600 dark:text-amber-500',
-        info: 'text-blue-600 dark:text-blue-500',
-    };
-
     return (
         <div className="flex items-start gap-3 w-full">
             {/* Icon */}
             {showIcon && (
                 <div className="shrink-0 mt-0.5" aria-hidden="true">
-                    {icon || <StatusIcon className={composeClasses('w-5 h-5', iconColorClasses[status])} />}
+                    {icon || <StatusIcon className={composeClasses(ICON_SIZE, STATUS_COLORS[status])} />}
                 </div>
             )}
 
             {/* Content */}
             <div className="flex-1 min-w-0">
                 {title && (
-                    <div className="font-semibold text-sm mb-1 text-neutral-900 dark:text-white">
+                    <div className={composeClasses('font-semibold mb-1 text-neutral-900 dark:text-white', TEXT_SIZE)}>
                         {title}
                     </div>
                 )}
-                <div className="text-sm text-neutral-700 dark:text-neutral-300">
+                <div className={composeClasses('text-neutral-700 dark:text-neutral-300', TEXT_SIZE)}>
                     {message}
                 </div>
 
@@ -128,7 +128,7 @@ const showAlert = (options: UiAlertOptions) => {
 
     const sonnerOptions: ExternalToast = {
         duration: duration === Infinity ? Infinity : duration,
-        position: convertPosition(position),
+        position,
         dismissible,
         onDismiss,
         className,
@@ -150,6 +150,9 @@ const showAlert = (options: UiAlertOptions) => {
                 break;
             case 'info':
                 toastId = toast.info(message, sonnerOptions);
+                break;
+            default:
+                toastId = toast(message, sonnerOptions);
                 break;
         }
     } else {
@@ -230,7 +233,7 @@ export const alert = Object.assign(showAlert, {
                 return error;
             },
             duration,
-            position: convertPosition(position),
+            position,
             unstyled: true,
             className,
         });
@@ -240,7 +243,7 @@ export const alert = Object.assign(showAlert, {
      * Custom alert with full control
      */
     custom: (
-        content: (id: string | number) => ReactElement,
+        content: ((id: string | number) => ReactElement) | ReactElement,
         options?: ExternalToast
     ) => {
         return toast.custom(content, options);
@@ -282,7 +285,7 @@ export const UiAlertProvider = (props: UiAlertProviderProps) => {
         <>
             {children}
             <Toaster
-                position={convertPosition(position)}
+                position={position}
                 duration={duration}
                 visibleToasts={visibleToasts}
                 expand={expand}
@@ -302,17 +305,17 @@ export const UiAlertProvider = (props: UiAlertProviderProps) => {
                             'p-4',
                             'text-neutral-900 dark:text-white',
                         ),
-                        title: 'text-sm font-semibold text-neutral-900 dark:text-white',
-                        description: 'text-sm text-neutral-700 dark:text-neutral-300',
+                        title: composeClasses('font-semibold text-neutral-900 dark:text-white', TEXT_SIZE),
+                        description: composeClasses('text-neutral-700 dark:text-neutral-300', TEXT_SIZE),
                         icon: 'text-current',
                         actionButton: 'bg-neutral-900 text-white dark:bg-white dark:text-neutral-900',
                         cancelButton: 'bg-neutral-100 text-neutral-900 dark:bg-neutral-800 dark:text-white',
                         closeButton: 'bg-transparent border-neutral-200 dark:border-neutral-800',
-                        success: 'text-green-600 dark:text-green-500',
-                        error: 'text-red-600 dark:text-red-500',
-                        warning: 'text-amber-600 dark:text-amber-500',
-                        info: 'text-blue-600 dark:text-blue-500',
-                        loading: 'text-blue-600 dark:text-blue-500',
+                        success: STATUS_COLORS.success,
+                        error: STATUS_COLORS.error,
+                        warning: STATUS_COLORS.warning,
+                        info: STATUS_COLORS.info,
+                        loading: STATUS_COLORS.info,
                     },
                 }}
             />
