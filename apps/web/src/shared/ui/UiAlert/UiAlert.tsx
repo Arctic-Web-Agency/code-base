@@ -1,5 +1,6 @@
 'use client';
 
+import { ReactElement } from 'react';
 import { toast, Toaster } from 'sonner';
 import type { ExternalToast } from 'sonner';
 import {
@@ -7,16 +8,13 @@ import {
     XCircleIcon,
     AlertCircleIcon,
     InfoCircleIcon,
-    CloseIcon,
 } from '@/shared/icons';
 import { composeClasses } from '@/shared/lib';
 import UiButton from '../UiButton/UiButton';
 import type {
     UiAlertOptions,
     UiAlertProviderProps,
-    UiAlertStatus,
     UiAlertPromiseOptions,
-    UiAlertAction,
     UiAlertPosition,
 } from './types';
 
@@ -242,7 +240,7 @@ export const alert = Object.assign(showAlert, {
      * Custom alert with full control
      */
     custom: (
-        content: (id: string | number) => React.ReactElement,
+        content: (id: string | number) => ReactElement,
         options?: ExternalToast
     ) => {
         return toast.custom(content, options);
