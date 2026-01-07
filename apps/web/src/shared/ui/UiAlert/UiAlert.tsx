@@ -215,7 +215,7 @@ export const alert = Object.assign(showAlert, {
         promise: Promise<T>,
         options: UiAlertPromiseOptions<T>
     ) => {
-        const { loading, success, error, duration = 5000, position = 'top-right' } = options;
+        const { loading, success, error, duration = 5000, position = 'top-right', className } = options;
 
         return toast.promise(promise, {
             loading,
@@ -233,6 +233,24 @@ export const alert = Object.assign(showAlert, {
             },
             duration,
             position: convertPosition(position),
+            unstyled: false,
+            className,
+            classNames: {
+                toast: composeClasses(
+                    'bg-white dark:bg-neutral-900',
+                    'border border-neutral-200 dark:border-neutral-800',
+                    'shadow-lg',
+                    'rounded-lg',
+                    'p-4',
+                    'text-neutral-900 dark:text-white',
+                ),
+                title: 'text-sm font-semibold text-neutral-900 dark:text-white',
+                description: 'text-sm text-neutral-700 dark:text-neutral-300',
+                icon: 'text-current',
+                success: 'text-green-600 dark:text-green-500',
+                error: 'text-red-600 dark:text-red-500',
+                loading: 'text-blue-600 dark:text-blue-500',
+            },
         });
     },
 

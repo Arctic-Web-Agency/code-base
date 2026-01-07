@@ -200,4 +200,9 @@ export interface UiAlertPromiseOptions<T = unknown> {
      * @default 'top-right'
      */
     position?: UiAlertPosition;
+
+    /**
+     * Custom className for the alert
+     */
+    className?: string;
 }
