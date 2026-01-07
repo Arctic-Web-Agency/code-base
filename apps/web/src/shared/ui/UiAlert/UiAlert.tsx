@@ -58,23 +58,30 @@ const buildAlertContent = (
     const StatusIcon = statusIcons[status];
     const showIcon = !hideIcon && (icon || StatusIcon);
 
+    const iconColorClasses = {
+        success: 'text-green-600 dark:text-green-500',
+        error: 'text-red-600 dark:text-red-500',
+        warning: 'text-amber-600 dark:text-amber-500',
+        info: 'text-blue-600 dark:text-blue-500',
+    };
+
     return (
         <div className="flex items-start gap-3 w-full">
             {/* Icon */}
             {showIcon && (
                 <div className="shrink-0 mt-0.5" aria-hidden="true">
-                    {icon || <StatusIcon className="w-5 h-5" />}
+                    {icon || <StatusIcon className={composeClasses('w-5 h-5', iconColorClasses[status])} />}
                 </div>
             )}
 
             {/* Content */}
             <div className="flex-1 min-w-0">
                 {title && (
-                    <div className="font-semibold text-sm mb-1">
+                    <div className="font-semibold text-sm mb-1 text-neutral-900 dark:text-white">
                         {title}
                     </div>
                 )}
-                <div className="text-sm">
+                <div className="text-sm text-neutral-700 dark:text-neutral-300">
                     {message}
                 </div>
 
@@ -293,9 +300,11 @@ export const UiAlertProvider = (props: UiAlertProviderProps) => {
                             'shadow-lg',
                             'rounded-lg',
                             'p-4',
+                            'text-neutral-900 dark:text-white',
                         ),
-                        title: 'text-sm font-semibold',
-                        description: 'text-sm',
+                        title: 'text-sm font-semibold text-neutral-900 dark:text-white',
+                        description: 'text-sm text-neutral-700 dark:text-neutral-300',
+                        icon: 'text-current',
                         actionButton: 'bg-neutral-900 text-white dark:bg-white dark:text-neutral-900',
                         cancelButton: 'bg-neutral-100 text-neutral-900 dark:bg-neutral-800 dark:text-white',
                         closeButton: 'bg-transparent border-neutral-200 dark:border-neutral-800',
@@ -303,6 +312,7 @@ export const UiAlertProvider = (props: UiAlertProviderProps) => {
                         error: 'text-red-600 dark:text-red-500',
                         warning: 'text-amber-600 dark:text-amber-500',
                         info: 'text-blue-600 dark:text-blue-500',
+                        loading: 'text-blue-600 dark:text-blue-500',
                     },
                 }}
             />

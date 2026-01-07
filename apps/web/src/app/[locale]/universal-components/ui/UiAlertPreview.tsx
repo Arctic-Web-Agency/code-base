@@ -74,7 +74,7 @@ export default function UiAlertPreview() {
             <UiButton size="sm" onClick={handleInfo}>
                 {t('button_info')}
             </UiButton>
-            <UiButton size="sm" variant="text" onClick={handlePromise}>
+            <UiButton size="sm" onClick={handlePromise}>
                 {t('button_promise')}
             </UiButton>
         </div>
