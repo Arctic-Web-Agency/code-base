@@ -555,11 +555,77 @@ alert.success('Message', {
 
 ## Accessibility
 
-- Proper ARIA attributes (`role="status"`, `aria-live="polite"`)
-- Keyboard navigation support (Escape to dismiss)
-- Screen reader announcements
-- Focus management for action buttons
-- Swipe-to-dismiss for touch devices
+UiAlert is built with accessibility in mind, following WCAG 2.1 guidelines:
+
+### Core Features
+
+- **ARIA attributes**: Alerts use `role="status"` and `aria-live="polite"` for non-intrusive screen reader announcements
+- **Keyboard navigation**: Press `Escape` to dismiss alerts, `Tab` to navigate action buttons
+- **Screen reader support**: Automatic announcements for alert messages and state changes
+- **Focus management**: Action buttons are keyboard-accessible with visible focus indicators
+- **Touch-friendly**: Swipe-to-dismiss gesture for mobile devices
+
+### Keyboard Shortcuts
+
+| Key | Action |
+|-----|--------|
+| `Escape` | Dismiss the most recent alert |
+| `Tab` / `Shift+Tab` | Navigate through action buttons |
+| `Enter` / `Space` | Activate focused button |
+
+### Accessibility Examples
+
+**1. Screen Reader-Friendly Messages**
+
+```tsx
+// Good: Clear, descriptive messages
+alert.success('Profile updated successfully');
+alert.error('Password must be at least 8 characters');
+
+// Avoid: Vague messages
+alert.success('Done'); // Not descriptive enough
+alert.error('Error'); // Doesn't explain the problem
+```
+
+**2. Important Alerts with Actions**
+
+```tsx
+// Use persistent alerts for critical actions
+alert.warning('Your session will expire in 2 minutes', {
+    title: 'Session Timeout',
+    duration: Infinity, // User must acknowledge
+    actions: [
+        {
+            label: 'Extend Session',
+            onClick: () => extendSession(),
+            variant: 'filled',
+        },
+    ],
+});
+```
+
+**3. Loading States for Screen Readers**
+
+```tsx
+// Promise alerts announce state changes automatically
+alert.promise(
+    saveUserProfile(),
+    {
+        loading: 'Saving your profile...', // Announced to screen readers
+        success: 'Profile saved successfully', // Announced when complete
+        error: 'Failed to save profile. Please try again',
+    }
+);
+```
+
+### Best Practices for Accessibility
+
+1. **Use descriptive messages**: Avoid generic text like "Success" or "Error"
+2. **Provide context**: Include what succeeded or failed
+3. **Use persistent alerts for critical actions**: Set `duration: Infinity` for important decisions
+4. **Add meaningful action labels**: "Save Changes" instead of "OK"
+5. **Avoid alert spam**: Don't show multiple alerts simultaneously for unrelated events
+6. **Test with screen readers**: Verify announcements with NVDA, JAWS, or VoiceOver
 
 ## Best Practices
 
