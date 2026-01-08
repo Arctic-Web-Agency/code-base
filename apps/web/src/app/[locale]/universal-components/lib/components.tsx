@@ -11,6 +11,7 @@ import UiCheckboxGroupPreview from '../ui/UiCheckboxGroupPreview';
 import UiRadioGroupPreview from '../ui/UiRadioGroupPreview';
 import UiModalPreview from '../ui/UiModalPreview';
 import UiAlertPreview from '../ui/UiAlertPreview';
+import UiTooltipPreview from '../ui/UiTooltipPreview';
 import UiBadge from '@/shared/ui/UiBadge';
 
 export interface ComponentItem {
@@ -153,6 +154,14 @@ export function getComponents(
             githubUrl:
                 'https://github.com/Arctic-Web-Agency/code-base/tree/feature/ui-components/apps/web/src/shared/ui/UiAlert',
             preview: <UiAlertPreview />,
+        },
+        {
+            key: 'universal-tooltip',
+            name: t('components.tooltip.name'),
+            description: t('components.tooltip.description'),
+            githubUrl:
+                'https://github.com/Arctic-Web-Agency/code-base/tree/feature/ui-components/apps/web/src/shared/ui/UiTooltip',
+            preview: <UiTooltipPreview />,
         },
     ];
 }
