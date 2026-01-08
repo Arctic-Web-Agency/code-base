@@ -64,6 +64,10 @@
             "alert": {
                 "name": "Universal alert",
                 "description": "Toast notification system with multiple statuses, positions, actions, and promise support."
+            },
+            "tooltip": {
+                "name": "Universal tooltip",
+                "description": "Small popup with helpful hints that appears on hover, focus, or click over an element."
             }
         },
         "github_label": "View on GitHub"
@@ -148,6 +152,48 @@
             "action_confirm": "Confirm",
             "action_cancel": "Cancel",
             "action_confirmed": "Action confirmed!"
+        },
+        "tooltip": {
+            "section_positions": "Positions",
+            "position_top": "Tooltip on top",
+            "position_bottom": "Tooltip on bottom",
+            "position_left": "Tooltip on left",
+            "position_right": "Tooltip on right",
+            "button_top": "Top",
+            "button_bottom": "Bottom",
+            "button_left": "Left",
+            "button_right": "Right",
+            "section_triggers": "Triggers",
+            "trigger_hover": "Shown on hover",
+            "trigger_focus": "Shown on focus",
+            "trigger_click": "Click to toggle",
+            "trigger_multiple": "Hover or focus to show",
+            "button_hover": "Hover me",
+            "button_focus": "Focus me",
+            "button_click": "Click me",
+            "button_multiple": "Hover/Focus",
+            "section_delays": "Delays",
+            "delay_instant": "Shows instantly (0ms)",
+            "delay_default": "Default delay (200ms)",
+            "delay_slow": "Slow delay (1000ms)",
+            "button_instant": "Instant",
+            "button_default": "Default",
+            "button_slow": "Slow",
+            "section_arrow": "Arrow Indicator",
+            "arrow_with": "Tooltip with arrow pointer",
+            "arrow_without": "Tooltip without arrow",
+            "button_with_arrow": "With Arrow",
+            "button_without_arrow": "No Arrow",
+            "section_rich_content": "Rich Content",
+            "rich_title": "Advanced Tooltip",
+            "rich_description": "This tooltip contains multiple elements and formatted text.",
+            "button_rich": "Rich Content",
+            "icon_help": "Click this icon for help",
+            "section_custom": "Custom Styling",
+            "custom_blue": "Blue styled tooltip",
+            "custom_green": "Green styled tooltip with extended width",
+            "button_blue": "Blue Theme",
+            "button_green": "Green Theme"
         }
     }
 }
