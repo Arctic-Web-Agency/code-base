@@ -19,25 +19,31 @@ export default function UniversalComponentsPage() {
             <GoBack className="w-fit" label={t('back_button')} />
 
             <header className="max-w-3xl space-y-4">
-                <p className="text-sm uppercase tracking-[0.25em] text-text-secondary">CodeBase</p>
-                <h1 className="text-4xl font-semibold text-text-primary">{t('heading')}</h1>
-                <p className="text-lg text-text-secondary">{t('intro')}</p>
+                <p className="text-text-secondary text-sm tracking-[0.25em] uppercase">
+                    CodeBase
+                </p>
+                <h1 className="text-text-primary text-4xl font-semibold">
+                    {t('heading')}
+                </h1>
+                <p className="text-text-secondary text-lg">{t('intro')}</p>
             </header>
 
             <section className="grid gap-6 lg:grid-cols-2">
                 {components.map((component) => (
                     <article
                         key={component.key}
-                        className="flex flex-col gap-6 rounded-2xl border border-border/40 bg-surface/40 p-6 shadow-lg"
+                        className="border-border/40 bg-surface/40 flex flex-col gap-6 rounded-2xl border p-6 shadow-lg"
                     >
                         <div className="space-y-3">
-                            <h2 className="text-2xl font-semibold text-text-primary">{component.name}</h2>
-                            <p className="text-base text-text-secondary">{component.description}</p>
+                            <h2 className="text-text-primary text-2xl font-semibold">
+                                {component.name}
+                            </h2>
+                            <p className="text-text-secondary text-base">
+                                {component.description}
+                            </p>
                         </div>
 
-                        <div className="w-fit">
-                            {component.preview}
-                        </div>
+                        <div className="w-fit">{component.preview}</div>
 
                         <UiButton
                             variant="text"

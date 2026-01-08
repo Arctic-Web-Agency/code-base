@@ -64,10 +64,6 @@
             "alert": {
                 "name": "Універсальний алерт",
                 "description": "Система toast-сповіщень з кількома статусами, позиціями, діями та підтримкою промісів."
-            },
-            "tooltip": {
-                "name": "Універсальний тултіп",
-                "description": "Маленький popup з підказкою, що з'являється при hover, focus або click над елементом."
             }
         },
         "github_label": "Переглянути на GitHub"
@@ -152,48 +148,6 @@
             "action_confirm": "Підтвердити",
             "action_cancel": "Скасувати",
             "action_confirmed": "Дію підтверджено!"
-        },
-        "tooltip": {
-            "section_positions": "Позиції",
-            "position_top": "Тултіп зверху",
-            "position_bottom": "Тултіп знизу",
-            "position_left": "Тултіп зліва",
-            "position_right": "Тултіп справа",
-            "button_top": "Зверху",
-            "button_bottom": "Знизу",
-            "button_left": "Зліва",
-            "button_right": "Справа",
-            "section_triggers": "Тригери",
-            "trigger_hover": "Показується при наведенні",
-            "trigger_focus": "Показується при фокусі",
-            "trigger_click": "Клік для перемикання",
-            "trigger_multiple": "Наведення або фокус для показу",
-            "button_hover": "Наведи на мене",
-            "button_focus": "Фокус на мені",
-            "button_click": "Клікни мене",
-            "button_multiple": "Hover/Focus",
-            "section_delays": "Затримки",
-            "delay_instant": "Показується миттєво (0мс)",
-            "delay_default": "Стандартна затримка (200мс)",
-            "delay_slow": "Повільна затримка (1000мс)",
-            "button_instant": "Миттєво",
-            "button_default": "Стандартно",
-            "button_slow": "Повільно",
-            "section_arrow": "Індикатор стрілки",
-            "arrow_with": "Тултіп зі стрілкою-вказівником",
-            "arrow_without": "Тултіп без стрілки",
-            "button_with_arrow": "Зі стрілкою",
-            "button_without_arrow": "Без стрілки",
-            "section_rich_content": "Багатий контент",
-            "rich_title": "Розширений тултіп",
-            "rich_description": "Цей тултіп містить кілька елементів та форматований текст.",
-            "button_rich": "Багатий контент",
-            "icon_help": "Клікни цю іконку для допомоги",
-            "section_custom": "Кастомне стилізування",
-            "custom_blue": "Синій стилізований тултіп",
-            "custom_green": "Зелений стилізований тултіп з розширеною шириною",
-            "button_blue": "Синя тема",
-            "button_green": "Зелена тема"
         }
     }
 }
