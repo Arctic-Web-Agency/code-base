@@ -129,7 +129,9 @@ export default function UiTooltipPreview() {
                 </h3>
                 <div className="flex flex-wrap gap-3 items-center">
                     <UiTooltip content={t('on_badge')}>
-                        <UiBadge status="success">{t('hover_badge')}</UiBadge>
+                        <span className="inline-flex">
+                            <UiBadge status="success">{t('hover_badge')}</UiBadge>
+                        </span>
                     </UiTooltip>
 
                     <UiTooltip content={t('on_text')}>
