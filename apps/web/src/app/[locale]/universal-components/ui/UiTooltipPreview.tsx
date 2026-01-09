@@ -2,7 +2,6 @@
 
 import UiTooltip from '@/shared/ui/UiTooltip';
 import UiButton from '@/shared/ui/UiButton';
-import UiBadge from '@/shared/ui/UiBadge';
 import { useTranslations } from 'next-intl';
 
 export default function UiTooltipPreview() {
@@ -118,32 +117,6 @@ export default function UiTooltipPreview() {
 
                     <UiTooltip content={t('very_long_text')} maxWidth={400}>
                         <UiButton size="sm">{t('button_very_long')}</UiButton>
-                    </UiTooltip>
-                </div>
-            </section>
-
-            {/* Different elements */}
-            <section>
-                <h3 className="text-lg font-semibold mb-4">
-                    {t('different_triggers')}
-                </h3>
-                <div className="flex flex-wrap gap-3 items-center">
-                    <UiTooltip content={t('on_badge')}>
-                        <span className="inline-flex">
-                            <UiBadge status="success">{t('hover_badge')}</UiBadge>
-                        </span>
-                    </UiTooltip>
-
-                    <UiTooltip content={t('on_text')}>
-                        <span className="underline cursor-help">{t('hover_text')}</span>
-                    </UiTooltip>
-
-                    <UiTooltip content={t('on_icon')}>
-                        <button className="p-2 hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded">
-                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                        </button>
                     </UiTooltip>
                 </div>
             </section>

@@ -192,12 +192,6 @@
             "very_long_text": "This is an even longer tooltip text with more detailed information. It shows how tooltips handle extensive content while maintaining readability and proper wrapping across multiple lines.",
             "button_long": "Long Text",
             "button_very_long": "Very Long Text",
-            "different_triggers": "Different Trigger Elements",
-            "on_badge": "Tooltip on badge element",
-            "hover_badge": "Hover Me",
-            "on_text": "Tooltip on text element",
-            "hover_text": "Hover this text",
-            "on_icon": "Tooltip on icon button",
             "disabled_state": "Disabled State",
             "wont_show": "This won't appear",
             "button_disabled": "Disabled Tooltip"
