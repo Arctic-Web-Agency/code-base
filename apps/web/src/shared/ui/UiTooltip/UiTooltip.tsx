@@ -30,22 +30,23 @@ const sizeStyles: Record<UiTooltipSize, { padding: string; text: string }> = {
 
 /**
  * Variant styles for tooltip background and text
+ * Each variant maintains consistent appearance across light/dark themes
  */
 const variantStyles: Record<UiTooltipVariant, { bg: string; text: string; arrow: string }> = {
     dark: {
-        bg: 'bg-neutral-900 dark:bg-neutral-700',
-        text: 'text-white dark:text-neutral-100',
-        arrow: 'fill-neutral-900 dark:fill-neutral-700',
+        bg: 'bg-neutral-900 dark:bg-neutral-900',
+        text: 'text-white dark:text-white',
+        arrow: 'fill-neutral-900 dark:fill-neutral-900',
     },
     light: {
-        bg: 'bg-white dark:bg-neutral-300',
-        text: 'text-neutral-900 dark:text-neutral-800',
-        arrow: 'fill-white dark:fill-neutral-300',
+        bg: 'bg-white dark:bg-white',
+        text: 'text-neutral-900 dark:text-neutral-900',
+        arrow: 'fill-white dark:fill-white',
     },
     neutral: {
-        bg: 'bg-neutral-200 dark:bg-neutral-700',
-        text: 'text-neutral-800 dark:text-neutral-200',
-        arrow: 'fill-neutral-200 dark:fill-neutral-700',
+        bg: 'bg-neutral-400 dark:bg-neutral-400',
+        text: 'text-white dark:text-white',
+        arrow: 'fill-neutral-400 dark:fill-neutral-400',
     },
 };
 
