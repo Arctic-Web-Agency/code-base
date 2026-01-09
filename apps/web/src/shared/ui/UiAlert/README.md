@@ -228,13 +228,15 @@ alert.dismissAll();
 
 ```tsx
 alert.custom(
-    <div className="flex items-center gap-3 p-4">
-        <img src="/avatar.jpg" className="w-10 h-10 rounded-full" />
-        <div>
-            <p className="font-semibold">John Doe</p>
-            <p className="text-sm text-neutral-500">liked your post</p>
+    (id) => (
+        <div className="flex items-center gap-3 p-4">
+            <img src="/avatar.jpg" className="w-10 h-10 rounded-full" />
+            <div>
+                <p className="font-semibold">John Doe</p>
+                <p className="text-sm text-neutral-500">liked your post</p>
+            </div>
         </div>
-    </div>,
+    ),
     {
         duration: 5000,
         position: 'top-right',
@@ -364,13 +366,13 @@ await alert.promise(
 );
 ```
 
-### `alert.custom(content, options?)`
+### `alert.custom(jsx, options?)`
 
-Show fully custom alert.
+Show fully custom alert with a render function that receives the toast ID.
 
 ```tsx
 alert.custom(
-    <CustomComponent />,
+    (id) => <CustomComponent toastId={id} />,
     {
         duration: 5000,
         position: 'top-center',

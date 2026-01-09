@@ -241,12 +241,14 @@ export const alert = Object.assign(showAlert, {
 
     /**
      * Custom alert with full control
+     * @param jsx - Function that receives toast ID and returns a React element
+     * @param options - Additional toast options
      */
     custom: (
-        content: ((id: string | number) => ReactElement) | ReactElement,
+        jsx: (id: string | number) => ReactElement,
         options?: ExternalToast
     ) => {
-        return toast.custom(content, options);
+        return toast.custom(jsx, options);
     },
 
     /**
