@@ -67,7 +67,7 @@ const buildAlertContent = (
         <div className="flex items-start gap-3 w-full">
             {/* Icon */}
             {showIcon && (
-                <div className="shrink-0 mt-0.5" aria-hidden="true">
+                <div className="shrink-0" aria-hidden="true">
                     {icon || <StatusIcon className={composeClasses(ICON_SIZE, STATUS_COLORS[status])} />}
                 </div>
             )}
@@ -116,7 +116,7 @@ const showAlert = (options: UiAlertOptions) => {
         status,
         title,
         message,
-        duration = 5000,
+        duration,
         position = 'top-right',
         actions,
         icon,
@@ -126,8 +126,10 @@ const showAlert = (options: UiAlertOptions) => {
         className,
     } = options;
 
+    const resolvedDuration = duration ?? (actions && actions.length > 0 ? Infinity : 5000);
+
     const sonnerOptions: ExternalToast = {
-        duration: duration === Infinity ? Infinity : duration,
+        duration: resolvedDuration === Infinity ? Infinity : resolvedDuration,
         position,
         dismissible,
         onDismiss,

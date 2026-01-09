@@ -38,6 +38,7 @@ export default function UiAlertPreview() {
                     variant: 'text',
                 },
             ],
+            duration: Infinity,
         });
     };
 

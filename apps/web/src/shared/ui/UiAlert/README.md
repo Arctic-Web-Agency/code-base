@@ -9,6 +9,7 @@ Universal alert/toast notification system built on top of [Sonner](https://sonne
 - ⏱️ **Auto-dismiss**: Configurable duration or persistent alerts
 - 🎬 **Smooth animations**: Built-in swipe gestures and transitions
 - 🎨 **Action buttons**: Add interactive buttons to alerts
+- 🧷 **Action-first UX**: Alerts with actions stay open unless `duration` is set
 - 🔄 **Promise support**: Automatic loading/success/error states for async operations
 - ♿ **Accessible**: Full ARIA support and keyboard navigation
 - 🔒 **Type-safe**: Full TypeScript support with detailed types
@@ -119,6 +120,8 @@ alert.warning('Unsaved changes detected', {
     ],
 });
 ```
+
+By default, alerts with actions are persistent until the user responds. Set `duration` if you want auto-dismiss.
 
 ### Action Button Options
 
@@ -289,7 +292,7 @@ Main function to show alerts with full control.
 | `status` | `'success' \| 'error' \| 'warning' \| 'info'` | - | Alert status (required) |
 | `message` | `ReactNode` | - | Alert message (required) |
 | `title` | `string` | - | Alert title |
-| `duration` | `number` | `5000` | Duration in ms (0 or Infinity for persistent) |
+| `duration` | `number` | `5000` (or `Infinity` when `actions` are set) | Duration in ms (0 or Infinity for persistent) |
 | `position` | `UiAlertPosition` | `'top-right'` | Position on screen |
 | `actions` | `UiAlertAction[]` | - | Action buttons |
 | `icon` | `ReactNode` | - | Custom icon (overrides status icon) |
