@@ -1,6 +1,5 @@
 'use client';
 
-import { ReactNode } from 'react';
 import * as Tooltip from '@radix-ui/react-tooltip';
 import { composeClasses } from '@/shared/lib';
 import type {
@@ -11,9 +10,25 @@ import type {
 } from './types';
 
 /**
+ * Default collision padding in pixels
+ */
+const DEFAULT_COLLISION_PADDING = 8;
+
+/**
+ * Base tooltip classes applied to all variants
+ */
+const BASE_TOOLTIP_CLASSES = [
+    'z-50',
+    'rounded-md',
+    'shadow-lg',
+    'break-words',
+    'animate-fadeIn',
+] as const;
+
+/**
  * Size styles for tooltip content
  */
-const sizeStyles: Record<UiTooltipSize, { padding: string; text: string }> = {
+const SIZE_STYLES: Record<UiTooltipSize, { padding: string; text: string }> = {
     sm: {
         padding: 'px-2 py-1',
         text: 'text-xs',
@@ -32,21 +47,21 @@ const sizeStyles: Record<UiTooltipSize, { padding: string; text: string }> = {
  * Variant styles for tooltip background and text
  * Each variant maintains consistent appearance across light/dark themes
  */
-const variantStyles: Record<UiTooltipVariant, { bg: string; text: string; arrow: string }> = {
+const VARIANT_STYLES: Record<UiTooltipVariant, { bg: string; text: string; arrow: string }> = {
     dark: {
-        bg: 'bg-neutral-900 dark:bg-neutral-900',
-        text: 'text-white dark:text-white',
-        arrow: 'fill-neutral-900 dark:fill-neutral-900',
+        bg: 'bg-neutral-900',
+        text: 'text-white',
+        arrow: 'fill-neutral-900',
     },
     light: {
-        bg: 'bg-white dark:bg-white',
-        text: 'text-neutral-900 dark:text-neutral-900',
-        arrow: 'fill-white dark:fill-white',
+        bg: 'bg-white',
+        text: 'text-neutral-900',
+        arrow: 'fill-white',
     },
     neutral: {
-        bg: 'bg-neutral-400 dark:bg-neutral-400',
-        text: 'text-white dark:text-white',
-        arrow: 'fill-neutral-400 dark:fill-neutral-400',
+        bg: 'bg-neutral-400',
+        text: 'text-white',
+        arrow: 'fill-neutral-400',
     },
 };
 
@@ -110,26 +125,19 @@ const UiTooltip = (props: UiTooltipProps) => {
         return <>{children}</>;
     }
 
-    const sizeStyle = sizeStyles[size];
-    const variantStyle = variantStyles[variant];
+    const { padding, text } = SIZE_STYLES[size];
+    const { bg, text: textColor, arrow } = VARIANT_STYLES[variant];
 
     const tooltipClasses = composeClasses(
-        'z-50',
-        'rounded-md',
-        'shadow-lg',
-        'break-words',
-        'animate-fadeIn',
-        sizeStyle.padding,
-        sizeStyle.text,
-        variantStyle.bg,
-        variantStyle.text,
+        ...BASE_TOOLTIP_CLASSES,
+        padding,
+        text,
+        bg,
+        textColor,
         className
     );
 
-    const arrowClasses = composeClasses(
-        variantStyle.arrow,
-        arrowClassName
-    );
+    const arrowClasses = composeClasses(arrow, arrowClassName);
 
     return (
         <Tooltip.Root>
@@ -140,14 +148,12 @@ const UiTooltip = (props: UiTooltipProps) => {
                     side={side}
                     align={align}
                     sideOffset={sideOffset}
-                    collisionPadding={8}
+                    collisionPadding={DEFAULT_COLLISION_PADDING}
                     className={tooltipClasses}
                     style={{ maxWidth }}
                 >
                     {content}
-                    {showArrow && (
-                        <Tooltip.Arrow className={arrowClasses} />
-                    )}
+                    {showArrow && <Tooltip.Arrow className={arrowClasses} />}
                 </Tooltip.Content>
             </Tooltip.Portal>
         </Tooltip.Root>
