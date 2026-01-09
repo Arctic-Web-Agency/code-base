@@ -64,6 +64,10 @@
             "alert": {
                 "name": "Universal alert",
                 "description": "Toast notification system with multiple statuses, positions, actions, and promise support."
+            },
+            "tooltip": {
+                "name": "Universal tooltip",
+                "description": "Accessible hint popup built on Radix UI with smart positioning and minimal styling."
             }
         },
         "github_label": "View on GitHub"
@@ -148,6 +152,16 @@
             "action_confirm": "Confirm",
             "action_cancel": "Cancel",
             "action_confirmed": "Action confirmed!"
+        },
+        "tooltip": {
+            "top": "Tooltip on top",
+            "bottom": "Tooltip on bottom",
+            "left": "Tooltip on left",
+            "right": "Tooltip on right",
+            "button_top": "Top",
+            "button_bottom": "Bottom",
+            "button_left": "Left",
+            "button_right": "Right"
         }
     }
 }
