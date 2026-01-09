@@ -191,10 +191,7 @@
             "long_text": "This is a longer tooltip text that demonstrates text wrapping behavior when content exceeds the width limit.",
             "very_long_text": "This is an even longer tooltip text with more detailed information. It shows how tooltips handle extensive content while maintaining readability and proper wrapping across multiple lines.",
             "button_long": "Long Text",
-            "button_very_long": "Very Long Text",
-            "disabled_state": "Disabled State",
-            "wont_show": "This won't appear",
-            "button_disabled": "Disabled Tooltip"
+            "button_very_long": "Very Long Text"
         }
     }
 }

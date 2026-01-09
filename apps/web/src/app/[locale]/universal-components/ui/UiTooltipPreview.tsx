@@ -120,18 +120,6 @@ export default function UiTooltipPreview() {
                     </UiTooltip>
                 </div>
             </section>
-
-            {/* Disabled state */}
-            <section>
-                <h3 className="text-lg font-semibold mb-4">
-                    {t('disabled_state')}
-                </h3>
-                <div className="flex flex-wrap gap-3">
-                    <UiTooltip content={t('wont_show')} disabled>
-                        <UiButton size="sm">{t('button_disabled')}</UiButton>
-                    </UiTooltip>
-                </div>
-            </section>
         </div>
     );
 }
