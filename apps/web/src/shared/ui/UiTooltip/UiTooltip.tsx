@@ -33,14 +33,14 @@ const sizeStyles: Record<UiTooltipSize, { padding: string; text: string }> = {
  */
 const variantStyles: Record<UiTooltipVariant, { bg: string; text: string; arrow: string }> = {
     dark: {
-        bg: 'bg-neutral-900 dark:bg-neutral-800',
-        text: 'text-white',
-        arrow: 'fill-neutral-900 dark:fill-neutral-800',
+        bg: 'bg-neutral-900 dark:bg-neutral-700',
+        text: 'text-white dark:text-neutral-100',
+        arrow: 'fill-neutral-900 dark:fill-neutral-700',
     },
     light: {
-        bg: 'bg-white dark:bg-neutral-100',
+        bg: 'bg-white dark:bg-neutral-300',
         text: 'text-neutral-900 dark:text-neutral-800',
-        arrow: 'fill-white dark:fill-neutral-100',
+        arrow: 'fill-white dark:fill-neutral-300',
     },
     neutral: {
         bg: 'bg-neutral-200 dark:bg-neutral-700',
