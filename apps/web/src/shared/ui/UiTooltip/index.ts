@@ -1,2 +1,9 @@
-export { default } from './UiTooltip';
-export type { UiTooltipProps, UiTooltipSide, UiTooltipAlign } from './types';
+export { default, UiTooltipProvider } from './UiTooltip';
+export type {
+    UiTooltipProps,
+    UiTooltipProviderProps,
+    UiTooltipSide,
+    UiTooltipAlign,
+    UiTooltipSize,
+    UiTooltipVariant,
+} from './types';
