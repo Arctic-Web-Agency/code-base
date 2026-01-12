@@ -1,0 +1,5 @@
+/* Override Sonner loading wrapper positioning to allow parent to inherit dimensions */
+[data-sonner-toast] .sonner-loading-wrapper {
+    position: relative;
+    inset: auto;
+}

@@ -17,6 +17,7 @@ import type {
     UiAlertPromiseOptions,
     UiAlertStatus,
 } from './types';
+import './UiAlert.css';
 
 /**
  * Status icons mapping
