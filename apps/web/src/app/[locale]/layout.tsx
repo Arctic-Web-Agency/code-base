@@ -44,7 +44,7 @@ export default async function LocaleLayout({
     }
 
     return (
-        <html lang={locale}>
+        <html lang={locale} suppressHydrationWarning>
             <head>
                 <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
                 <script dangerouslySetInnerHTML={{ __html: setInitialTheme }} />
