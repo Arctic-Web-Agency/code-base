@@ -8,6 +8,7 @@ import {
     XCircleIcon,
     AlertCircleIcon,
     InfoCircleIcon,
+    LoaderIcon,
 } from '@/shared/icons';
 import { composeClasses } from '@/shared/lib';
 import UiButton from '../UiButton/UiButton';
@@ -17,7 +18,6 @@ import type {
     UiAlertPromiseOptions,
     UiAlertStatus,
 } from './types';
-import './UiAlert.css';
 
 /**
  * Status icons mapping
@@ -221,25 +221,67 @@ export const alert = Object.assign(showAlert, {
     ) => {
         const { loading, success, error, duration = 5000, position = 'top-right', className } = options;
 
-        return toast.promise(promise, {
-            loading,
-            success: (data) => {
-                if (typeof success === 'function') {
-                    return success(data);
-                }
-                return success;
-            },
-            error: (err) => {
-                if (typeof error === 'function') {
-                    return error(err);
-                }
-                return error;
-            },
-            duration,
-            position,
-            unstyled: true,
-            className,
-        });
+        // Show loading toast with custom loader
+        const toastId = toast.custom(
+            () => (
+                <div className="flex items-start gap-3 w-full">
+                    <LoaderIcon className={composeClasses(ICON_SIZE, STATUS_COLORS.info, 'shrink-0')} />
+                    <div className={composeClasses('text-neutral-700 dark:text-neutral-300', TEXT_SIZE)}>
+                        {loading}
+                    </div>
+                </div>
+            ),
+            {
+                duration: Infinity,
+                position,
+                className,
+            }
+        );
+
+        // Handle promise resolution
+        promise
+            .then((data) => {
+                const successMessage = typeof success === 'function' ? success(data) : success;
+
+                toast.custom(
+                    () => (
+                        <div className="flex items-start gap-3 w-full">
+                            <CheckCircleIcon className={composeClasses(ICON_SIZE, STATUS_COLORS.success, 'shrink-0')} />
+                            <div className={composeClasses('text-neutral-700 dark:text-neutral-300', TEXT_SIZE)}>
+                                {successMessage}
+                            </div>
+                        </div>
+                    ),
+                    {
+                        id: toastId,
+                        duration,
+                        position,
+                        className,
+                    }
+                );
+            })
+            .catch((err) => {
+                const errorMessage = typeof error === 'function' ? error(err) : error;
+
+                toast.custom(
+                    () => (
+                        <div className="flex items-start gap-3 w-full">
+                            <XCircleIcon className={composeClasses(ICON_SIZE, STATUS_COLORS.error, 'shrink-0')} />
+                            <div className={composeClasses('text-neutral-700 dark:text-neutral-300', TEXT_SIZE)}>
+                                {errorMessage}
+                            </div>
+                        </div>
+                    ),
+                    {
+                        id: toastId,
+                        duration,
+                        position,
+                        className,
+                    }
+                );
+            });
+
+        return toastId;
     },
 
     /**

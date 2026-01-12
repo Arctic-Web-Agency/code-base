@@ -8,5 +8,6 @@ export { default as CheckCircleIcon } from './CheckCircleIcon';
 export { default as XCircleIcon } from './XCircleIcon';
 export { default as AlertCircleIcon } from './AlertCircleIcon';
 export { default as InfoCircleIcon } from './InfoCircleIcon';
+export { default as LoaderIcon } from './LoaderIcon';
 
 export type { IconProps } from './types';
