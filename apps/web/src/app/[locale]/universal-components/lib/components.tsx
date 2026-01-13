@@ -12,6 +12,7 @@ import UiRadioGroupPreview from '../ui/UiRadioGroupPreview';
 import UiModalPreview from '../ui/UiModalPreview';
 import UiAlertPreview from '../ui/UiAlertPreview';
 import UiTooltipPreview from '../ui/UiTooltipPreview';
+import UiBreadcrumbsPreview from '../ui/UiBreadcrumbsPreview';
 import UiBadge from '@/shared/ui/UiBadge';
 
 export interface ComponentItem {
@@ -162,6 +163,14 @@ export function getComponents(
             githubUrl:
                 'https://github.com/Arctic-Web-Agency/code-base/tree/feature/ui-components/apps/web/src/shared/ui/UiTooltip',
             preview: <UiTooltipPreview />,
+        },
+        {
+            key: 'universal-breadcrumbs',
+            name: t('components.breadcrumbs.name'),
+            description: t('components.breadcrumbs.description'),
+            githubUrl:
+                'https://github.com/Arctic-Web-Agency/code-base/tree/feature/ui-components/apps/web/src/shared/ui/UiBreadcrumbs',
+            preview: <UiBreadcrumbsPreview />,
         },
     ];
 }

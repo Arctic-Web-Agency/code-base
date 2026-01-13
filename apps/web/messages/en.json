@@ -68,6 +68,10 @@
             "tooltip": {
                 "name": "Universal tooltip",
                 "description": "Accessible hint popup built on Radix UI with smart positioning and minimal styling."
+            },
+            "breadcrumbs": {
+                "name": "Universal breadcrumbs",
+                "description": "Navigation trail component with Next.js routing, smart collapse, and accessibility support."
             }
         },
         "github_label": "View on GitHub"
