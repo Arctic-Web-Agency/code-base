@@ -179,59 +179,6 @@ export default function BreadcrumbsPage() {
                         </div>
                     </div>
                 </section>
-
-                {/* Common patterns */}
-                <section className="space-y-4">
-                    <h2 className="text-text-primary text-2xl font-semibold">
-                        {t('sections.patterns.heading')}
-                    </h2>
-                    <p className="text-text-secondary">
-                        {t('sections.patterns.description')}
-                    </p>
-                    <div className="border-border/40 bg-surface/40 space-y-6 rounded-xl border p-6">
-                        <div className="space-y-2">
-                            <p className="text-text-secondary text-sm">
-                                {t('sections.patterns.ecommerce')}
-                            </p>
-                            <UiBreadcrumbs
-                                items={[
-                                    { label: 'Shop' },
-                                    { label: 'Electronics' },
-                                    { label: 'Laptops' },
-                                    { label: 'Gaming Laptops' },
-                                ]}
-                            />
-                        </div>
-
-                        <div className="space-y-2">
-                            <p className="text-text-secondary text-sm">
-                                {t('sections.patterns.documentation')}
-                            </p>
-                            <UiBreadcrumbs
-                                size="sm"
-                                items={[
-                                    { label: 'Docs' },
-                                    { label: 'Components' },
-                                    { label: 'Navigation' },
-                                    { label: 'Breadcrumbs' },
-                                ]}
-                            />
-                        </div>
-
-                        <div className="space-y-2">
-                            <p className="text-text-secondary text-sm">
-                                {t('sections.patterns.dashboard')}
-                            </p>
-                            <UiBreadcrumbs
-                                items={[
-                                    { label: 'Dashboard' },
-                                    { label: 'Users' },
-                                    { label: 'Edit User' },
-                                ]}
-                            />
-                        </div>
-                    </div>
-                </section>
             </div>
         </main>
     );

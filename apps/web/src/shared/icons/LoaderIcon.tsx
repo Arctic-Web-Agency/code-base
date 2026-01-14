@@ -12,6 +12,7 @@ const LoaderIcon = ({ className = 'h-5 w-5', ...props }: IconProps) => {
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
             aria-hidden="true"
+            suppressHydrationWarning
             {...props}
         >
             <circle

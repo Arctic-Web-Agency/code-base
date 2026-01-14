@@ -1,6 +1,6 @@
 'use client';
 
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { THEME, Theme } from '@/shared/types/settings';
 import { SunIcon, MoonIcon } from '@/shared/icons';
 import UiSwitch from '@/shared/ui/UiSwitch';
@@ -10,6 +10,7 @@ import { selectTheme, setTheme } from '@/stores/settings';
 const ChangeTheme: FC = () => {
     const dispatch = useAppDispatch();
     const theme = useAppSelector(selectTheme);
+    const [mounted, setMounted] = useState(false);
 
     const handleToggleTheme = () => {
         const newTheme = theme === THEME.LIGHT ? THEME.DARK : THEME.LIGHT;
@@ -35,7 +36,24 @@ const ChangeTheme: FC = () => {
             document.documentElement.setAttribute('data-theme', defaultTheme);
             document.documentElement.classList.add(defaultTheme);
         }
+        setMounted(true);
     }, [dispatch]);
+
+    // Prevent hydration mismatch by rendering with server state initially
+    if (!mounted) {
+        return (
+            <UiSwitch
+                id="theme-switcher"
+                name="theme-switcher"
+                checked={true}
+                onChange={() => {}}
+                disabled
+            >
+                <SunIcon className="h-4 w-4 ml-1 text-text-primary transition-all duration-300" />
+                <MoonIcon className="h-4 w-4 mr-1 text-text-primary transition-all duration-300" />
+            </UiSwitch>
+        );
+    }
 
     return (
         <>

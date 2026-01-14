@@ -1,5 +1,3 @@
-'use client';
-
 import Link from 'next/link';
 import { composeClasses } from '@/shared/lib';
 import { ChevronDownIcon } from '@/shared/icons';

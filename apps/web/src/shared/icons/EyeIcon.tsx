@@ -16,6 +16,7 @@ const EyeIcon = ({ className = 'h-5 w-5', ...props }: IconProps) => {
             strokeLinejoin="round"
             xmlns="http://www.w3.org/2000/svg"
             aria-hidden="true"
+            suppressHydrationWarning
             {...props}
         >
             <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />

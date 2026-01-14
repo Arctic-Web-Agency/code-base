@@ -232,7 +232,7 @@
                 "heading": "Smart Collapse",
                 "description": "Automatically collapse long breadcrumb trails using the maxItems prop. First and last items are always visible.",
                 "without": "Without collapse (6 items):",
-                "with": "With collapse (maxItems={4}):"
+                "with": "With collapse (maxItems=4):"
             },
             "patterns": {
                 "heading": "Common Patterns",

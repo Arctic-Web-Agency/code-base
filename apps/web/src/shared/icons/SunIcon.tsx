@@ -13,6 +13,7 @@ const SunIcon = ({ className = 'h-5 w-5', ...props }: IconProps) => {
             stroke="currentColor"
             xmlns="http://www.w3.org/2000/svg"
             aria-hidden="true"
+            suppressHydrationWarning
             {...props}
         >
             <circle cx="12" cy="12" r="5" strokeWidth="1.5" />
