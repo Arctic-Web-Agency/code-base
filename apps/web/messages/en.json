@@ -196,6 +196,51 @@
             "very_long_text": "This is an even longer tooltip text with more detailed information. It shows how tooltips handle extensive content while maintaining readability and proper wrapping across multiple lines.",
             "button_long": "Long Text",
             "button_very_long": "Very Long Text"
+        },
+        "breadcrumbs": {
+            "view_examples": "View Examples"
+        }
+    },
+    "breadcrumbs_page": {
+        "head": {
+            "title": "Universal Breadcrumbs Examples — Arctic Web",
+            "description": "Explore UiBreadcrumbs component examples with various sizes, separators, and use cases."
+        },
+        "back_button": "Back to components",
+        "breadcrumb": {
+            "home": "Home",
+            "universal_components": "Universal Components",
+            "current": "Universal Breadcrumbs"
+        },
+        "heading": "Universal Breadcrumbs",
+        "intro": "Navigation trail component with Next.js routing, smart collapse, and full accessibility support. Explore different configurations and common usage patterns.",
+        "sections": {
+            "sizes": {
+                "heading": "Size Variants",
+                "description": "Three sizes available: small (sm), medium (md), and large (lg). Choose based on your design hierarchy.",
+                "large": "Large (lg):",
+                "medium": "Medium (md):",
+                "small": "Small (sm):"
+            },
+            "separator": {
+                "heading": "Custom Separators",
+                "description": "Replace the default chevron with any ReactNode: text, icons, or custom components.",
+                "slash": "Slash separator:",
+                "dot": "Dot separator:"
+            },
+            "collapse": {
+                "heading": "Smart Collapse",
+                "description": "Automatically collapse long breadcrumb trails using the maxItems prop. First and last items are always visible.",
+                "without": "Without collapse (6 items):",
+                "with": "With collapse (maxItems={4}):"
+            },
+            "patterns": {
+                "heading": "Common Patterns",
+                "description": "Typical breadcrumb structures used across different types of websites and applications.",
+                "ecommerce": "E-commerce pattern:",
+                "documentation": "Documentation pattern:",
+                "dashboard": "Dashboard pattern:"
+            }
         }
     }
 }

@@ -1,28 +1,17 @@
-'use client';
-
-import UiBreadcrumbs from '@/shared/ui/UiBreadcrumbs';
+import UiButton from '@/shared/ui/UiButton/UiButton';
+import { useTranslations } from 'next-intl';
 
 export default function UiBreadcrumbsPreview() {
-    return (
-        <div className="space-y-6">
-            {/* Basic breadcrumbs */}
-            <UiBreadcrumbs
-                items={[
-                    { label: 'Home', href: '/' },
-                    { label: 'Products', href: '/products' },
-                    { label: 'Laptops' },
-                ]}
-            />
+    const t = useTranslations('previews.breadcrumbs');
 
-            {/* Small size */}
-            <UiBreadcrumbs
-                size="sm"
-                items={[
-                    { label: 'Home', href: '/' },
-                    { label: 'Documentation', href: '/docs' },
-                    { label: 'Components' },
-                ]}
-            />
-        </div>
+    return (
+        <UiButton
+            as="link"
+            href="/universal-components/breadcrumbs"
+            variant="filled"
+            size="md"
+        >
+            {t('view_examples')}
+        </UiButton>
     );
 }
