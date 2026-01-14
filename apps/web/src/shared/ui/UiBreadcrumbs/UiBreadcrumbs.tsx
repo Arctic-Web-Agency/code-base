@@ -9,9 +9,9 @@ import type { UiBreadcrumbsProps, UiBreadcrumbSize, UiBreadcrumbItem } from './t
  * Size styles for breadcrumb items
  */
 const sizeStyles: Record<UiBreadcrumbSize, string> = {
-    sm: 'text-xs gap-1',
-    md: 'text-sm gap-2',
-    lg: 'text-base gap-3',
+    sm: 'text-xs',
+    md: 'text-sm',
+    lg: 'text-base',
 };
 
 /**
@@ -30,6 +30,15 @@ const separatorSizeMap: Record<UiBreadcrumbSize, string> = {
     sm: 'w-3 h-3',
     md: 'w-4 h-4',
     lg: 'w-5 h-5',
+};
+
+/**
+ * Separator spacing (horizontal padding) to center it between items
+ */
+const separatorSpacingMap: Record<UiBreadcrumbSize, string> = {
+    sm: 'px-1',   // 4px on each side
+    md: 'px-2',   // 8px on each side
+    lg: 'px-3',   // 12px on each side
 };
 
 /**
@@ -116,7 +125,7 @@ const UiBreadcrumbs = ({
                     const iconSize = iconSizeMap[size];
 
                     return (
-                        <li key={`${item.label}-${index}`} className="flex items-center gap-inherit">
+                        <li key={`${item.label}-${index}`} className="flex items-center">
                             {/* Breadcrumb item */}
                             <div className="flex items-center gap-1.5">
                                 {/* Optional icon */}
@@ -158,7 +167,7 @@ const UiBreadcrumbs = ({
 
                             {/* Separator (not shown after last item) */}
                             {!isLast && (
-                                <span className={separatorClasses} aria-hidden="true">
+                                <span className={composeClasses(separatorClasses, separatorSpacingMap[size])} aria-hidden="true">
                                     {separatorElement}
                                 </span>
                             )}
