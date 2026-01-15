@@ -24,6 +24,13 @@ export interface UiBreadcrumbItem {
      * Optional icon to display before the label
      */
     icon?: ReactNode;
+
+    /**
+     * Whether the breadcrumb item is disabled
+     * Disabled items are not clickable and have reduced opacity
+     * @default false
+     */
+    disabled?: boolean;
 }
 
 /**
@@ -103,4 +110,26 @@ export interface UiBreadcrumbsProps {
      * @default 'Breadcrumb'
      */
     ariaLabel?: string;
+
+    /**
+     * Enable JSON-LD structured data for SEO (schema.org BreadcrumbList)
+     * Requires baseUrl to generate absolute URLs
+     * @default false
+     */
+    structuredData?: boolean;
+
+    /**
+     * Base URL for generating absolute URLs in structured data
+     * Required when structuredData is enabled
+     * @example 'https://example.com'
+     */
+    baseUrl?: string;
+
+    /**
+     * Maximum number of characters for breadcrumb labels
+     * Labels exceeding this length will be truncated with "..."
+     * Full label is preserved in title attribute for hover tooltip
+     * @default undefined (no truncation)
+     */
+    maxLabelLength?: number;
 }

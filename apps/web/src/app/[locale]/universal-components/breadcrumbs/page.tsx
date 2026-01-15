@@ -147,11 +147,11 @@ export default function BreadcrumbsPage() {
                             </p>
                             <UiBreadcrumbs
                                 items={[
-                                    { label: 'Home' },
-                                    { label: 'Products' },
-                                    { label: 'Electronics' },
-                                    { label: 'Computers' },
-                                    { label: 'Laptops' },
+                                    { label: 'Home', href: '/' },
+                                    { label: 'Products', href: '/products' },
+                                    { label: 'Electronics', href: '/products/electronics' },
+                                    { label: 'Computers', href: '/products/electronics/computers' },
+                                    { label: 'Laptops', href: '/products/electronics/computers/laptops' },
                                     { label: 'Gaming' },
                                 ]}
                             />
@@ -164,12 +164,50 @@ export default function BreadcrumbsPage() {
                             <UiBreadcrumbs
                                 maxItems={4}
                                 items={[
-                                    { label: 'Home' },
-                                    { label: 'Products' },
-                                    { label: 'Electronics' },
-                                    { label: 'Computers' },
-                                    { label: 'Laptops' },
+                                    { label: 'Home', href: '/' },
+                                    { label: 'Products', href: '/products' },
+                                    { label: 'Electronics', href: '/products/electronics' },
+                                    { label: 'Computers', href: '/products/electronics/computers' },
+                                    { label: 'Laptops', href: '/products/electronics/computers/laptops' },
                                     { label: 'Gaming' },
+                                ]}
+                            />
+                        </div>
+                    </div>
+                </section>
+
+                {/* Label truncation */}
+                <section className="space-y-4">
+                    <h2 className="text-text-primary text-2xl font-semibold">
+                        {t('sections.truncation.heading')}
+                    </h2>
+                    <p className="text-text-secondary">
+                        {t('sections.truncation.description')}
+                    </p>
+                    <div className="border-border/40 bg-surface/40 space-y-6 rounded-xl border p-6">
+                        <div className="space-y-2">
+                            <p className="text-text-secondary text-sm">
+                                {t('sections.truncation.without')}
+                            </p>
+                            <UiBreadcrumbs
+                                items={[
+                                    { label: 'Home', href: '/' },
+                                    { label: 'Very Long Category Name', href: '/category' },
+                                    { label: 'Another Extremely Long Product Title Here' },
+                                ]}
+                            />
+                        </div>
+
+                        <div className="space-y-2">
+                            <p className="text-text-secondary text-sm">
+                                {t('sections.truncation.with')}
+                            </p>
+                            <UiBreadcrumbs
+                                maxLabelLength={20}
+                                items={[
+                                    { label: 'Home', href: '/' },
+                                    { label: 'Very Long Category Name', href: '/category' },
+                                    { label: 'Another Extremely Long Product Title Here' },
                                 ]}
                             />
                         </div>

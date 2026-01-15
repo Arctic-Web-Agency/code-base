@@ -232,9 +232,15 @@
             },
             "collapse": {
                 "heading": "Smart Collapse",
-                "description": "Automatically collapse long breadcrumb trails using the maxItems prop. First and last items are always visible.",
+                "description": "Automatically collapse long breadcrumb trails using the maxItems prop. First and last items are always visible. Click on \"...\" to see hidden items.",
                 "without": "Without collapse (6 items):",
-                "with": "With collapse (maxItems=4):"
+                "with": "With collapse (maxItems=4) — click \"...\" to expand:"
+            },
+            "truncation": {
+                "heading": "Label Truncation",
+                "description": "Use the maxLabelLength prop to truncate long labels. Full text is available on hover.",
+                "without": "Without truncation:",
+                "with": "With truncation (maxLabelLength=20):"
             },
             "patterns": {
                 "heading": "Common Patterns",

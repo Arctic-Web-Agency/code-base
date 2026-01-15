@@ -49,6 +49,50 @@ const separatorSpacingMap: Record<UiBreadcrumbSize, string> = {
 };
 
 /**
+ * Truncate label if it exceeds maxLength
+ * Returns object with truncated label and whether it was truncated
+ */
+const truncateLabel = (label: string, maxLength?: number): { text: string; isTruncated: boolean } => {
+    if (!maxLength || label.length <= maxLength) {
+        return { text: label, isTruncated: false };
+    }
+    return { text: `${label.slice(0, maxLength)}...`, isTruncated: true };
+};
+
+/**
+ * Generate JSON-LD structured data for SEO (schema.org BreadcrumbList)
+ */
+const generateStructuredData = (items: UiBreadcrumbItem[], baseUrl: string) => {
+    const itemListElement = items
+        .filter((item) => item.href) // Only include items with URLs
+        .map((item, index) => ({
+            '@type': 'ListItem',
+            position: index + 1,
+            name: item.label,
+            item: item.href?.startsWith('http')
+                ? item.href
+                : `${baseUrl.replace(/\/$/, '')}${item.href}`,
+        }));
+
+    // Add current page (last item without href) if exists
+    const lastItem = items[items.length - 1];
+    if (!lastItem.href) {
+        itemListElement.push({
+            '@type': 'ListItem',
+            position: itemListElement.length + 1,
+            name: lastItem.label,
+            item: typeof window !== 'undefined' ? window.location.href : baseUrl,
+        });
+    }
+
+    return {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement,
+    };
+};
+
+/**
  * Collapse breadcrumb items when maxItems is exceeded
  * Shows first item, collapse trigger with hidden items, and last N items
  */
@@ -107,6 +151,9 @@ const UiBreadcrumbs = ({
     collapseMenuClassName,
     collapseMenuItemClassName,
     ariaLabel = 'Breadcrumb',
+    structuredData = false,
+    baseUrl,
+    maxLabelLength,
 }: UiBreadcrumbsProps) => {
     // Collapse items if maxItems is specified
     const displayItems = maxItems ? collapseItems(items, maxItems) : items;
@@ -141,6 +188,8 @@ const UiBreadcrumbs = ({
         'shrink-0'
     );
 
+    const disabledClasses = 'opacity-50 cursor-not-allowed';
+
     // Use custom classes if provided, otherwise use defaults
     const linkClasses = linkClassName ?? defaultLinkClasses;
     const currentClasses = currentClassName ?? defaultCurrentClasses;
@@ -148,15 +197,33 @@ const UiBreadcrumbs = ({
         ? composeClasses('shrink-0', separatorClassName)
         : defaultSeparatorClasses;
 
+    // Generate structured data JSON-LD
+    const jsonLd = structuredData && baseUrl
+        ? generateStructuredData(items, baseUrl)
+        : null;
+
     return (
-        <nav aria-label={ariaLabel}>
-            <ol className={containerClasses}>
+        <>
+            {/* JSON-LD Structured Data for SEO */}
+            {jsonLd && (
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+                />
+            )}
+
+            <nav aria-label={ariaLabel}>
+                <ol className={containerClasses}>
                 {displayItems.map((item, index) => {
                     const collapsedItem = item as CollapsedBreadcrumbItem;
                     const isLast = index === displayItems.length - 1;
                     const isCurrent = isLast && !item.href;
                     const isCollapseTrigger = collapsedItem.isCollapseTrigger;
                     const iconSize = iconSizeMap[size];
+
+                    // Truncate label if maxLabelLength is specified
+                    const { text: displayLabel, isTruncated } = truncateLabel(item.label, maxLabelLength);
+                    const titleAttr = isTruncated ? item.label : undefined;
 
                     return (
                         <li key={`${item.label}-${index}`} className={composeClasses('flex items-center', itemClassName)}>
@@ -185,20 +252,31 @@ const UiBreadcrumbs = ({
                                 ) : /* Current page (non-link) */
                                 isCurrent ? (
                                     <span
-                                        className={currentClasses}
+                                        className={composeClasses(currentClasses, item.disabled && disabledClasses)}
                                         aria-current="page"
+                                        aria-disabled={item.disabled}
+                                        title={titleAttr}
                                     >
-                                        {item.label}
+                                        {displayLabel}
+                                    </span>
+                                ) : /* Disabled link - render as span */
+                                item.disabled ? (
+                                    <span
+                                        className={composeClasses(linkClasses, disabledClasses)}
+                                        aria-disabled="true"
+                                        title={titleAttr}
+                                    >
+                                        {displayLabel}
                                     </span>
                                 ) : /* Link to other pages */
                                 item.href ? (
-                                    <Link href={item.href} className={linkClasses}>
-                                        {item.label}
+                                    <Link href={item.href} className={linkClasses} title={titleAttr}>
+                                        {displayLabel}
                                     </Link>
                                 ) : (
                                     /* Fallback for items without href but not last */
-                                    <span className={currentClasses}>
-                                        {item.label}
+                                    <span className={currentClasses} title={titleAttr}>
+                                        {displayLabel}
                                     </span>
                                 )}
                             </div>
@@ -212,8 +290,9 @@ const UiBreadcrumbs = ({
                         </li>
                     );
                 })}
-            </ol>
-        </nav>
+                </ol>
+            </nav>
+        </>
     );
 };
 
