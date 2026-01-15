@@ -21,6 +21,7 @@ const CloseIcon = ({ className = 'h-5 w-5', ...props }: IconProps) => {
                 strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
+                suppressHydrationWarning
             />
         </svg>
     );

@@ -21,6 +21,7 @@ const CheckCircleIcon = ({ className = 'h-5 w-5', ...props }: IconProps) => {
                 r="8"
                 stroke="currentColor"
                 strokeWidth="2"
+                suppressHydrationWarning
             />
             <path
                 d="M6 10L8.5 12.5L14 7"
@@ -28,6 +29,7 @@ const CheckCircleIcon = ({ className = 'h-5 w-5', ...props }: IconProps) => {
                 strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
+                suppressHydrationWarning
             />
         </svg>
     );

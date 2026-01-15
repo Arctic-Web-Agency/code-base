@@ -24,6 +24,7 @@ const LoaderIcon = ({ className = 'h-5 w-5', ...props }: IconProps) => {
                 strokeLinecap="round"
                 strokeDasharray="35 12"
                 className="animate-spin origin-center"
+                suppressHydrationWarning
             />
         </svg>
     );

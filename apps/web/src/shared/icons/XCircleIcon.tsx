@@ -21,6 +21,7 @@ const XCircleIcon = ({ className = 'h-5 w-5', ...props }: IconProps) => {
                 r="8"
                 stroke="currentColor"
                 strokeWidth="2"
+                suppressHydrationWarning
             />
             <path
                 d="M7.5 7.5L12.5 12.5M12.5 7.5L7.5 12.5"
@@ -28,6 +29,7 @@ const XCircleIcon = ({ className = 'h-5 w-5', ...props }: IconProps) => {
                 strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
+                suppressHydrationWarning
             />
         </svg>
     );

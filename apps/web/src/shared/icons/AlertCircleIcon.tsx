@@ -21,18 +21,21 @@ const AlertCircleIcon = ({ className = 'h-5 w-5', ...props }: IconProps) => {
                 r="8"
                 stroke="currentColor"
                 strokeWidth="2"
+                suppressHydrationWarning
             />
             <path
                 d="M10 6V10"
                 stroke="currentColor"
                 strokeWidth="2"
                 strokeLinecap="round"
+                suppressHydrationWarning
             />
             <circle
                 cx="10"
                 cy="13.5"
                 r="0.75"
                 fill="currentColor"
+                suppressHydrationWarning
             />
         </svg>
     );
