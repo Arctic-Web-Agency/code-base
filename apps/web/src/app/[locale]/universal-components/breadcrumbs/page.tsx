@@ -1,7 +1,6 @@
 import { Metadata } from 'next';
 import { useTranslations } from 'next-intl';
 import UiBreadcrumbs from '@/shared/ui/UiBreadcrumbs';
-import { GoBack } from '@/features/go-back';
 import { fetchMetadata } from '@/shared/seo/metadata';
 import { MetaProps } from '@/shared/types/settings';
 
@@ -18,9 +17,6 @@ export default function BreadcrumbsPage() {
 
     return (
         <main className="container flex min-h-screen flex-col gap-10 py-12">
-            <GoBack className="w-fit" label={t('back_button')} />
-
-            {/* Real breadcrumbs - 3 levels */}
             <UiBreadcrumbs
                 items={[
                     { label: t('breadcrumb.home'), href: '/' },
