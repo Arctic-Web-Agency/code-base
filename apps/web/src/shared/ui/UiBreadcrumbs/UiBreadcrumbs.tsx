@@ -241,7 +241,7 @@ const UiBreadcrumbs = ({
                                 )}
 
                                 {/* Collapse trigger with dropdown */}
-                                {isCollapseTrigger && collapsedItem.hiddenItems ? (
+                                {isCollapseTrigger && collapsedItem.hiddenItems && (
                                     <CollapsedDropdown
                                         hiddenItems={collapsedItem.hiddenItems}
                                         triggerClassName={collapseTriggerClassName}
@@ -249,8 +249,10 @@ const UiBreadcrumbs = ({
                                         menuItemClassName={collapseMenuItemClassName}
                                         iconSize={iconSize}
                                     />
-                                ) : /* Current page (non-link) */
-                                isCurrent ? (
+                                )}
+
+                                {/* Current page (last item) */}
+                                {!isCollapseTrigger && isCurrent && (
                                     <span
                                         className={composeClasses(currentClasses, item.disabled && disabledClasses)}
                                         aria-current="page"
@@ -259,8 +261,10 @@ const UiBreadcrumbs = ({
                                     >
                                         {displayLabel}
                                     </span>
-                                ) : /* Disabled link - render as span */
-                                item.disabled ? (
+                                )}
+
+                                {/* Disabled link - render as non-clickable span */}
+                                {!isCollapseTrigger && !isCurrent && item.disabled && (
                                     <span
                                         className={composeClasses(linkClasses, disabledClasses)}
                                         aria-disabled="true"
@@ -268,13 +272,17 @@ const UiBreadcrumbs = ({
                                     >
                                         {displayLabel}
                                     </span>
-                                ) : /* Link to other pages */
-                                item.href ? (
+                                )}
+
+                                {/* Active link */}
+                                {!isCollapseTrigger && !isCurrent && !item.disabled && item.href && (
                                     <Link href={item.href} className={linkClasses} title={titleAttr}>
                                         {displayLabel}
                                     </Link>
-                                ) : (
-                                    /* Fallback for items without href but not last */
+                                )}
+
+                                {/* Text without link (fallback) */}
+                                {!isCollapseTrigger && !isCurrent && !item.disabled && !item.href && (
                                     <span className={currentClasses} title={titleAttr}>
                                         {displayLabel}
                                     </span>
