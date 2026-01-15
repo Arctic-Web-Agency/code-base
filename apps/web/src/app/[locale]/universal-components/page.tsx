@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import { useTranslations } from 'next-intl';
 import UiButton from '@/shared/ui/UiButton/UiButton';
-import { GoBack } from '@/features/go-back';
+import UiBreadcrumbs from '@/shared/ui/UiBreadcrumbs/UiBreadcrumbs';
 import { fetchMetadata } from '@/shared/seo/metadata';
 import { MetaProps } from '@/shared/types/settings';
 import { getComponents } from './lib/components';
@@ -14,9 +14,14 @@ export default function UniversalComponentsPage() {
     const t = useTranslations('universal_components_page');
     const components = getComponents(t);
 
+    const breadcrumbItems = [
+        { label: t('breadcrumb.home'), href: '/' },
+        { label: t('heading') },
+    ];
+
     return (
         <main className="container flex min-h-screen flex-col gap-10 py-12">
-            <GoBack className="w-fit" label={t('back_button')} />
+            <UiBreadcrumbs items={breadcrumbItems} />
 
             <header className="max-w-3xl space-y-4">
                 <p className="text-text-secondary text-sm tracking-[0.25em] uppercase">

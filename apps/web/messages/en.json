@@ -9,7 +9,9 @@
         },
         "heading": "Universal components",
         "intro": "List of shared components with previews and links to source files.",
-        "back_button": "Back to home",
+        "breadcrumb": {
+            "home": "Home"
+        },
         "components": {
             "button": {
                 "name": "Universal button",
