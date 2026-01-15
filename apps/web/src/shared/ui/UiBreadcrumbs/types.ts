@@ -63,6 +63,14 @@ export interface UiBreadcrumbsProps {
     maxItems?: number;
 
     /**
+     * Maximum number of items on mobile devices (< 640px)
+     * Enables automatic responsive collapse without explicit maxItems
+     * @default undefined (no responsive collapse)
+     * @example responsiveMaxItems={3} - collapse to 3 items on mobile
+     */
+    responsiveMaxItems?: number;
+
+    /**
      * Additional CSS classes for the breadcrumb container
      */
     className?: string;

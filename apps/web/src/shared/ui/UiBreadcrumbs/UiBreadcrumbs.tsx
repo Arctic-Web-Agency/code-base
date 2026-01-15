@@ -1,5 +1,7 @@
+'use client';
+
 import Link from 'next/link';
-import { composeClasses } from '@/shared/lib';
+import { composeClasses, useIsMobile } from '@/shared/lib';
 import { ChevronDownIcon } from '@/shared/icons';
 import CollapsedDropdown from './CollapsedDropdown';
 import type { UiBreadcrumbsProps, UiBreadcrumbSize, UiBreadcrumbItem } from './types';
@@ -142,6 +144,7 @@ const UiBreadcrumbs = ({
     size = 'md',
     separator,
     maxItems,
+    responsiveMaxItems,
     className,
     itemClassName,
     linkClassName,
@@ -155,8 +158,18 @@ const UiBreadcrumbs = ({
     baseUrl,
     maxLabelLength,
 }: UiBreadcrumbsProps) => {
-    // Collapse items if maxItems is specified
-    const displayItems = maxItems ? collapseItems(items, maxItems) : items;
+    // Detect mobile device for responsive collapse
+    const isMobile = useIsMobile();
+
+    // Determine effective maxItems based on screen size
+    const effectiveMaxItems = isMobile && responsiveMaxItems
+        ? responsiveMaxItems
+        : maxItems;
+
+    // Collapse items if effectiveMaxItems is specified
+    const displayItems = effectiveMaxItems
+        ? collapseItems(items, effectiveMaxItems)
+        : items;
 
     // Use custom separator or default ChevronDownIcon rotated right (-90deg)
     const defaultSeparator = (

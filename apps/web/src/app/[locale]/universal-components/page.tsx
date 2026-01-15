@@ -21,7 +21,7 @@ export default function UniversalComponentsPage() {
 
     return (
         <main className="container flex min-h-screen flex-col gap-10 py-12">
-            <UiBreadcrumbs items={breadcrumbItems} />
+            <UiBreadcrumbs items={breadcrumbItems} responsiveMaxItems={2} />
 
             <header className="max-w-3xl space-y-4">
                 <p className="text-text-secondary text-sm tracking-[0.25em] uppercase">

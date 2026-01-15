@@ -242,6 +242,11 @@
                 "without": "Without truncation:",
                 "with": "With truncation (maxLabelLength=20):"
             },
+            "responsive": {
+                "heading": "Responsive Collapse",
+                "description": "Automatically collapse breadcrumbs on mobile devices using the responsiveMaxItems prop. Resize your browser window to see the effect.",
+                "example": "Example (responsiveMaxItems=3) — resize window:"
+            },
             "patterns": {
                 "heading": "Common Patterns",
                 "description": "Typical breadcrumb structures used across different types of websites and applications.",

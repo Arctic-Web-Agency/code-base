@@ -26,6 +26,7 @@ export default function BreadcrumbsPage() {
                     },
                     { label: t('breadcrumb.current') },
                 ]}
+                responsiveMaxItems={2}
             />
 
             <header className="max-w-3xl space-y-4">
@@ -208,6 +209,33 @@ export default function BreadcrumbsPage() {
                                     { label: 'Home', href: '/' },
                                     { label: 'Very Long Category Name', href: '/category' },
                                     { label: 'Another Extremely Long Product Title Here' },
+                                ]}
+                            />
+                        </div>
+                    </div>
+                </section>
+
+                {/* Responsive collapse */}
+                <section className="space-y-4">
+                    <h2 className="text-text-primary text-2xl font-semibold">
+                        {t('sections.responsive.heading')}
+                    </h2>
+                    <p className="text-text-secondary">
+                        {t('sections.responsive.description')}
+                    </p>
+                    <div className="border-border/40 bg-surface/40 space-y-6 rounded-xl border p-6">
+                        <div className="space-y-2">
+                            <p className="text-text-secondary text-sm">
+                                {t('sections.responsive.example')}
+                            </p>
+                            <UiBreadcrumbs
+                                responsiveMaxItems={3}
+                                items={[
+                                    { label: 'Home', href: '/' },
+                                    { label: 'Products', href: '/products' },
+                                    { label: 'Electronics', href: '/products/electronics' },
+                                    { label: 'Computers', href: '/products/electronics/computers' },
+                                    { label: 'Laptops' },
                                 ]}
                             />
                         </div>
