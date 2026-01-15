@@ -61,6 +61,44 @@ export interface UiBreadcrumbsProps {
     className?: string;
 
     /**
+     * Additional CSS classes for each breadcrumb item wrapper (li element)
+     */
+    itemClassName?: string;
+
+    /**
+     * Additional CSS classes for breadcrumb links
+     * Overrides default link styles when provided
+     */
+    linkClassName?: string;
+
+    /**
+     * Additional CSS classes for the current (last) breadcrumb item
+     * Overrides default current item styles when provided
+     */
+    currentClassName?: string;
+
+    /**
+     * Additional CSS classes for the separator between items
+     * Overrides default separator styles when provided
+     */
+    separatorClassName?: string;
+
+    /**
+     * Additional CSS classes for the collapse trigger button ("...")
+     */
+    collapseTriggerClassName?: string;
+
+    /**
+     * Additional CSS classes for the collapse dropdown menu
+     */
+    collapseMenuClassName?: string;
+
+    /**
+     * Additional CSS classes for items inside the collapse dropdown
+     */
+    collapseMenuItemClassName?: string;
+
+    /**
      * Accessible label for the breadcrumb navigation
      * @default 'Breadcrumb'
      */

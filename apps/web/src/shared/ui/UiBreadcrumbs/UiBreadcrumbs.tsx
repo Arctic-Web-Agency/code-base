@@ -1,7 +1,16 @@
 import Link from 'next/link';
 import { composeClasses } from '@/shared/lib';
 import { ChevronDownIcon } from '@/shared/icons';
+import CollapsedDropdown from './CollapsedDropdown';
 import type { UiBreadcrumbsProps, UiBreadcrumbSize, UiBreadcrumbItem } from './types';
+
+/**
+ * Internal type for collapsed items with hidden items reference
+ */
+interface CollapsedBreadcrumbItem extends UiBreadcrumbItem {
+    isCollapseTrigger?: boolean;
+    hiddenItems?: UiBreadcrumbItem[];
+}
 
 /**
  * Size styles for breadcrumb items
@@ -41,9 +50,12 @@ const separatorSpacingMap: Record<UiBreadcrumbSize, string> = {
 
 /**
  * Collapse breadcrumb items when maxItems is exceeded
- * Shows first item, "...", and last N items
+ * Shows first item, collapse trigger with hidden items, and last N items
  */
-const collapseItems = (items: UiBreadcrumbItem[], maxItems: number): UiBreadcrumbItem[] => {
+const collapseItems = (
+    items: UiBreadcrumbItem[],
+    maxItems: number
+): CollapsedBreadcrumbItem[] => {
     if (items.length <= maxItems) {
         return items;
     }
@@ -52,9 +64,17 @@ const collapseItems = (items: UiBreadcrumbItem[], maxItems: number): UiBreadcrum
     const firstItem = items[0];
     const lastItems = items.slice(-(maxItems - 2));
 
+    // Hidden items are everything between first and last items
+    const hiddenItems = items.slice(1, items.length - (maxItems - 2));
+
     return [
         firstItem,
-        { label: '...', href: undefined },
+        {
+            label: '...',
+            href: undefined,
+            isCollapseTrigger: true,
+            hiddenItems,
+        },
         ...lastItems,
     ];
 };
@@ -79,6 +99,13 @@ const UiBreadcrumbs = ({
     separator,
     maxItems,
     className,
+    itemClassName,
+    linkClassName,
+    currentClassName,
+    separatorClassName,
+    collapseTriggerClassName,
+    collapseMenuClassName,
+    collapseMenuItemClassName,
     ariaLabel = 'Breadcrumb',
 }: UiBreadcrumbsProps) => {
     // Collapse items if maxItems is specified
@@ -96,40 +123,49 @@ const UiBreadcrumbs = ({
         className
     );
 
-    const linkClasses = composeClasses(
+    // Default styles - used when custom className is not provided
+    const defaultLinkClasses = composeClasses(
         'text-neutral-600 dark:text-neutral-400',
         'hover:text-neutral-900 dark:hover:text-neutral-100',
         'transition-colors',
         'focus:outline-none focus:underline'
     );
 
-    const currentClasses = composeClasses(
+    const defaultCurrentClasses = composeClasses(
         'text-neutral-900 dark:text-neutral-100',
         'font-medium'
     );
 
-    const separatorClasses = composeClasses(
+    const defaultSeparatorClasses = composeClasses(
         'text-neutral-400 dark:text-neutral-600',
-        'flex-shrink-0'
+        'shrink-0'
     );
+
+    // Use custom classes if provided, otherwise use defaults
+    const linkClasses = linkClassName ?? defaultLinkClasses;
+    const currentClasses = currentClassName ?? defaultCurrentClasses;
+    const separatorClasses = separatorClassName
+        ? composeClasses('shrink-0', separatorClassName)
+        : defaultSeparatorClasses;
 
     return (
         <nav aria-label={ariaLabel}>
             <ol className={containerClasses}>
                 {displayItems.map((item, index) => {
+                    const collapsedItem = item as CollapsedBreadcrumbItem;
                     const isLast = index === displayItems.length - 1;
                     const isCurrent = isLast && !item.href;
-                    const isCollapsed = item.label === '...';
+                    const isCollapseTrigger = collapsedItem.isCollapseTrigger;
                     const iconSize = iconSizeMap[size];
 
                     return (
-                        <li key={`${item.label}-${index}`} className="flex items-center">
+                        <li key={`${item.label}-${index}`} className={composeClasses('flex items-center', itemClassName)}>
                             {/* Breadcrumb item */}
                             <div className="flex items-center gap-1.5">
                                 {/* Optional icon */}
                                 {item.icon && (
                                     <span
-                                        className="flex-shrink-0"
+                                        className="shrink-0"
                                         style={{ width: iconSize, height: iconSize }}
                                         aria-hidden="true"
                                     >
@@ -137,11 +173,15 @@ const UiBreadcrumbs = ({
                                     </span>
                                 )}
 
-                                {/* Collapsed indicator (non-interactive) */}
-                                {isCollapsed ? (
-                                    <span className={currentClasses} aria-hidden="true">
-                                        {item.label}
-                                    </span>
+                                {/* Collapse trigger with dropdown */}
+                                {isCollapseTrigger && collapsedItem.hiddenItems ? (
+                                    <CollapsedDropdown
+                                        hiddenItems={collapsedItem.hiddenItems}
+                                        triggerClassName={collapseTriggerClassName}
+                                        menuClassName={collapseMenuClassName}
+                                        menuItemClassName={collapseMenuItemClassName}
+                                        iconSize={iconSize}
+                                    />
                                 ) : /* Current page (non-link) */
                                 isCurrent ? (
                                     <span
