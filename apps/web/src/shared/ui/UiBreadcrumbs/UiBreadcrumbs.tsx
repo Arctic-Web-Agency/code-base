@@ -96,10 +96,7 @@ const generateStructuredData = (items: UiBreadcrumbItem[], baseUrl: string) => {
 
 /**
  * Collapse breadcrumb items when maxItems is exceeded
- * Shows first item, collapse trigger with hidden items, and last N items
- *
- * For maxItems=2: shows first + last (no collapse trigger)
- * For maxItems>=3: shows first + "..." + last (maxItems-2) items
+ * Shows first item, collapse trigger with hidden items, and last item
  */
 const collapseItems = (
     items: UiBreadcrumbItem[],
@@ -109,21 +106,17 @@ const collapseItems = (
         return items;
     }
 
-    // Special case: maxItems=2 means just show first and last
-    if (maxItems === 2) {
-        return [items[0], items[items.length - 1]];
-    }
-
-    // For maxItems >= 3: show first + collapse trigger + last (maxItems-2) items
-    const firstItem = items[0];
-    const lastItemsCount = maxItems - 2; // Reserve 1 for first, 1 for "..."
+    // Always show: first + "..." + last (maxItems-2) items
+    // Minimum maxItems is effectively 3 (first + "..." + last)
+    const effectiveMaxItems = Math.max(maxItems, 3);
+    const lastItemsCount = effectiveMaxItems - 2;
     const lastItems = items.slice(-lastItemsCount);
 
     // Hidden items are everything between first and last items
     const hiddenItems = items.slice(1, items.length - lastItemsCount);
 
     return [
-        firstItem,
+        items[0],
         {
             label: '...',
             href: undefined,
