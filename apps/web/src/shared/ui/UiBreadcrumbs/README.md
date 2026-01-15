@@ -4,16 +4,20 @@ Universal breadcrumb navigation component with Next.js integration, accessibilit
 
 ## Features
 
-- 🎯 **Semantic HTML**: Uses `<nav>` and `<ol>` for proper structure
-- 🔗 **Next.js integration**: Client-side navigation with Next.js Link
-- 📐 **Three sizes**: Small, medium, large with consistent spacing
-- 🎨 **Custom separators**: Replace default chevron with any ReactNode
-- 🔢 **Smart collapse**: Automatically collapse long breadcrumb trails
-- 🎭 **Icon support**: Optional icons for each breadcrumb item
-- ♿ **Accessible**: Full ARIA support and semantic markup
-- 🔒 **Type-safe**: Strict TypeScript with proper prop typing
-- 🌗 **Theme-agnostic**: Neutral colors that work in light/dark themes
-- ⚡ **Lightweight**: No external dependencies beyond Next.js
+- **Semantic HTML**: Uses `<nav>` and `<ol>` for proper structure
+- **Next.js integration**: Client-side navigation with Next.js Link
+- **Three sizes**: Small, medium, large with consistent spacing
+- **Custom separators**: Replace default chevron with any ReactNode
+- **Smart collapse**: Interactive dropdown for collapsed items
+- **Responsive collapse**: Automatic collapse on mobile devices
+- **Label truncation**: Truncate long labels with hover tooltip
+- **Icon support**: Optional icons for each breadcrumb item
+- **Disabled state**: Support for non-clickable items
+- **SEO structured data**: JSON-LD schema.org BreadcrumbList
+- **Style customization**: Override any element styles via className props
+- **Accessible**: Full ARIA support and semantic markup
+- **Type-safe**: Strict TypeScript with proper prop typing
+- **Theme-agnostic**: Neutral colors that work in light/dark themes
 
 ## Installation
 
@@ -39,6 +43,7 @@ import type { UiBreadcrumbsProps, UiBreadcrumbItem } from '@/shared/ui/UiBreadcr
 ### Different Sizes
 
 ```tsx
+// Small
 <UiBreadcrumbs
     size="sm"
     items={[
@@ -47,6 +52,7 @@ import type { UiBreadcrumbsProps, UiBreadcrumbItem } from '@/shared/ui/UiBreadcr
     ]}
 />
 
+// Medium (default)
 <UiBreadcrumbs
     size="md"
     items={[
@@ -55,6 +61,7 @@ import type { UiBreadcrumbsProps, UiBreadcrumbItem } from '@/shared/ui/UiBreadcr
     ]}
 />
 
+// Large
 <UiBreadcrumbs
     size="lg"
     items={[
@@ -62,6 +69,98 @@ import type { UiBreadcrumbsProps, UiBreadcrumbItem } from '@/shared/ui/UiBreadcr
         { label: 'About' },
     ]}
 />
+```
+
+### Custom Separator
+
+```tsx
+// Slash separator
+<UiBreadcrumbs
+    items={[
+        { label: 'Home', href: '/' },
+        { label: 'Products', href: '/products' },
+        { label: 'Laptops' },
+    ]}
+    separator={<span className="text-neutral-400">/</span>}
+/>
+
+// Dot separator
+<UiBreadcrumbs
+    items={[
+        { label: 'Home', href: '/' },
+        { label: 'About' },
+    ]}
+    separator={<span className="text-neutral-400">•</span>}
+/>
+```
+
+### Smart Collapse with Interactive Dropdown
+
+When breadcrumb trail is too long, use `maxItems` to collapse middle items. Collapsed items are shown in an interactive dropdown:
+
+```tsx
+<UiBreadcrumbs
+    maxItems={4}
+    items={[
+        { label: 'Home', href: '/' },
+        { label: 'Products', href: '/products' },
+        { label: 'Electronics', href: '/products/electronics' },
+        { label: 'Computers', href: '/products/electronics/computers' },
+        { label: 'Laptops', href: '/products/electronics/computers/laptops' },
+        { label: 'Gaming Laptops' },
+    ]}
+/>
+// Displays: Home > ... > Computers > Laptops > Gaming Laptops
+// Click "..." to see hidden items in dropdown
+```
+
+### Responsive Collapse
+
+Automatically collapse breadcrumbs on mobile devices (< 640px):
+
+```tsx
+<UiBreadcrumbs
+    responsiveMaxItems={3}
+    items={[
+        { label: 'Home', href: '/' },
+        { label: 'Products', href: '/products' },
+        { label: 'Electronics', href: '/products/electronics' },
+        { label: 'Computers', href: '/products/electronics/computers' },
+        { label: 'Laptops' },
+    ]}
+/>
+// Desktop: shows all items
+// Mobile: Home > ... > Laptops
+```
+
+### Label Truncation
+
+Truncate long labels while preserving full text in hover tooltip:
+
+```tsx
+<UiBreadcrumbs
+    maxLabelLength={20}
+    items={[
+        { label: 'Home', href: '/' },
+        { label: 'Very Long Category Name', href: '/category' },
+        { label: 'Another Extremely Long Product Title Here' },
+    ]}
+/>
+// Labels longer than 20 characters are truncated with "..."
+// Hover to see full label in tooltip
+```
+
+### Disabled Items
+
+```tsx
+<UiBreadcrumbs
+    items={[
+        { label: 'Home', href: '/' },
+        { label: 'Products', href: '/products', disabled: true },
+        { label: 'Laptops' },
+    ]}
+/>
+// "Products" link is not clickable and has reduced opacity
 ```
 
 ### With Icons
@@ -89,91 +188,51 @@ import { HomeIcon, FolderIcon, DocumentIcon } from '@/shared/icons';
 />
 ```
 
-### Custom Separator
+### SEO Structured Data
+
+Enable JSON-LD schema.org BreadcrumbList for better SEO:
 
 ```tsx
-import { SlashIcon } from '@/shared/icons';
+<UiBreadcrumbs
+    structuredData
+    baseUrl="https://example.com"
+    items={[
+        { label: 'Home', href: '/' },
+        { label: 'Products', href: '/products' },
+        { label: 'Laptops' },
+    ]}
+/>
+// Generates JSON-LD script tag with BreadcrumbList schema
+```
 
-// Using slash separator
+### Style Customization
+
+Override default styles for any element:
+
+```tsx
 <UiBreadcrumbs
     items={[
         { label: 'Home', href: '/' },
         { label: 'Products', href: '/products' },
         { label: 'Laptops' },
     ]}
-    separator={<span className="text-neutral-400">/</span>}
-/>
-
-// Using custom icon
-<UiBreadcrumbs
-    items={[
-        { label: 'Home', href: '/' },
-        { label: 'About' },
-    ]}
-    separator={<SlashIcon />}
-/>
-```
-
-### Collapsed Long Breadcrumbs
-
-When breadcrumb trail is too long, use `maxItems` to collapse middle items:
-
-```tsx
-<UiBreadcrumbs
-    maxItems={4}
-    items={[
-        { label: 'Home', href: '/' },
-        { label: 'Products', href: '/products' },
-        { label: 'Electronics', href: '/products/electronics' },
-        { label: 'Computers', href: '/products/electronics/computers' },
-        { label: 'Laptops', href: '/products/electronics/computers/laptops' },
-        { label: 'Gaming Laptops' },
-    ]}
-/>
-// Displays: Home > ... > Computers > Laptops > Gaming Laptops
-```
-
-### Dynamic Breadcrumbs
-
-```tsx
-'use client';
-
-import { usePathname } from 'next/navigation';
-import UiBreadcrumbs from '@/shared/ui/UiBreadcrumbs';
-
-const DynamicBreadcrumbs = () => {
-    const pathname = usePathname();
-
-    // Generate breadcrumb items from pathname
-    const items = pathname
-        .split('/')
-        .filter(Boolean)
-        .map((segment, index, array) => ({
-            label: segment.charAt(0).toUpperCase() + segment.slice(1),
-            href: index < array.length - 1
-                ? '/' + array.slice(0, index + 1).join('/')
-                : undefined,
-        }));
-
-    // Add home as first item
-    const breadcrumbs = [
-        { label: 'Home', href: '/' },
-        ...items,
-    ];
-
-    return <UiBreadcrumbs items={breadcrumbs} />;
-};
-```
-
-### Custom Styling
-
-```tsx
-<UiBreadcrumbs
-    items={[
-        { label: 'Home', href: '/' },
-        { label: 'About' },
-    ]}
     className="bg-neutral-100 dark:bg-neutral-800 p-3 rounded-lg"
+    itemClassName="py-1"
+    linkClassName="text-blue-600 hover:text-blue-800"
+    currentClassName="text-gray-900 font-bold"
+    separatorClassName="text-gray-300"
+/>
+```
+
+Customize collapse dropdown styles:
+
+```tsx
+<UiBreadcrumbs
+    maxItems={3}
+    items={longItems}
+    collapseTriggerClassName="bg-blue-100 hover:bg-blue-200"
+    collapseMenuClassName="bg-white shadow-xl rounded-lg"
+    collapseMenuItemClassName="px-4 py-2 hover:bg-gray-100"
 />
 ```
 
@@ -186,8 +245,19 @@ const DynamicBreadcrumbs = () => {
 | `items` | `UiBreadcrumbItem[]` | **required** | Array of breadcrumb items |
 | `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Size of text and spacing |
 | `separator` | `ReactNode` | `<ChevronDownIcon className="-rotate-90" />` | Custom separator element |
-| `maxItems` | `number` | - | Max items before collapsing middle items |
-| `className` | `string` | - | Additional CSS classes for container |
+| `maxItems` | `number` | - | Max items before collapsing (min effective: 3) |
+| `responsiveMaxItems` | `number` | - | Max items on mobile (< 640px) |
+| `maxLabelLength` | `number` | - | Max characters before label truncation |
+| `structuredData` | `boolean` | `false` | Enable JSON-LD structured data |
+| `baseUrl` | `string` | - | Base URL for structured data (required if structuredData=true) |
+| `className` | `string` | - | CSS classes for container |
+| `itemClassName` | `string` | - | CSS classes for each item wrapper |
+| `linkClassName` | `string` | - | CSS classes for links (overrides defaults) |
+| `currentClassName` | `string` | - | CSS classes for current page item (overrides defaults) |
+| `separatorClassName` | `string` | - | CSS classes for separator (overrides defaults) |
+| `collapseTriggerClassName` | `string` | - | CSS classes for collapse trigger button |
+| `collapseMenuClassName` | `string` | - | CSS classes for collapse dropdown menu |
+| `collapseMenuItemClassName` | `string` | - | CSS classes for dropdown menu items |
 | `ariaLabel` | `string` | `'Breadcrumb'` | Accessible label for navigation |
 
 ### Types
@@ -196,9 +266,14 @@ const DynamicBreadcrumbs = () => {
 
 ```tsx
 interface UiBreadcrumbItem {
-    label: string;        // Display text
-    href?: string;        // URL (omit for current page)
-    icon?: ReactNode;     // Optional icon
+    /** Display text */
+    label: string;
+    /** URL (omit for current page) */
+    href?: string;
+    /** Optional icon */
+    icon?: ReactNode;
+    /** Disabled state (non-clickable, reduced opacity) */
+    disabled?: boolean;
 }
 ```
 
@@ -216,103 +291,94 @@ interface UiBreadcrumbsProps {
     size?: UiBreadcrumbSize;
     separator?: ReactNode;
     maxItems?: number;
+    responsiveMaxItems?: number;
+    maxLabelLength?: number;
+    structuredData?: boolean;
+    baseUrl?: string;
     className?: string;
+    itemClassName?: string;
+    linkClassName?: string;
+    currentClassName?: string;
+    separatorClassName?: string;
+    collapseTriggerClassName?: string;
+    collapseMenuClassName?: string;
+    collapseMenuItemClassName?: string;
     ariaLabel?: string;
 }
 ```
 
 ## Size Variants
 
-Controls text size, spacing, and icon size:
+Controls text size, spacing, icon size, and separator size:
 
-**Text and spacing:**
-- `sm`: `text-xs gap-1`
-- `md`: `text-sm gap-2`
-- `lg`: `text-base gap-3`
+| Size | Text | Icon | Separator | Spacing |
+|------|------|------|-----------|---------|
+| `sm` | `text-xs` | 14px | `w-3 h-3` | `px-1` |
+| `md` | `text-sm` | 16px | `w-4 h-4` | `px-2` |
+| `lg` | `text-base` | 20px | `w-5 h-5` | `px-3` |
 
-**Icon sizes:**
-- `sm`: 14px
-- `md`: 16px
-- `lg`: 20px
+## Default Styling
 
-**Separator sizes:**
-- `sm`: `w-3 h-3`
-- `md`: `w-4 h-4`
-- `lg`: `w-5 h-5`
+The component uses theme-agnostic neutral colors (can be overridden via className props):
 
-## Styling Details
-
-The component uses theme-agnostic neutral colors:
-
-**Links (non-current pages):**
-- Color: `neutral-600` (light) / `neutral-400` (dark)
-- Hover: `neutral-900` (light) / `neutral-100` (dark)
-- Transition: smooth color change
+**Links:**
+- Color: `neutral-600` / `neutral-400` (dark)
+- Hover: `neutral-900` / `neutral-100` (dark)
+- Focus: underline
 
 **Current page:**
-- Color: `neutral-900` (light) / `neutral-100` (dark)
+- Color: `neutral-900` / `neutral-100` (dark)
 - Font weight: `medium`
-- No hover effect
 
 **Separator:**
-- Color: `neutral-400` (light) / `neutral-600` (dark)
-- Aria hidden for accessibility
+- Color: `neutral-400` / `neutral-600` (dark)
+
+**Disabled:**
+- Opacity: 50%
+- Cursor: not-allowed
 
 ## Collapse Behavior
 
-When `maxItems` is specified and the number of items exceeds it:
+When `maxItems` or `responsiveMaxItems` is specified and items exceed the limit:
 
 1. First item is always shown
-2. Middle items are replaced with "..."
+2. Hidden items are shown as "..." button with dropdown
 3. Last `maxItems - 2` items are shown
 
-Example with `maxItems={4}`:
+The "..." button opens an interactive dropdown with all hidden items.
+
 ```
-Input:  Home > A > B > C > D > E > Current
-Output: Home > ... > D > E > Current
+Input:  Home > A > B > C > D > E > Current (maxItems=4)
+Output: Home > [...] > D > E > Current
+                 ↓
+            Dropdown:
+              - A
+              - B
+              - C
 ```
 
 ## Accessibility
 
-- Uses semantic HTML: `<nav>` with `<ol>` list
+- Semantic HTML: `<nav>` with `<ol>` list
 - ARIA label on navigation (`aria-label="Breadcrumb"`)
 - Current page marked with `aria-current="page"`
+- Disabled items have `aria-disabled="true"`
+- Collapse trigger has `aria-expanded`, `aria-haspopup`
+- Dropdown menu has `role="menu"` with `role="menuitem"` for items
 - Icons and separators have `aria-hidden="true"`
-- Keyboard navigation works through standard link behavior
+- Keyboard navigation: Tab through links, Escape closes dropdown
 - Screen reader friendly with proper list structure
 
-## TypeScript
+## File Structure
 
-Import types for type-safe usage:
-
-```tsx
-import type {
-    UiBreadcrumbsProps,
-    UiBreadcrumbItem,
-    UiBreadcrumbSize,
-} from '@/shared/ui/UiBreadcrumbs';
-
-const items: UiBreadcrumbItem[] = [
-    { label: 'Home', href: '/' },
-    { label: 'About' },
-];
-
-const props: UiBreadcrumbsProps = {
-    items,
-    size: 'md',
-    separator: <span>/</span>,
-    maxItems: 5,
-};
 ```
-
-## Best Practices
-
-1. **Last item**: Omit `href` from the last item to indicate current page
-2. **Home first**: Always start with Home or root page
-3. **Limit depth**: Use `maxItems` for paths deeper than 5 levels
-4. **Icon usage**: Use icons sparingly, typically only for Home
-5. **Consistent sizing**: Match breadcrumb size to your page typography
-6. **Mobile responsive**: Consider hiding breadcrumbs or using smaller size on mobile
+UiBreadcrumbs/
+├── UiBreadcrumbs.tsx    # Main component
+├── CollapsedDropdown.tsx # Dropdown for collapsed items
+├── types.ts              # TypeScript types
+├── index.ts              # Exports
+└── README.md             # Documentation
+```
 
 ## Examples
 
@@ -328,30 +394,21 @@ const props: UiBreadcrumbsProps = {
         { label: 'ASUS ROG Strix G15' },
     ]}
     maxItems={4}
+    responsiveMaxItems={3}
+    maxLabelLength={25}
 />
 ```
 
-### Documentation Site
+### Documentation Site with SEO
 
 ```tsx
-import { HomeIcon, BookIcon, FileIcon } from '@/shared/icons';
-
 <UiBreadcrumbs
+    structuredData
+    baseUrl="https://docs.example.com"
     items={[
-        {
-            label: 'Docs',
-            href: '/docs',
-            icon: <HomeIcon />,
-        },
-        {
-            label: 'Components',
-            href: '/docs/components',
-            icon: <BookIcon />,
-        },
-        {
-            label: 'UiBreadcrumbs',
-            icon: <FileIcon />,
-        },
+        { label: 'Docs', href: '/docs' },
+        { label: 'Components', href: '/docs/components' },
+        { label: 'UiBreadcrumbs' },
     ]}
     size="sm"
 />
@@ -364,132 +421,32 @@ import { HomeIcon, BookIcon, FileIcon } from '@/shared/icons';
     items={[
         { label: 'Dashboard', href: '/admin' },
         { label: 'Users', href: '/admin/users' },
-        { label: 'Edit User', href: `/admin/users/${userId}/edit` },
-        { label: 'Permissions' },
+        { label: 'Archived', href: '/admin/users/archived', disabled: true },
+        { label: 'User Details' },
     ]}
     separator={<span className="text-neutral-300">•</span>}
 />
 ```
 
-### Blog Post
-
-```tsx
-<UiBreadcrumbs
-    items={[
-        { label: 'Blog', href: '/blog' },
-        { label: '2025', href: '/blog/2025' },
-        { label: 'January', href: '/blog/2025/01' },
-        { label: 'How to Build Universal Components' },
-    ]}
-/>
-```
-
-### Settings Page
-
-```tsx
-<UiBreadcrumbs
-    items={[
-        { label: 'Settings', href: '/settings' },
-        { label: 'Account', href: '/settings/account' },
-        { label: 'Security' },
-    ]}
-    size="lg"
-/>
-```
-
-## Integration with Next.js App Router
-
-### Layout Integration
-
-```tsx
-// app/layout.tsx or specific layout
-import UiBreadcrumbs from '@/shared/ui/UiBreadcrumbs';
-
-export default function Layout({ children }) {
-    return (
-        <div>
-            <header>
-                <UiBreadcrumbs
-                    items={[
-                        { label: 'Home', href: '/' },
-                        // Dynamic items based on route
-                    ]}
-                />
-            </header>
-            <main>{children}</main>
-        </div>
-    );
-}
-```
-
-### With Route Context
-
-```tsx
-'use client';
-
-import { usePathname } from 'next/navigation';
-import UiBreadcrumbs from '@/shared/ui/UiBreadcrumbs';
-
-// Map routes to human-readable labels
-const routeLabels: Record<string, string> = {
-    '/': 'Home',
-    '/products': 'Products',
-    '/products/electronics': 'Electronics',
-    '/about': 'About Us',
-    '/contact': 'Contact',
-};
-
-export function Breadcrumbs() {
-    const pathname = usePathname();
-    const segments = pathname.split('/').filter(Boolean);
-
-    const items = [
-        { label: 'Home', href: '/' },
-        ...segments.map((segment, index) => {
-            const path = '/' + segments.slice(0, index + 1).join('/');
-            const isLast = index === segments.length - 1;
-
-            return {
-                label: routeLabels[path] || segment,
-                href: isLast ? undefined : path,
-            };
-        }),
-    ];
-
-    return <UiBreadcrumbs items={items} />;
-}
-```
-
 ## Troubleshooting
 
-**Breadcrumbs not showing:**
-- Ensure `items` array has at least one item
-- Check that component is imported correctly
+**Collapse not working on mobile:**
+- Ensure `responsiveMaxItems` is set
+- Component uses `useIsMobile()` hook which requires client-side rendering
 
-**Links not working:**
-- Verify `href` values are valid Next.js routes
-- Check that Next.js Link is properly configured in your project
+**Dropdown not closing:**
+- Dropdown closes on click outside and Escape key
+- Ensure no event propagation issues in parent components
 
-**Icons wrong size:**
-- Icons automatically scale based on `size` prop
-- Ensure custom icons support width/height props
+**Truncation not visible:**
+- Check that `maxLabelLength` is less than your longest label
+- Hover over truncated labels to see full text in tooltip
 
-**Collapse not working:**
-- Verify `maxItems` is less than `items.length`
-- Check that `maxItems` is at least 3 (to show first, "...", last)
+**Structured data not appearing:**
+- Both `structuredData` and `baseUrl` props are required
+- Check browser dev tools for the JSON-LD script tag
 
 ## Related Components
 
-- [UiButton](../UiButton/README.md) - Button component (uses similar Link logic)
-- [UiTabs](../UiTabs/README.md) - Tab navigation
-- [UiPagination](../UiPagination/README.md) - Page navigation
-
-## File Structure
-
-```
-UiBreadcrumbs/
-├── UiBreadcrumbs.tsx  # Main component
-├── types.ts           # TypeScript types
-├── index.ts           # Exports
-└── README.md          # Documentation
-```
+- [UiButton](../UiButton/README.md) - Used for collapse trigger
+- [useIsMobile](../../lib/useMediaQuery.ts) - Hook for responsive behavior
