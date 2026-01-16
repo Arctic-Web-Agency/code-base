@@ -74,6 +74,10 @@
             "breadcrumbs": {
                 "name": "Universal breadcrumbs",
                 "description": "Navigation trail component with Next.js routing, smart collapse, and accessibility support."
+            },
+            "dropdown": {
+                "name": "Universal dropdown",
+                "description": "Accessible dropdown menu with keyboard navigation, focus management, and multiple placement options."
             }
         },
         "github_label": "View on GitHub"
@@ -201,6 +205,23 @@
         },
         "breadcrumbs": {
             "view_examples": "View Examples"
+        },
+        "dropdown": {
+            "basic": "Basic Dropdown",
+            "trigger": "Actions",
+            "placements": "Placements",
+            "bottom_start": "Bottom Start",
+            "bottom_end": "Bottom End",
+            "sizes": "Size Variants",
+            "small": "Small",
+            "medium": "Medium",
+            "large": "Large",
+            "items": {
+                "view": "View Details",
+                "approve": "Approve",
+                "warn": "Mark as Warning",
+                "delete": "Delete"
+            }
         }
     },
     "breadcrumbs_page": {

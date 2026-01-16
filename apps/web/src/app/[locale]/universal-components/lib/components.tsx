@@ -13,6 +13,7 @@ import UiModalPreview from '../ui/UiModalPreview';
 import UiAlertPreview from '../ui/UiAlertPreview';
 import UiTooltipPreview from '../ui/UiTooltipPreview';
 import UiBreadcrumbsPreview from '../ui/UiBreadcrumbsPreview';
+import UiDropdownPreview from '../ui/UiDropdownPreview';
 import UiBadge from '@/shared/ui/UiBadge';
 
 export interface ComponentItem {
@@ -171,6 +172,14 @@ export function getComponents(
             githubUrl:
                 'https://github.com/Arctic-Web-Agency/code-base/tree/feature/ui-components/apps/web/src/shared/ui/UiBreadcrumbs',
             preview: <UiBreadcrumbsPreview />,
+        },
+        {
+            key: 'universal-dropdown',
+            name: t('components.dropdown.name'),
+            description: t('components.dropdown.description'),
+            githubUrl:
+                'https://github.com/Arctic-Web-Agency/code-base/tree/feature/ui-components/apps/web/src/shared/ui/UiDropdown',
+            preview: <UiDropdownPreview />,
         },
     ];
 }
