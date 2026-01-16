@@ -311,14 +311,14 @@ const UiDropdown = (props: UiDropdownProps) => {
 
     // Render menu item content
     const renderItemContent = (item: UiDropdownItem) => (
-        <>
+        <span className="flex items-center gap-4">
             {item.icon && (
                 <span className="shrink-0" aria-hidden="true">
                     {item.icon}
                 </span>
             )}
             <span className="flex-1">{item.label}</span>
-        </>
+        </span>
     );
 
     // Menu item classes (override UiButton default styles)
