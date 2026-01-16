@@ -111,14 +111,15 @@ const UiDropdown = (props: UiDropdownProps) => {
 
     const setIsOpen = useCallback(
         (value: boolean | ((prev: boolean) => boolean)) => {
-            const newValue = typeof value === 'function' ? value(isOpen) : value;
             if (isControlled) {
+                const newValue = typeof value === 'function' ? value(controlledIsOpen!) : value;
                 onOpenChange?.(newValue);
             } else {
-                setUncontrolledIsOpen(newValue);
+                // useState handles functional updates correctly
+                setUncontrolledIsOpen(value);
             }
         },
-        [isControlled, isOpen, onOpenChange]
+        [isControlled, controlledIsOpen, onOpenChange]
     );
 
     // Refs
