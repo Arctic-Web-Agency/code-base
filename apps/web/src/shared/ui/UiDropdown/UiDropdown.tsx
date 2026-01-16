@@ -124,7 +124,6 @@ const UiDropdown = (props: UiDropdownProps) => {
 
     // Refs
     const containerRef = useRef<HTMLDivElement>(null);
-    const menuRef = useRef<HTMLUListElement>(null);
     const triggerRef = useRef<HTMLElement>(null);
 
     // Focus management
@@ -135,8 +134,7 @@ const UiDropdown = (props: UiDropdownProps) => {
     const menuId = `dropdown-menu-${generatedId}`;
     const triggerId = `dropdown-trigger-${generatedId}`;
 
-    // Get enabled items for keyboard navigation
-    const enabledItems = items.filter((item) => !item.disabled);
+    // Get enabled indices for keyboard navigation
     const enabledIndices = items
         .map((item, index) => (!item.disabled ? index : -1))
         .filter((index) => index !== -1);
@@ -326,19 +324,14 @@ const UiDropdown = (props: UiDropdownProps) => {
     // Menu item classes (override UiButton default styles)
     const getItemClasses = (item: UiDropdownItem, index: number) =>
         composeClasses(
-            '!justify-start gap-2 w-full rounded-none',
+            '!justify-start gap-2 w-full',
             'select-none',
             SIZE_STYLES[size],
-            // Default colors (override UiButton text variant)
             '!text-neutral-700 dark:!text-neutral-300',
             'hover:!text-neutral-700 dark:hover:!text-neutral-300',
             'hover:bg-neutral-100 dark:hover:bg-neutral-800',
-            // Danger state
-            item.danger &&
-                '!text-red-600 dark:!text-red-400 hover:!text-red-600 dark:hover:!text-red-400 hover:bg-red-50 dark:hover:bg-red-950',
-            // Focus state
-            focusedIndex === index &&
-                'bg-neutral-100 dark:bg-neutral-800',
+            item.danger && '!text-red-600 dark:!text-red-400',
+            focusedIndex === index && 'bg-neutral-100 dark:bg-neutral-800',
             itemClassName
         );
 
@@ -347,8 +340,6 @@ const UiDropdown = (props: UiDropdownProps) => {
         'absolute z-50',
         'py-1',
         'bg-white dark:bg-neutral-900',
-        'border border-neutral-200 dark:border-neutral-700',
-        'rounded-md shadow-lg',
         'outline-none',
         PLACEMENT_STYLES[placement],
         menuClassName
@@ -371,7 +362,6 @@ const UiDropdown = (props: UiDropdownProps) => {
 
             {isOpen && (
                 <ul
-                    ref={menuRef}
                     id={menuId}
                     role="menu"
                     aria-labelledby={triggerId}
