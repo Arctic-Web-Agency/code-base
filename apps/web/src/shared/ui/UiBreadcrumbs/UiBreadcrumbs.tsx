@@ -3,7 +3,8 @@
 import Link from 'next/link';
 import { composeClasses, useIsMobile } from '@/shared/lib';
 import { ChevronDownIcon } from '@/shared/icons';
-import CollapsedDropdown from './CollapsedDropdown';
+import UiButton from '@/shared/ui/UiButton';
+import UiDropdown from '@/shared/ui/UiDropdown';
 import type { UiBreadcrumbsProps, UiBreadcrumbSize, UiBreadcrumbItem } from './types';
 
 /**
@@ -203,6 +204,18 @@ const UiBreadcrumbs = ({
         'shrink-0'
     );
 
+    const defaultCollapseMenuClasses = composeClasses(
+        'min-w-[160px]',
+        'border border-neutral-200 dark:border-neutral-700',
+        'rounded-md shadow-lg'
+    );
+
+    const defaultCollapseMenuItemClasses = composeClasses(
+        '!text-neutral-600 dark:!text-neutral-400',
+        'hover:!text-neutral-900 dark:hover:!text-neutral-100',
+        'transition-colors'
+    );
+
     const disabledClasses = 'opacity-50 cursor-not-allowed';
 
     // Use custom classes if provided, otherwise use defaults
@@ -211,6 +224,14 @@ const UiBreadcrumbs = ({
     const separatorClasses = separatorClassName
         ? composeClasses('shrink-0', separatorClassName)
         : defaultSeparatorClasses;
+    const collapseMenuClasses = composeClasses(
+        defaultCollapseMenuClasses,
+        collapseMenuClassName
+    );
+    const collapseMenuItemClasses = composeClasses(
+        defaultCollapseMenuItemClasses,
+        collapseMenuItemClassName
+    );
 
     // Generate structured data JSON-LD
     const jsonLd = structuredData && baseUrl
@@ -257,12 +278,38 @@ const UiBreadcrumbs = ({
 
                                 {/* Collapse trigger with dropdown */}
                                 {isCollapseTrigger && collapsedItem.hiddenItems && (
-                                    <CollapsedDropdown
-                                        hiddenItems={collapsedItem.hiddenItems}
-                                        triggerClassName={collapseTriggerClassName}
-                                        menuClassName={collapseMenuClassName}
-                                        menuItemClassName={collapseMenuItemClassName}
-                                        iconSize={iconSize}
+                                    <UiDropdown
+                                        trigger={(
+                                            <UiButton
+                                                variant="text"
+                                                size="sm"
+                                                className={collapseTriggerClassName}
+                                            >
+                                                ...
+                                            </UiButton>
+                                        )}
+                                        items={collapsedItem.hiddenItems.map((hiddenItem, hiddenIndex) => ({
+                                            key: `${hiddenItem.label}-${hiddenIndex}`,
+                                            label: hiddenItem.label,
+                                            icon: hiddenItem.icon ? (
+                                                <span
+                                                    className="inline-flex"
+                                                    style={{
+                                                        width: iconSize,
+                                                        height: iconSize,
+                                                    }}
+                                                >
+                                                    {hiddenItem.icon}
+                                                </span>
+                                            ) : undefined,
+                                            href: hiddenItem.href,
+                                            disabled: Boolean(hiddenItem.disabled) || !hiddenItem.href,
+                                        }))}
+                                        placement="bottom-start"
+                                        size={size}
+                                        ariaLabel="Show hidden breadcrumbs"
+                                        menuClassName={collapseMenuClasses}
+                                        itemClassName={collapseMenuItemClasses}
                                     />
                                 )}
 

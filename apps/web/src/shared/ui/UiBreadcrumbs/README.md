@@ -374,7 +374,6 @@ Output: Home > [...] > D > E > Current
 ```
 UiBreadcrumbs/
 ├── UiBreadcrumbs.tsx    # Main component
-├── CollapsedDropdown.tsx # Dropdown for collapsed items
 ├── types.ts              # TypeScript types
 ├── index.ts              # Exports
 └── README.md             # Documentation
