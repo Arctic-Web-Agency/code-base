@@ -46,11 +46,15 @@ export default async function LocaleLayout({
     return (
         <html lang={locale} suppressHydrationWarning>
             <head>
+                <meta name="darkreader-lock" />
+                <meta name="color-scheme" content="light dark" />
                 <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
                 <script dangerouslySetInnerHTML={{ __html: setInitialTheme }} />
             </head>
 
-            <body className={`${mulish.className} bg-background text-text-primary`}>
+            <body
+                className={`${mulish.className} bg-background text-text-primary`}
+            >
                 <NextIntlClientProvider>
                     <StoreProvider>
                         <UiTooltipProvider>

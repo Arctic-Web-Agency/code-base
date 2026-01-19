@@ -78,9 +78,60 @@
             "dropdown": {
                 "name": "Universal dropdown",
                 "description": "Accessible dropdown menu with keyboard navigation, focus management, and multiple placement options."
+            },
+            "tabs": {
+                "name": "Universal Tabs",
+                "description": "A flexible component for organizing content into multiple sections, supporting different styles, sizes, and orientations."
             }
         },
-        "github_label": "View on GitHub"
+        "github_label": "View on GitHub",
+        "tabs_preview": {
+            "variants": {
+                "heading": "Variants",
+                "description": "Two variants are available: `primary` (default) and `underline`."
+            },
+            "sizes": {
+                "heading": "Sizes"
+            },
+            "full_width": {
+                "heading": "Full Width"
+            },
+            "with_icons": {
+                "heading": "With Icons"
+            },
+            "vertical_orientation": {
+                "heading": "Vertical Orientation"
+            },
+            "composition_api": {
+                "heading": "Composition API"
+            },
+            "controlled_component": {
+                "heading": "Controlled Component",
+                "description": "Current tab: "
+            },
+            "custom_styles": {
+                "heading": "Custom Styles with `classNames`",
+                "panel_content_1": "This panel has custom styles applied.",
+                "panel_content_2": "So does this one!"
+            },
+            "account_tab": {
+                "label": "Account",
+                "heading": "Account Settings",
+                "description": "Manage your account details here.",
+                "composition_description": "Manage your account details here (via composition)."
+            },
+            "notifications_tab": {
+                "label": "Notifications",
+                "heading": "Notifications",
+                "description": "Configure your notification preferences.",
+                "composition_description": "Configure your notification preferences (via composition)."
+            },
+            "security_tab": {
+                "label": "Security",
+                "heading": "Security",
+                "description": "Update your password and security settings."
+            }
+        }
     },
     "welcome_page": {
         "head": {

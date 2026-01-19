@@ -78,9 +78,60 @@
             "dropdown": {
                 "name": "Універсальний дропдаун",
                 "description": "Доступне випадаюче меню з клавіатурною навігацією, управлінням фокусу та різними варіантами позиціонування."
+            },
+            "tabs": {
+                "name": "Універсальні вкладки",
+                "description": "Гнучкий компонент для організації контенту в кілька розділів, що підтримує різні стилі, розміри та орієнтації."
             }
         },
-        "github_label": "Переглянути на GitHub"
+        "github_label": "Переглянути на GitHub",
+        "tabs_preview": {
+            "variants": {
+                "heading": "Варіанти",
+                "description": "Доступні два варіанти: `primary` (за замовчуванням) та `underline`."
+            },
+            "sizes": {
+                "heading": "Розміри"
+            },
+            "full_width": {
+                "heading": "Повна ширина"
+            },
+            "with_icons": {
+                "heading": "З іконками"
+            },
+            "vertical_orientation": {
+                "heading": "Вертикальна орієнтація"
+            },
+            "composition_api": {
+                "heading": "API композиції"
+            },
+            "controlled_component": {
+                "heading": "Контрольований компонент",
+                "description": "Поточна вкладка: "
+            },
+            "custom_styles": {
+                "heading": "Кастомні стилі за допомогою `classNames`",
+                "panel_content_1": "Ця панель має кастомні стилі.",
+                "panel_content_2": "І ця теж!"
+            },
+            "account_tab": {
+                "label": "Обліковий запис",
+                "heading": "Налаштування облікового запису",
+                "description": "Керуйте даними свого облікового запису тут.",
+                "composition_description": "Керуйте даними свого облікового запису тут (через композицію)."
+            },
+            "notifications_tab": {
+                "label": "Сповіщення",
+                "heading": "Сповіщення",
+                "description": "Налаштуйте свої сповіщення.",
+                "composition_description": "Налаштуйте свої сповіщення (через композицію)."
+            },
+            "security_tab": {
+                "label": "Безпека",
+                "heading": "Безпека",
+                "description": "Оновіть свій пароль та налаштування безпеки."
+            }
+        }
     },
     "welcome_page": {
         "head": {

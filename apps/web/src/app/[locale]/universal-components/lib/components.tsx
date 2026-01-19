@@ -15,6 +15,7 @@ import UiTooltipPreview from '../ui/UiTooltipPreview';
 import UiBreadcrumbsPreview from '../ui/UiBreadcrumbsPreview';
 import UiDropdownPreview from '../ui/UiDropdownPreview';
 import UiBadge from '@/shared/ui/UiBadge';
+import UiTabsPreview from './previews/UiTabsPreview';
 
 export interface ComponentItem {
     key: string;
@@ -180,6 +181,14 @@ export function getComponents(
             githubUrl:
                 'https://github.com/Arctic-Web-Agency/code-base/tree/feature/ui-components/apps/web/src/shared/ui/UiDropdown',
             preview: <UiDropdownPreview />,
+        },
+        {
+            key: 'universal-tabs',
+            name: t('components.tabs.name'),
+            description: t('components.tabs.description'),
+            githubUrl:
+                'https://github.com/Arctic-Web-Agency/code-base/tree/feature/ui-components/apps/web/src/shared/ui/UiTabs',
+            preview: <UiTabsPreview />,
         },
     ];
 }
