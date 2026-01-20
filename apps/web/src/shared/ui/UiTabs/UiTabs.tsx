@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 'use client';
 
 import {
@@ -109,6 +108,19 @@ const useUiTabsContext = () => {
     return context;
 };
 
+const getIndices = (
+    values: string[],
+    value?: string,
+    defaultValue?: string
+) => {
+    const valueIndex = value ? values.indexOf(value) : undefined;
+    const defaultIndex = defaultValue ? values.indexOf(defaultValue) : 0;
+    return {
+        selected: valueIndex !== undefined && valueIndex >= 0 ? valueIndex : undefined,
+        default: defaultIndex >= 0 ? defaultIndex : 0,
+    };
+};
+
 const List = ({ children, className }: UiTabListProps) => {
     const { variant, orientation, classNames } = useUiTabsContext();
     return (
@@ -197,19 +209,11 @@ const UiTabsRoot = ({
     const isVertical = orientation === 'vertical';
     const contextValue = { variant, size, orientation, fullWidth, classNames, lazy };
 
-    const indices = useMemo(() => {
-        if (!items) return { selected: undefined, default: 0 };
-        const valueIndex = value
-            ? items.findIndex((item) => item.value === value)
-            : undefined;
-        const defaultIndex = defaultValue
-            ? items.findIndex((item) => item.value === defaultValue)
-            : 0;
-        return {
-            selected: valueIndex !== undefined && valueIndex >= 0 ? valueIndex : undefined,
-            default: defaultIndex >= 0 ? defaultIndex : 0,
-        };
-    }, [items, value, defaultValue]);
+    const itemValues = useMemo(() => items?.map((item) => item.value) ?? [], [items]);
+    const indices = useMemo(
+        () => getIndices(itemValues, value, defaultValue),
+        [itemValues, value, defaultValue]
+    );
 
     const handleTabChange = (index: number) => {
         if (onChange && items) {
@@ -260,14 +264,10 @@ const UiTabsRoot = ({
         return values;
     }, [children]);
 
-    const compositionIndices = useMemo(() => {
-        const valueIndex = value ? tabValues.indexOf(value) : undefined;
-        const defaultIndex = defaultValue ? tabValues.indexOf(defaultValue) : 0;
-        return {
-            selected: valueIndex !== undefined && valueIndex >= 0 ? valueIndex : undefined,
-            default: defaultIndex >= 0 ? defaultIndex : 0,
-        };
-    }, [tabValues, value, defaultValue]);
+    const compositionIndices = useMemo(
+        () => getIndices(tabValues, value, defaultValue),
+        [tabValues, value, defaultValue]
+    );
 
     const handleCompositionChange = (index: number) => {
         if (onChange && tabValues[index]) {
