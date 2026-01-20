@@ -124,12 +124,13 @@ const List = ({ children, className }: UiTabListProps) => {
     );
 };
 
-const Tab = ({ disabled, icon, children, className }: UiTabProps) => {
+const Tab = ({ value, disabled, icon, children, className }: UiTabProps) => {
     const { variant, size, fullWidth, orientation, classNames } = useUiTabsContext();
 
     return (
         <HeadlessTab as={Fragment} disabled={disabled}>
             <button
+                data-value={value}
                 className={composeClasses(
                     tabStyles({ variant, size, fullWidth, orientation }),
                     disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer',
@@ -228,7 +229,7 @@ const UiTabsRoot = ({
                 <UiTabsContext.Provider value={contextValue}>
                     <List>
                         {items.map((item) => (
-                            <Tab key={item.value} value={item.value} {...item}>
+                            <Tab key={item.value} {...item}>
                                 {item.label}
                             </Tab>
                         ))}
@@ -248,9 +249,9 @@ const UiTabsRoot = ({
     const tabValues = useMemo(() => {
         const values: string[] = [];
         Children.forEach(children, (child) => {
-            if (isValidElement(child) && child.type === List) {
+            if (isValidElement<UiTabListProps>(child) && child.type === List) {
                 Children.forEach(child.props.children, (tab) => {
-                    if (isValidElement(tab) && tab.type === Tab && tab.props.value) {
+                    if (isValidElement<UiTabProps>(tab) && tab.type === Tab && tab.props.value) {
                         values.push(tab.props.value);
                     }
                 });
