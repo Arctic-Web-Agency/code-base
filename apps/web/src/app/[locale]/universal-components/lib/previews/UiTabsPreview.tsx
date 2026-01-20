@@ -1,13 +1,11 @@
 'use client';
 
-import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { SunIcon, MoonIcon } from '@/shared/icons';
 import UiTabs from '@/shared/ui/UiTabs';
 
 export default function UiTabsPreview() {
     const t = useTranslations('universal_components_page.tabs_preview');
-    const [controlledTab, setControlledTab] = useState('account');
 
     const tabs = [
         {
@@ -55,6 +53,57 @@ export default function UiTabsPreview() {
         { ...tabs[2], icon: <SunIcon className="w-5 h-5" /> },
     ];
 
+    const sizeTabs = {
+        sm: [
+            {
+                label: t('size_tabs.first'),
+                value: 'first',
+                content: <p className="p-3 text-neutral-500">{t('size_tabs.sm_description')}</p>,
+            },
+            {
+                label: t('size_tabs.second'),
+                value: 'second',
+                content: <p className="p-3 text-neutral-500">{t('size_tabs.content_placeholder')}</p>,
+            },
+        ],
+        md: [
+            {
+                label: t('size_tabs.first'),
+                value: 'first',
+                content: <p className="p-4 text-neutral-500">{t('size_tabs.md_description')}</p>,
+            },
+            {
+                label: t('size_tabs.second'),
+                value: 'second',
+                content: <p className="p-4 text-neutral-500">{t('size_tabs.content_placeholder')}</p>,
+            },
+        ],
+        lg: [
+            {
+                label: t('size_tabs.first'),
+                value: 'first',
+                content: <p className="p-5 text-neutral-500">{t('size_tabs.lg_description')}</p>,
+            },
+            {
+                label: t('size_tabs.second'),
+                value: 'second',
+                content: <p className="p-5 text-neutral-500">{t('size_tabs.content_placeholder')}</p>,
+            },
+        ],
+        fullWidth: [
+            {
+                label: t('size_tabs.first'),
+                value: 'first',
+                content: <p className="p-4 text-neutral-500">{t('size_tabs.full_width_description')}</p>,
+            },
+            {
+                label: t('size_tabs.second'),
+                value: 'second',
+                content: <p className="p-4 text-neutral-500">{t('size_tabs.content_placeholder')}</p>,
+            },
+        ],
+    };
+
     return (
         <div className="flex flex-col gap-12">
             <section className="flex flex-col gap-4">
@@ -62,27 +111,18 @@ export default function UiTabsPreview() {
                 <p className="text-sm text-neutral-500 -mt-2">
                     {t('variants.description')}
                 </p>
-                <UiTabs items={tabs} />
-                <UiTabs items={tabs} variant="underline" />
+                <UiTabs items={tabsWithIcons} />
+                <UiTabs items={tabsWithIcons} variant="underline" />
             </section>
 
             <section className="flex flex-col gap-4">
                 <h3 className="text-lg font-medium">{t('sizes.heading')}</h3>
                 <div className="flex flex-col gap-6">
-                    <UiTabs items={tabs} size="sm" />
-                    <UiTabs items={tabs} size="md" />
-                    <UiTabs items={tabs} size="lg" />
+                    <UiTabs items={sizeTabs.sm} size="sm" />
+                    <UiTabs items={sizeTabs.md} size="md" />
+                    <UiTabs items={sizeTabs.lg} size="lg" />
+                    <UiTabs items={sizeTabs.fullWidth} fullWidth />
                 </div>
-            </section>
-
-            <section className="flex flex-col gap-4">
-                <h3 className="text-lg font-medium">{t('full_width.heading')}</h3>
-                <UiTabs items={tabs} fullWidth />
-            </section>
-
-            <section className="flex flex-col gap-4">
-                <h3 className="text-lg font-medium">{t('with_icons.heading')}</h3>
-                <UiTabs items={tabsWithIcons} />
             </section>
 
             <section className="flex flex-col gap-4">
@@ -123,15 +163,6 @@ export default function UiTabsPreview() {
                         </UiTabs.Panel>
                     </UiTabs.Panels>
                 </UiTabs>
-            </section>
-
-            <section className="flex flex-col gap-4">
-                <h3 className="text-lg font-medium">{t('controlled_component.heading')}</h3>
-                <p className="text-sm text-neutral-500 -mt-2">
-                    {t('controlled_component.description')}
-                    <span className="font-semibold text-neutral-800 dark:text-neutral-200">{controlledTab}</span>
-                </p>
-                <UiTabs value={controlledTab} onChange={setControlledTab} items={tabs} />
             </section>
 
             <section className="flex flex-col gap-4">

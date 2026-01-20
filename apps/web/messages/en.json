@@ -93,21 +93,20 @@
             "sizes": {
                 "heading": "Sizes"
             },
-            "full_width": {
-                "heading": "Full Width"
-            },
-            "with_icons": {
-                "heading": "With Icons"
+            "size_tabs": {
+                "first": "Tab 1",
+                "second": "Tab 2",
+                "sm_description": "Size `sm` — compact variant for dense interfaces or secondary navigation.",
+                "md_description": "Size `md` — standard size, optimal for most use cases.",
+                "lg_description": "Size `lg` — larger variant for emphasized sections or touch interfaces.",
+                "full_width_description": "The `fullWidth` property stretches tabs to fill the entire container width.",
+                "content_placeholder": "Tab content."
             },
             "vertical_orientation": {
                 "heading": "Vertical Orientation"
             },
             "composition_api": {
                 "heading": "Composition API"
-            },
-            "controlled_component": {
-                "heading": "Controlled Component",
-                "description": "Current tab: "
             },
             "custom_styles": {
                 "heading": "Custom Styles with `classNames`",

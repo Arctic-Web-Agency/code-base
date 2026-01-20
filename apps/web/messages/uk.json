@@ -93,21 +93,20 @@
             "sizes": {
                 "heading": "Розміри"
             },
-            "full_width": {
-                "heading": "Повна ширина"
-            },
-            "with_icons": {
-                "heading": "З іконками"
+            "size_tabs": {
+                "first": "Вкладка 1",
+                "second": "Вкладка 2",
+                "sm_description": "Розмір `sm` — компактний варіант для щільних інтерфейсів або другорядної навігації.",
+                "md_description": "Розмір `md` — стандартний розмір, оптимальний для більшості випадків використання.",
+                "lg_description": "Розмір `lg` — збільшений варіант для акцентованих секцій або сенсорних інтерфейсів.",
+                "full_width_description": "Властивість `fullWidth` розтягує вкладки на всю доступну ширину контейнера.",
+                "content_placeholder": "Вміст вкладки."
             },
             "vertical_orientation": {
                 "heading": "Вертикальна орієнтація"
             },
             "composition_api": {
                 "heading": "API композиції"
-            },
-            "controlled_component": {
-                "heading": "Контрольований компонент",
-                "description": "Поточна вкладка: "
             },
             "custom_styles": {
                 "heading": "Кастомні стилі за допомогою `classNames`",
