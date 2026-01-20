@@ -9,5 +9,8 @@ export { default as XCircleIcon } from './XCircleIcon';
 export { default as AlertCircleIcon } from './AlertCircleIcon';
 export { default as InfoCircleIcon } from './InfoCircleIcon';
 export { default as LoaderIcon } from './LoaderIcon';
+export { default as UserIcon } from './UserIcon';
+export { default as BellIcon } from './BellIcon';
+export { default as LockIcon } from './LockIcon';
 
 export type { IconProps } from './types';

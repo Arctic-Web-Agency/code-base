@@ -1,7 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { SunIcon, MoonIcon } from '@/shared/icons';
+import { UserIcon, BellIcon, LockIcon } from '@/shared/icons';
 import UiTabs from '@/shared/ui/UiTabs';
 
 export default function UiTabsPreview() {
@@ -48,9 +48,9 @@ export default function UiTabsPreview() {
     ];
 
     const tabsWithIcons = [
-        { ...tabs[0], icon: <SunIcon className="w-5 h-5" /> },
-        { ...tabs[1], icon: <MoonIcon className="w-5 h-5" /> },
-        { ...tabs[2], icon: <SunIcon className="w-5 h-5" /> },
+        { ...tabs[0], icon: <UserIcon className="w-5 h-5" /> },
+        { ...tabs[1], icon: <BellIcon className="w-5 h-5" /> },
+        { ...tabs[2], icon: <LockIcon className="w-5 h-5" /> },
     ];
 
     const sizeTabs = {
@@ -135,13 +135,13 @@ export default function UiTabsPreview() {
                 <h3 className="text-lg font-medium">{t('composition_api.heading')}</h3>
                 <UiTabs defaultValue="notifications">
                     <UiTabs.List>
-                        <UiTabs.Tab value="account" icon={<SunIcon />}>
+                        <UiTabs.Tab value="account" icon={<UserIcon />}>
                             {t('account_tab.label')}
                         </UiTabs.Tab>
-                        <UiTabs.Tab value="notifications" icon={<MoonIcon />}>
+                        <UiTabs.Tab value="notifications" icon={<BellIcon />}>
                             {t('notifications_tab.label')}
                         </UiTabs.Tab>
-                        <UiTabs.Tab value="security" disabled>
+                        <UiTabs.Tab value="security" icon={<LockIcon />} disabled>
                             {t('security_tab.label')}
                         </UiTabs.Tab>
                     </UiTabs.List>
