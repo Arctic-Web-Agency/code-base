@@ -82,6 +82,10 @@
             "tabs": {
                 "name": "Universal Tabs",
                 "description": "A flexible component for organizing content into multiple sections, supporting different styles, sizes, and orientations."
+            },
+            "pagination": {
+                "name": "Universal Pagination",
+                "description": "Navigation component for moving between pages with ellipsis support, multiple sizes, and full accessibility."
             }
         },
         "github_label": "View on GitHub",
@@ -272,6 +276,12 @@
                 "warn": "Mark as Warning",
                 "delete": "Delete"
             }
+        },
+        "pagination": {
+            "basic": "Basic Usage",
+            "sizes": "Sizes",
+            "with_first_last": "With First/Last Buttons",
+            "custom_range": "Custom Range"
         }
     },
     "breadcrumbs_page": {

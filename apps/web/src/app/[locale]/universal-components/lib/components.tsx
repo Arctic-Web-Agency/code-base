@@ -16,6 +16,7 @@ import UiBreadcrumbsPreview from '../ui/UiBreadcrumbsPreview';
 import UiDropdownPreview from '../ui/UiDropdownPreview';
 import UiBadge from '@/shared/ui/UiBadge';
 import UiTabsPreview from './previews/UiTabsPreview';
+import UiPaginationPreview from '../ui/UiPaginationPreview';
 
 export interface ComponentItem {
     key: string;
@@ -189,6 +190,14 @@ export function getComponents(
             githubUrl:
                 'https://github.com/Arctic-Web-Agency/code-base/tree/feature/ui-components/apps/web/src/shared/ui/UiTabs',
             preview: <UiTabsPreview />,
+        },
+        {
+            key: 'universal-pagination',
+            name: t('components.pagination.name'),
+            description: t('components.pagination.description'),
+            githubUrl:
+                'https://github.com/Arctic-Web-Agency/code-base/tree/feature/ui-components/apps/web/src/shared/ui/UiPagination',
+            preview: <UiPaginationPreview />,
         },
     ];
 }
