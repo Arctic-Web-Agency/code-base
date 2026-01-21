@@ -1,17 +1,17 @@
 # UiPagination
 
-Universal pagination component with ellipsis support, multiple variants, and full accessibility.
+Universal pagination component with ellipsis support, multiple sizes, and full accessibility.
 
 ## Features
 
-- **Three variants**: Filled, outlined, and ghost styles
-- **Three sizes**: Small, medium, large with consistent sizing
+- **Three sizes**: Small, medium, large (inherited from UiButton)
 - **Smart ellipsis**: Automatically shows ellipsis for large page counts
 - **Accessible**: Full ARIA support and keyboard navigation
 - **Type-safe**: Complete TypeScript support
 - **Customizable icons**: Replace default navigation icons
 - **First/Last buttons**: Optional first and last page navigation
 - **Configurable range**: Control sibling and boundary page counts
+- **Active state styling**: Built-in visual distinction for current page
 
 ## Installation
 
@@ -33,24 +33,12 @@ const [page, setPage] = useState(1);
 />
 ```
 
-### With Variant and Size
+### Sizes
 
 ```tsx
-<UiPagination
-    value={page}
-    totalPages={20}
-    onChange={setPage}
-    variant="outlined"
-    size="lg"
-/>
-
-<UiPagination
-    value={page}
-    totalPages={20}
-    onChange={setPage}
-    variant="ghost"
-    size="sm"
-/>
+<UiPagination value={page} totalPages={20} onChange={setPage} size="sm" />
+<UiPagination value={page} totalPages={20} onChange={setPage} size="md" />
+<UiPagination value={page} totalPages={20} onChange={setPage} size="lg" />
 ```
 
 ### With First/Last Buttons
@@ -84,45 +72,25 @@ Control how many pages show around the current page and at the edges:
     onChange={setPage}
     boundaryCount={2}
 />
-
-// Combined
-<UiPagination
-    value={page}
-    totalPages={100}
-    onChange={setPage}
-    siblingCount={2}
-    boundaryCount={2}
-/>
 ```
 
 ### Custom Icons
 
 ```tsx
-import { ArrowLeft, ArrowRight } from '@/icons';
+import { ArrowLeftIcon, ArrowRightIcon } from '@/shared/icons';
 
 <UiPagination
     value={page}
     totalPages={10}
     onChange={setPage}
-    IconPrev={ArrowLeft}
-    IconNext={ArrowRight}
-/>
-```
-
-### Disabled State
-
-```tsx
-<UiPagination
-    value={page}
-    totalPages={10}
-    onChange={setPage}
-    disabled
+    IconPrev={ArrowLeftIcon}
+    IconNext={ArrowRightIcon}
 />
 ```
 
 ### Custom Styling
 
-Override default styles with className or classNames:
+Override default styles with `className` or `classNames`:
 
 ```tsx
 <UiPagination
@@ -131,11 +99,11 @@ Override default styles with className or classNames:
     onChange={setPage}
     className="justify-center"
     classNames={{
-        container: 'bg-neutral-50 p-2 rounded-lg',
-        item: 'hover:scale-105',
-        activeItem: 'ring-2 ring-blue-500',
+        container: 'gap-2',
+        item: 'hover:bg-neutral-100',
+        activeItem: 'bg-neutral-200',
         navButton: 'text-blue-600',
-        ellipsis: 'text-neutral-400',
+        ellipsis: 'text-neutral-400 px-2',
     }}
 />
 ```
@@ -149,12 +117,10 @@ Override default styles with className or classNames:
 | `value` | `number` | - | Current active page (1-indexed, required) |
 | `totalPages` | `number` | - | Total number of pages (required) |
 | `onChange` | `(page: number) => void` | - | Callback when page changes (required) |
-| `variant` | `'filled' \| 'outlined' \| 'ghost'` | `'filled'` | Visual style variant |
 | `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Component size |
 | `siblingCount` | `number` | `1` | Pages to show on each side of current |
 | `boundaryCount` | `number` | `1` | Pages to show at start and end |
 | `showFirstLast` | `boolean` | `false` | Show first/last page buttons |
-| `disabled` | `boolean` | `false` | Disable all controls |
 | `IconPrev` | `ComponentType<SVGProps>` | `ChevronDownIcon` (rotated) | Custom previous icon |
 | `IconNext` | `ComponentType<SVGProps>` | `ChevronDownIcon` (rotated) | Custom next icon |
 | `IconFirst` | `ComponentType<SVGProps>` | `ChevronsRightIcon` (rotated) | Custom first page icon |
@@ -166,42 +132,34 @@ Override default styles with className or classNames:
 
 | Key | Description |
 |-----|-------------|
-| `container` | Pagination container |
+| `container` | Pagination container (`<nav>` element) |
 | `item` | Non-active page buttons |
-| `activeItem` | Active page button |
+| `activeItem` | Active page button (added to base active styles) |
 | `navButton` | Navigation buttons (prev, next, first, last) |
 | `ellipsis` | Ellipsis elements |
 
-## Variants
+## Behavior
 
-### Size
+### Auto-hide
 
-Controls dimensions and text size:
+Component returns `null` when `totalPages <= 1` (no pagination needed).
 
-- `sm`: `min-w-7 h-7 text-sm` with `gap-1`
-- `md`: `min-w-9 h-9 text-base` with `gap-1.5`
-- `lg`: `min-w-11 h-11 text-lg` with `gap-2`
+### Active Page Styling
 
-### Variant
+Active page has built-in styles: `font-semibold text-neutral-900 dark:text-neutral-100`. Use `classNames.activeItem` to add additional styles.
 
-Controls visual appearance:
+### Navigation Button States
 
-- `filled`: Solid background with hover state
-- `outlined`: Border with transparent background
-- `ghost`: No border or background, only hover state
+- **Previous/First** buttons are disabled on the first page
+- **Next/Last** buttons are disabled on the last page
 
-## Ellipsis Behavior
+### Ellipsis Logic
 
-The pagination automatically manages ellipsis display:
-
-- **Small page count**: Shows all pages without ellipsis
-- **Near start**: Shows pages at start, ellipsis, then end pages
-- **Near end**: Shows start pages, ellipsis, then pages at end
-- **Middle**: Shows start pages, ellipsis, current range, ellipsis, end pages
-
-Example with `totalPages={20}`, `siblingCount={1}`, `boundaryCount={1}`:
+The pagination automatically manages ellipsis display based on `siblingCount` and `boundaryCount`:
 
 ```
+totalPages=20, siblingCount=1, boundaryCount=1:
+
 Page 1:  [1] 2 3 ... 20
 Page 5:  1 ... 4 [5] 6 ... 20
 Page 10: 1 ... 9 [10] 11 ... 20
@@ -212,39 +170,17 @@ Page 20: 1 ... 18 19 [20]
 ## TypeScript
 
 ```tsx
-import type {
-    UiPaginationProps,
-    UiPaginationSize,
-    UiPaginationVariant,
-} from '@/shared/ui/UiPagination';
-
-// Type-safe props
-const paginationProps: UiPaginationProps = {
-    value: 1,
-    totalPages: 10,
-    onChange: (page) => console.log(page),
-    variant: 'outlined',
-    size: 'lg',
-};
+import type { UiPaginationProps, UiPaginationSize } from '@/shared/ui/UiPagination';
 ```
 
 ## Accessibility
 
 - Semantic `<nav>` element with `role="navigation"`
-- `aria-label` on the container
-- `aria-current="page"` on the active page
-- `aria-label` on all buttons describing their action
-- Keyboard navigation support
-- Focus indicators with ring styles
-- Disabled state properly communicated
-
-## Best Practices
-
-1. **Page numbering**: Always use 1-indexed page numbers
-2. **Loading states**: Disable pagination during data fetching
-3. **Total pages**: Calculate from total items and page size
-4. **URL sync**: Consider syncing page with URL params for bookmarking
-5. **Responsive**: Use smaller size on mobile viewports
+- `aria-label="Pagination"` on container
+- `aria-current="page"` on active page
+- `aria-label` on all buttons (e.g., "Go to page 5")
+- `aria-hidden="true"` on ellipsis elements
+- Keyboard navigation via UiButton
 
 ## Examples
 
@@ -284,18 +220,6 @@ const handlePageChange = (newPage: number) => {
     totalPages={totalPages}
     onChange={handlePageChange}
 />
-```
-
-### Centered Pagination
-
-```tsx
-<div className="flex justify-center">
-    <UiPagination
-        value={page}
-        totalPages={10}
-        onChange={setPage}
-    />
-</div>
 ```
 
 ## File Structure
