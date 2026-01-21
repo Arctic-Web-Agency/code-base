@@ -1,15 +1,16 @@
 'use client';
 
-import { ComponentType, SVGProps, useMemo } from 'react';
+import { ComponentType, useMemo, SVGProps } from 'react';
 import { composeClasses } from '@/shared/lib';
 import { ChevronDownIcon, ChevronsRightIcon } from '@/shared/icons';
 import UiButton from '@/shared/ui/UiButton';
 import type { UiPaginationProps } from './types';
 
 /**
- * Disabled styles
+ * Active page item styles
  */
-const disabledStyles = 'cursor-not-allowed pointer-events-none';
+const activeItemStyles =
+    'font-semibold text-neutral-900 dark:text-neutral-100';
 
 /**
  * Ellipsis marker
@@ -17,20 +18,22 @@ const disabledStyles = 'cursor-not-allowed pointer-events-none';
 const ELLIPSIS = 'ellipsis';
 
 /**
- * Helper to create rotated icon wrapper
+ * HOC to create rotated icon component
  */
-const createRotatedIcon = (
-    Icon: ComponentType<SVGProps<SVGSVGElement>>,
-    rotation: string
-): ComponentType<SVGProps<SVGSVGElement>> => {
-    const RotatedIcon = (props: SVGProps<SVGSVGElement>) => (
-        <span className={rotation}>
-            <Icon {...props} />
-        </span>
+const withRotation = (Icon: ComponentType<SVGProps<SVGSVGElement>>, className: string) => {
+    const Rotated = (props: SVGProps<SVGSVGElement>) => (
+        <span className={className}><Icon {...props} /></span>
     );
-    RotatedIcon.displayName = `Rotated${Icon.displayName || 'Icon'}`;
-    return RotatedIcon;
+    Rotated.displayName = `Rotated(${Icon.displayName || 'Icon'})`;
+    return Rotated;
 };
+
+/**
+ * Default navigation icons (created once at module level)
+ */
+const IconPrevDefault = withRotation(ChevronDownIcon, 'rotate-90');
+const IconNextDefault = withRotation(ChevronDownIcon, '-rotate-90');
+const IconFirstDefault = withRotation(ChevronsRightIcon, 'rotate-180');
 
 /**
  * Generate pagination range with ellipsis
@@ -91,7 +94,7 @@ function range(start: number, end: number): number[] {
 }
 
 /**
- * Universal pagination component with support for multiple variants and sizes.
+ * Universal pagination component with ellipsis support and multiple sizes.
  */
 const UiPagination = ({
     value,
@@ -101,7 +104,6 @@ const UiPagination = ({
     siblingCount = 1,
     boundaryCount = 1,
     showFirstLast = false,
-    disabled = false,
     IconPrev,
     IconNext,
     IconFirst,
@@ -120,24 +122,10 @@ const UiPagination = ({
     const isLastPage = value === totalPages;
 
     const handlePageChange = (page: number) => {
-        if (page >= 1 && page <= totalPages && page !== value && !disabled) {
+        if (page >= 1 && page <= totalPages && page !== value) {
             onChange(page);
         }
     };
-
-    // Create rotated icons for default navigation
-    const DefaultIconPrev = useMemo(
-        () => createRotatedIcon(ChevronDownIcon, 'rotate-90'),
-        []
-    );
-    const DefaultIconNext = useMemo(
-        () => createRotatedIcon(ChevronDownIcon, '-rotate-90'),
-        []
-    );
-    const DefaultIconFirst = useMemo(
-        () => createRotatedIcon(ChevronsRightIcon, 'rotate-180'),
-        []
-    );
 
     const ellipsisClasses = composeClasses(
         'inline-flex items-center justify-center',
@@ -154,12 +142,10 @@ const UiPagination = ({
         <nav
             className={composeClasses(
                 'inline-flex items-center',
-                disabled && disabledStyles,
                 className,
                 classNames?.container
             )}
             aria-label="Pagination"
-            role="navigation"
         >
             {/* First page button */}
             {showFirstLast && (
@@ -167,8 +153,8 @@ const UiPagination = ({
                     variant="text"
                     size={size}
                     onClick={() => handlePageChange(1)}
-                    disabled={isFirstPage || disabled}
-                    IconLeft={IconFirst || DefaultIconFirst}
+                    disabled={isFirstPage}
+                    IconLeft={IconFirst || IconFirstDefault}
                     className={classNames?.navButton}
                     aria-label="Go to first page"
                 />
@@ -179,8 +165,8 @@ const UiPagination = ({
                 variant="text"
                 size={size}
                 onClick={() => handlePageChange(value - 1)}
-                disabled={isFirstPage || disabled}
-                IconLeft={IconPrev || DefaultIconPrev}
+                disabled={isFirstPage}
+                IconLeft={IconPrev || IconPrevDefault}
                 className={classNames?.navButton}
                 aria-label="Go to previous page"
             />
@@ -207,8 +193,10 @@ const UiPagination = ({
                         variant="text"
                         size={size}
                         onClick={() => handlePageChange(page)}
-                        disabled={disabled}
-                        className={isActive ? classNames?.activeItem : classNames?.item}
+                        className={composeClasses(
+                            isActive && activeItemStyles,
+                            isActive ? classNames?.activeItem : classNames?.item
+                        )}
                         aria-label={`Go to page ${page}`}
                         aria-current={isActive ? 'page' : undefined}
                     >
@@ -222,8 +210,8 @@ const UiPagination = ({
                 variant="text"
                 size={size}
                 onClick={() => handlePageChange(value + 1)}
-                disabled={isLastPage || disabled}
-                IconLeft={IconNext || DefaultIconNext}
+                disabled={isLastPage}
+                IconLeft={IconNext || IconNextDefault}
                 className={classNames?.navButton}
                 aria-label="Go to next page"
             />
@@ -234,7 +222,7 @@ const UiPagination = ({
                     variant="text"
                     size={size}
                     onClick={() => handlePageChange(totalPages)}
-                    disabled={isLastPage || disabled}
+                    disabled={isLastPage}
                     IconLeft={IconLast || ChevronsRightIcon}
                     className={classNames?.navButton}
                     aria-label="Go to last page"

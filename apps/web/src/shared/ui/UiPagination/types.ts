@@ -38,11 +38,6 @@ export interface UiPaginationProps {
      */
     showFirstLast?: boolean;
     /**
-     * Disable all pagination controls
-     * @default false
-     */
-    disabled?: boolean;
-    /**
      * Custom icon for previous button
      */
     IconPrev?: IconComponent;
