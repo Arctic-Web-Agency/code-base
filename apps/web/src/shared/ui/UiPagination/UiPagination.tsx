@@ -1,70 +1,36 @@
 'use client';
 
-import { useMemo } from 'react';
+import { ComponentType, SVGProps, useMemo } from 'react';
 import { composeClasses } from '@/shared/lib';
 import { ChevronDownIcon, ChevronsRightIcon } from '@/shared/icons';
-import type {
-    UiPaginationProps,
-    UiPaginationSize,
-    UiPaginationVariant,
-} from './types';
-
-/**
- * Size styles for pagination items
- */
-const sizeStyles: Record<UiPaginationSize, string> = {
-    sm: 'min-w-7 h-7 text-sm',
-    md: 'min-w-9 h-9 text-base',
-    lg: 'min-w-11 h-11 text-lg',
-};
-
-/**
- * Icon size classes based on pagination size
- */
-const iconSizeStyles: Record<UiPaginationSize, string> = {
-    sm: 'h-4 w-4',
-    md: 'h-5 w-5',
-    lg: 'h-6 w-6',
-};
-
-/**
- * Gap styles based on size
- */
-const gapStyles: Record<UiPaginationSize, string> = {
-    sm: 'gap-1',
-    md: 'gap-1.5',
-    lg: 'gap-2',
-};
-
-/**
- * Variant styles for pagination items (non-active state)
- */
-const variantStyles: Record<UiPaginationVariant, string> = {
-    filled: 'bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700',
-    outlined:
-        'border border-neutral-300 dark:border-neutral-600 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800',
-    ghost: 'text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800',
-};
-
-/**
- * Variant styles for active pagination item
- */
-const activeVariantStyles: Record<UiPaginationVariant, string> = {
-    filled: 'bg-neutral-800 dark:bg-neutral-100 text-white dark:text-neutral-900',
-    outlined:
-        'border border-neutral-800 dark:border-neutral-100 bg-neutral-800 dark:bg-neutral-100 text-white dark:text-neutral-900',
-    ghost: 'bg-neutral-800 dark:bg-neutral-100 text-white dark:text-neutral-900',
-};
+import UiButton from '@/shared/ui/UiButton';
+import type { UiPaginationProps } from './types';
 
 /**
  * Disabled styles
  */
-const disabledStyles = 'opacity-50 cursor-not-allowed pointer-events-none';
+const disabledStyles = 'cursor-not-allowed pointer-events-none';
 
 /**
- * Ellipsis component
+ * Ellipsis marker
  */
 const ELLIPSIS = 'ellipsis';
+
+/**
+ * Helper to create rotated icon wrapper
+ */
+const createRotatedIcon = (
+    Icon: ComponentType<SVGProps<SVGSVGElement>>,
+    rotation: string
+): ComponentType<SVGProps<SVGSVGElement>> => {
+    const RotatedIcon = (props: SVGProps<SVGSVGElement>) => (
+        <span className={rotation}>
+            <Icon {...props} />
+        </span>
+    );
+    RotatedIcon.displayName = `Rotated${Icon.displayName || 'Icon'}`;
+    return RotatedIcon;
+};
 
 /**
  * Generate pagination range with ellipsis
@@ -131,7 +97,6 @@ const UiPagination = ({
     value,
     totalPages,
     onChange,
-    variant = 'filled',
     size = 'md',
     siblingCount = 1,
     boundaryCount = 1,
@@ -160,15 +125,25 @@ const UiPagination = ({
         }
     };
 
-    const baseItemClasses = composeClasses(
-        'inline-flex items-center justify-center rounded-md',
-        'cursor-pointer select-none',
-        'transition-colors duration-150',
-        'focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-500 focus-visible:ring-offset-2',
-        sizeStyles[size]
+    // Create rotated icons for default navigation
+    const DefaultIconPrev = useMemo(
+        () => createRotatedIcon(ChevronDownIcon, 'rotate-90'),
+        []
+    );
+    const DefaultIconNext = useMemo(
+        () => createRotatedIcon(ChevronDownIcon, '-rotate-90'),
+        []
+    );
+    const DefaultIconFirst = useMemo(
+        () => createRotatedIcon(ChevronsRightIcon, 'rotate-180'),
+        []
     );
 
-    const iconClasses = iconSizeStyles[size];
+    const ellipsisClasses = composeClasses(
+        'inline-flex items-center justify-center',
+        'cursor-default',
+        classNames?.ellipsis
+    );
 
     // Don't render if only one page
     if (totalPages <= 1) {
@@ -179,7 +154,6 @@ const UiPagination = ({
         <nav
             className={composeClasses(
                 'inline-flex items-center',
-                gapStyles[size],
                 disabled && disabledStyles,
                 className,
                 classNames?.container
@@ -189,45 +163,27 @@ const UiPagination = ({
         >
             {/* First page button */}
             {showFirstLast && (
-                <button
-                    type="button"
+                <UiButton
+                    variant="text"
+                    size={size}
                     onClick={() => handlePageChange(1)}
                     disabled={isFirstPage || disabled}
-                    className={composeClasses(
-                        baseItemClasses,
-                        variantStyles[variant],
-                        (isFirstPage || disabled) && disabledStyles,
-                        classNames?.navButton
-                    )}
+                    IconLeft={IconFirst || DefaultIconFirst}
+                    className={classNames?.navButton}
                     aria-label="Go to first page"
-                >
-                    {IconFirst ? (
-                        <IconFirst className={iconClasses} />
-                    ) : (
-                        <ChevronsRightIcon className={composeClasses(iconClasses, 'rotate-180')} />
-                    )}
-                </button>
+                />
             )}
 
             {/* Previous page button */}
-            <button
-                type="button"
+            <UiButton
+                variant="text"
+                size={size}
                 onClick={() => handlePageChange(value - 1)}
                 disabled={isFirstPage || disabled}
-                className={composeClasses(
-                    baseItemClasses,
-                    variantStyles[variant],
-                    (isFirstPage || disabled) && disabledStyles,
-                    classNames?.navButton
-                )}
+                IconLeft={IconPrev || DefaultIconPrev}
+                className={classNames?.navButton}
                 aria-label="Go to previous page"
-            >
-                {IconPrev ? (
-                    <IconPrev className={iconClasses} />
-                ) : (
-                    <ChevronDownIcon className={composeClasses(iconClasses, 'rotate-90')} />
-                )}
-            </button>
+            />
 
             {/* Page numbers */}
             {paginationRange.map((page, index) => {
@@ -235,12 +191,7 @@ const UiPagination = ({
                     return (
                         <span
                             key={`ellipsis-${index}`}
-                            className={composeClasses(
-                                baseItemClasses,
-                                'cursor-default',
-                                'text-neutral-500 dark:text-neutral-400',
-                                classNames?.ellipsis
-                            )}
+                            className={ellipsisClasses}
                             aria-hidden="true"
                         >
                             ...
@@ -251,67 +202,43 @@ const UiPagination = ({
                 const isActive = page === value;
 
                 return (
-                    <button
+                    <UiButton
                         key={page}
-                        type="button"
+                        variant="text"
+                        size={size}
                         onClick={() => handlePageChange(page)}
                         disabled={disabled}
-                        className={composeClasses(
-                            baseItemClasses,
-                            isActive
-                                ? activeVariantStyles[variant]
-                                : variantStyles[variant],
-                            disabled && disabledStyles,
-                            isActive ? classNames?.activeItem : classNames?.item
-                        )}
+                        className={isActive ? classNames?.activeItem : classNames?.item}
                         aria-label={`Go to page ${page}`}
                         aria-current={isActive ? 'page' : undefined}
                     >
                         {page}
-                    </button>
+                    </UiButton>
                 );
             })}
 
             {/* Next page button */}
-            <button
-                type="button"
+            <UiButton
+                variant="text"
+                size={size}
                 onClick={() => handlePageChange(value + 1)}
                 disabled={isLastPage || disabled}
-                className={composeClasses(
-                    baseItemClasses,
-                    variantStyles[variant],
-                    (isLastPage || disabled) && disabledStyles,
-                    classNames?.navButton
-                )}
+                IconLeft={IconNext || DefaultIconNext}
+                className={classNames?.navButton}
                 aria-label="Go to next page"
-            >
-                {IconNext ? (
-                    <IconNext className={iconClasses} />
-                ) : (
-                    <ChevronDownIcon className={composeClasses(iconClasses, '-rotate-90')} />
-                )}
-            </button>
+            />
 
             {/* Last page button */}
             {showFirstLast && (
-                <button
-                    type="button"
+                <UiButton
+                    variant="text"
+                    size={size}
                     onClick={() => handlePageChange(totalPages)}
                     disabled={isLastPage || disabled}
-                    className={composeClasses(
-                        baseItemClasses,
-                        variantStyles[variant],
-                        (isLastPage || disabled) && disabledStyles,
-                        classNames?.navButton
-                    )}
+                    IconLeft={IconLast || ChevronsRightIcon}
+                    className={classNames?.navButton}
                     aria-label="Go to last page"
-                >
-                    {IconLast ? (
-                        <IconLast className={iconClasses} />
-                    ) : (
-                        <ChevronsRightIcon className={iconClasses} />
-                    )}
-                </button>
+                />
             )}
         </nav>
     );

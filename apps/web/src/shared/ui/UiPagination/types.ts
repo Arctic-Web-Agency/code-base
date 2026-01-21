@@ -1,6 +1,5 @@
 import { ComponentType, SVGProps } from 'react';
 
-export type UiPaginationVariant = 'filled' | 'outlined' | 'ghost';
 export type UiPaginationSize = 'sm' | 'md' | 'lg';
 
 type IconComponent = ComponentType<SVGProps<SVGSVGElement>>;
@@ -18,11 +17,6 @@ export interface UiPaginationProps {
      * Callback when page changes
      */
     onChange: (page: number) => void;
-    /**
-     * Visual style variant
-     * @default 'filled'
-     */
-    variant?: UiPaginationVariant;
     /**
      * Component size
      * @default 'md'
@@ -78,14 +72,4 @@ export interface UiPaginationProps {
         navButton?: string;
         ellipsis?: string;
     };
-}
-
-export interface UiPaginationItemProps {
-    page: number;
-    isActive: boolean;
-    disabled: boolean;
-    onClick: () => void;
-    variant: UiPaginationVariant;
-    size: UiPaginationSize;
-    className?: string;
 }

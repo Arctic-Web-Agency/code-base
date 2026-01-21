@@ -1,6 +1,2 @@
-export type {
-    UiPaginationProps,
-    UiPaginationSize,
-    UiPaginationVariant,
-} from './types';
+export type { UiPaginationProps, UiPaginationSize } from './types';
 export { default } from './UiPagination';
