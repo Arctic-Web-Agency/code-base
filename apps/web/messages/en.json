@@ -86,6 +86,10 @@
             "pagination": {
                 "name": "Universal Pagination",
                 "description": "Navigation component for moving between pages with ellipsis support, multiple sizes, and full accessibility."
+            },
+            "accordion": {
+                "name": "Universal Accordion",
+                "description": "Collapsible content panels for showing and hiding sections of related content with keyboard navigation support."
             }
         },
         "github_label": "View on GitHub",
@@ -133,6 +137,40 @@
                 "label": "Security",
                 "heading": "Security",
                 "description": "Update your password and security settings."
+            }
+        },
+        "accordion_preview": {
+            "basic": {
+                "heading": "Basic Usage",
+                "description": "Single expansion accordion with items array pattern."
+            },
+            "multiple": {
+                "heading": "Multiple Expansion",
+                "description": "Allow multiple items to be expanded simultaneously."
+            },
+            "sizes": {
+                "heading": "Sizes"
+            },
+            "non_collapsible": {
+                "heading": "Non-collapsible",
+                "description": "At least one item must always be expanded."
+            },
+            "custom_styles": {
+                "heading": "Custom Styles with `classNames`"
+            },
+            "items": {
+                "item1": {
+                    "trigger": "What is an accordion?",
+                    "content": "An accordion is a UI component that allows users to show and hide sections of related content on a page."
+                },
+                "item2": {
+                    "trigger": "When should I use an accordion?",
+                    "content": "Use accordions when you need to organize content into collapsible sections, such as FAQs, settings panels, or navigation menus."
+                },
+                "item3": {
+                    "trigger": "Is this item accessible?",
+                    "content": "Yes! This accordion supports full keyboard navigation and ARIA attributes for screen readers."
+                }
             }
         }
     },

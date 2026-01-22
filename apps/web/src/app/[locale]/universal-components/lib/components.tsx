@@ -17,6 +17,7 @@ import UiDropdownPreview from '../ui/UiDropdownPreview';
 import UiBadge from '@/shared/ui/UiBadge';
 import UiTabsPreview from './previews/UiTabsPreview';
 import UiPaginationPreview from '../ui/UiPaginationPreview';
+import UiAccordionPreview from './previews/UiAccordionPreview';
 
 export interface ComponentItem {
     key: string;
@@ -198,6 +199,14 @@ export function getComponents(
             githubUrl:
                 'https://github.com/Arctic-Web-Agency/code-base/tree/feature/ui-components/apps/web/src/shared/ui/UiPagination',
             preview: <UiPaginationPreview />,
+        },
+        {
+            key: 'universal-accordion',
+            name: t('components.accordion.name'),
+            description: t('components.accordion.description'),
+            githubUrl:
+                'https://github.com/Arctic-Web-Agency/code-base/tree/feature/ui-components/apps/web/src/shared/ui/UiAccordion',
+            preview: <UiAccordionPreview />,
         },
     ];
 }
