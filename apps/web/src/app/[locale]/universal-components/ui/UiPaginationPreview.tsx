@@ -58,7 +58,7 @@ export default function UiPaginationPreview() {
         });
 
         return (
-            <div className="mt-4 space-y-3 rounded-xl border border-border/40 bg-surface/40 p-4">
+            <div className="my-4 space-y-3 rounded-xl border border-border/40 bg-surface/40 p-4">
                 <div className="flex flex-wrap items-center justify-between gap-2">
                     <p className="text-sm font-semibold text-text-primary">
                         {title}
@@ -217,6 +217,7 @@ export default function UiPaginationPreview() {
                             siblingCount={2}
                             boundaryCount={1}
                             showFirstLast
+                            size="sm"
                         />
                     </div>
                     <div>
@@ -237,6 +238,7 @@ export default function UiPaginationPreview() {
                             siblingCount={1}
                             boundaryCount={2}
                             showFirstLast
+                            size="sm"
                         />
                     </div>
                 </div>
