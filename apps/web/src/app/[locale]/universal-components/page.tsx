@@ -1,3 +1,4 @@
+import { use } from 'react';
 import { Metadata } from 'next';
 import { useTranslations } from 'next-intl';
 import UiButton from '@/shared/ui/UiButton/UiButton';
@@ -14,9 +15,9 @@ export async function generateMetadata(props: MetaProps): Promise<Metadata> {
 const COMPONENTS_PER_PAGE = 6;
 
 interface UniversalComponentsPageProps {
-    searchParams?: {
+    searchParams?: Promise<{
         page?: string;
-    };
+    }>;
 }
 
 export default function UniversalComponentsPage({
@@ -24,11 +25,12 @@ export default function UniversalComponentsPage({
 }: UniversalComponentsPageProps) {
     const t = useTranslations('universal_components_page');
     const components = getComponents(t);
+    const resolvedSearchParams = searchParams ? use(searchParams) : undefined;
     const totalPages = Math.max(
         1,
         Math.ceil(components.length / COMPONENTS_PER_PAGE)
     );
-    const requestedPage = Number(searchParams?.page || 1);
+    const requestedPage = Number(resolvedSearchParams?.page || 1);
     const currentPage = Number.isNaN(requestedPage)
         ? 1
         : Math.min(Math.max(1, requestedPage), totalPages);
