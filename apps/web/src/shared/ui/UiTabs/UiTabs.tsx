@@ -11,6 +11,7 @@ import {
 import { Tab as HeadlessTab, TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/react';
 import { cva, VariantProps } from 'class-variance-authority';
 import { composeClasses } from '@/shared/lib';
+import UiButton from '@/shared/ui/UiButton';
 import type {
     UiTabsProps,
     UiTabProps,
@@ -138,11 +139,15 @@ const List = ({ children, className }: UiTabListProps) => {
 
 const Tab = ({ value, disabled, icon, children, className }: UiTabProps) => {
     const { variant, size, fullWidth, orientation, classNames } = useUiTabsContext();
+    const buttonSize = size ?? 'md';
 
     return (
         <HeadlessTab as={Fragment} disabled={disabled}>
-            <button
+            <UiButton
+                variant="text"
+                size={buttonSize}
                 data-value={value}
+                disabled={disabled}
                 className={composeClasses(
                     tabStyles({ variant, size, fullWidth, orientation }),
                     disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer',
@@ -152,7 +157,7 @@ const Tab = ({ value, disabled, icon, children, className }: UiTabProps) => {
             >
                 {icon && <span className="shrink-0">{icon}</span>}
                 <span>{children}</span>
-            </button>
+            </UiButton>
         </HeadlessTab>
     );
 };

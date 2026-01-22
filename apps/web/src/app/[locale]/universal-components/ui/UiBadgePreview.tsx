@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import UiBadge from '@/shared/ui/UiBadge';
+import UiButton from '@/shared/ui/UiButton';
 import { useTranslations } from 'next-intl';
 
 export default function UiBadgePreview() {
@@ -212,12 +213,14 @@ export default function UiBadgePreview() {
                     {(!dismissibleStates.success ||
                         !dismissibleStates.error ||
                         !dismissibleStates.warning) && (
-                        <button
+                        <UiButton
                             onClick={resetDismissible}
-                            className="text-sm text-blue-600 dark:text-blue-400 underline"
+                            variant="text"
+                            size="sm"
+                            className="text-blue-600 dark:text-blue-400 underline"
                         >
                             {t('reset')}
-                        </button>
+                        </UiButton>
                     )}
                 </div>
             </section>
