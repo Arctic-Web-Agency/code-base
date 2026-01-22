@@ -5,14 +5,38 @@ import UiBreadcrumbs from '@/shared/ui/UiBreadcrumbs/UiBreadcrumbs';
 import { fetchMetadata } from '@/shared/seo/metadata';
 import { MetaProps } from '@/shared/types/settings';
 import { getComponents } from './lib/components';
+import UniversalComponentsPagination from './ui/UniversalComponentsPagination';
 
 export async function generateMetadata(props: MetaProps): Promise<Metadata> {
     return await fetchMetadata({ ...props, page: 'universal_components', href: 'universal-components' });
 }
 
-export default function UniversalComponentsPage() {
+const COMPONENTS_PER_PAGE = 6;
+
+interface UniversalComponentsPageProps {
+    searchParams?: {
+        page?: string;
+    };
+}
+
+export default function UniversalComponentsPage({
+    searchParams,
+}: UniversalComponentsPageProps) {
     const t = useTranslations('universal_components_page');
     const components = getComponents(t);
+    const totalPages = Math.max(
+        1,
+        Math.ceil(components.length / COMPONENTS_PER_PAGE)
+    );
+    const requestedPage = Number(searchParams?.page || 1);
+    const currentPage = Number.isNaN(requestedPage)
+        ? 1
+        : Math.min(Math.max(1, requestedPage), totalPages);
+    const startIndex = (currentPage - 1) * COMPONENTS_PER_PAGE;
+    const visibleComponents = components.slice(
+        startIndex,
+        startIndex + COMPONENTS_PER_PAGE
+    );
 
     const breadcrumbItems = [
         { label: t('breadcrumb.home'), href: '/' },
@@ -34,7 +58,7 @@ export default function UniversalComponentsPage() {
             </header>
 
             <section className="grid gap-6 lg:grid-cols-2">
-                {components.map((component) => (
+                {visibleComponents.map((component) => (
                     <article
                         key={component.key}
                         className="border-border/40 bg-surface/40 flex flex-col gap-6 rounded-2xl border p-6 shadow-lg"
@@ -63,6 +87,13 @@ export default function UniversalComponentsPage() {
                     </article>
                 ))}
             </section>
+
+            {totalPages > 1 && (
+                <UniversalComponentsPagination
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                />
+            )}
         </main>
     );
 }
