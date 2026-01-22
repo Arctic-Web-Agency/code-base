@@ -279,9 +279,22 @@
         },
         "pagination": {
             "basic": "Базове використання",
+            "basic_description": "Простий контроль пагінації з фіксованою кількістю сторінок та керованим станом.",
+            "basic_content_title": "Контент сторінки",
             "sizes": "Розміри",
+            "sizes_description": "Ті самі дані, але з різними розмірами контролу для різної щільності інтерфейсу.",
+            "sizes_content_title": "Список елементів",
             "with_first_last": "З кнопками першої/останньої сторінки",
-            "custom_range": "Налаштування діапазону"
+            "with_first_last_description": "Додаткові кнопки допомагають швидко перейти на початок або кінець списку.",
+            "with_first_last_content_title": "Результати пошуку",
+            "custom_range": "Налаштування діапазону",
+            "custom_range_description": "Керуйте кількістю сусідніх та граничних сторінок, щоб змінити вигляд діапазону.",
+            "custom_range_first_title": "Більше сусідів",
+            "custom_range_first_description": "Показує більше сторінок поруч із поточною.",
+            "custom_range_second_title": "Більше країв",
+            "custom_range_second_description": "Зберігає більше крайніх сторінок у полі зору.",
+            "showing": "Показано {start}–{end} з {total}",
+            "item_label": "Елемент {index}"
         }
     },
     "breadcrumbs_page": {

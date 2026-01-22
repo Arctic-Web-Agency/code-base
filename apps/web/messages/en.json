@@ -279,9 +279,22 @@
         },
         "pagination": {
             "basic": "Basic Usage",
+            "basic_description": "Simple pagination control with a fixed page count and controlled state.",
+            "basic_content_title": "Page content",
             "sizes": "Sizes",
+            "sizes_description": "Same data, different control sizes for dense or spacious layouts.",
+            "sizes_content_title": "Items list",
             "with_first_last": "With First/Last Buttons",
-            "custom_range": "Custom Range"
+            "with_first_last_description": "Extra buttons let users jump to the start or the end.",
+            "with_first_last_content_title": "Search results",
+            "custom_range": "Custom Range",
+            "custom_range_description": "Tune sibling and boundary counts to adjust the visible range.",
+            "custom_range_first_title": "More neighbors",
+            "custom_range_first_description": "Shows more pages around the current one.",
+            "custom_range_second_title": "More boundaries",
+            "custom_range_second_description": "Keeps more edge pages visible.",
+            "showing": "Showing {start}–{end} of {total}",
+            "item_label": "Item {index}"
         }
     },
     "breadcrumbs_page": {
