@@ -387,5 +387,70 @@
                 "dashboard": "Патерн дашборду:"
             }
         }
+    },
+    "auth": {
+        "login": {
+            "title": "Вхід",
+            "email": "Email",
+            "password": "Пароль",
+            "rememberMe": "Запам'ятати мене",
+            "submit": "Увійти",
+            "noAccount": "Немає акаунту?",
+            "register": "Зареєструватися",
+            "forgotPassword": "Забули пароль?",
+            "useMagicLink": "Увійти через Magic Link"
+        },
+        "register": {
+            "title": "Реєстрація",
+            "name": "Ім'я",
+            "email": "Email",
+            "password": "Пароль",
+            "confirmPassword": "Підтвердіть пароль",
+            "terms": "Я погоджуюсь з умовами використання",
+            "submit": "Зареєструватися",
+            "hasAccount": "Вже є акаунт?",
+            "login": "Увійти",
+            "passwordHint": "Мінімум 8 символів з великою, малою літерою та цифрою",
+            "passwordMismatch": "Паролі не співпадають",
+            "passwordTooShort": "Пароль повинен містити мінімум 8 символів",
+            "passwordRequirements": "Пароль повинен містити велику, малу літеру та цифру",
+            "termsRequired": "Ви повинні прийняти умови використання"
+        },
+        "magicLink": {
+            "title": "Magic Link",
+            "description": "Введіть email і ми надішлемо вам посилання для входу",
+            "email": "Email",
+            "submit": "Надіслати посилання",
+            "sent": "Посилання надіслано на {email}",
+            "checkEmail": "Перевірте вашу пошту",
+            "backToLogin": "Повернутися до входу",
+            "verifying": "Перевірка...",
+            "tryAgain": "Спробувати знову"
+        },
+        "verifyEmail": {
+            "title": "Підтвердіть email",
+            "description": "Ми надіслали лист на {email}",
+            "resend": "Надіслати повторно",
+            "resent": "Лист надіслано!",
+            "success": "Email підтверджено!",
+            "verifying": "Перевірка...",
+            "backToLogin": "Повернутися до входу"
+        },
+        "errors": {
+            "invalidCredentials": "Невірний email або пароль",
+            "emailExists": "Користувач з таким email вже існує",
+            "emailNotVerified": "Підтвердіть email для входу",
+            "invalidToken": "Недійсне або прострочене посилання",
+            "serverError": "Помилка сервера, спробуйте пізніше"
+        },
+        "google": {
+            "continueWith": "Продовжити з Google",
+            "error": "Помилка входу через Google",
+            "backToLogin": "Повернутися до входу",
+            "processing": "Обробка..."
+        },
+        "divider": {
+            "or": "або"
+        }
     }
 }

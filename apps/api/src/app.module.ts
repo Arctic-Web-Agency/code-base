@@ -5,6 +5,10 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ENV } from './config/env';
 import { KvModule } from './modules/kv/kv.module';
+import { UsersModule } from './modules/users/users.module';
+import { AuthModule } from './modules/auth/auth.module';
+import { TokenModule } from './modules/token/token.module';
+import { MailModule } from './modules/mail/mail.module';
 
 @Module({
     imports: [
@@ -15,6 +19,10 @@ import { KvModule } from './modules/kv/kv.module';
             dbName: ENV.MONGODB_DB_NAME,
         }),
         KvModule,
+        UsersModule,
+        AuthModule,
+        TokenModule,
+        MailModule,
     ],
     controllers: [AppController],
     providers: [AppService],

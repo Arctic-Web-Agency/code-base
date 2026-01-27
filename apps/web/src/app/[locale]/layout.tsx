@@ -9,6 +9,7 @@ import StoreProvider from '@/stores/providers/StoreProvider';
 import { Header } from '@/widgets/header';
 import { UiAlertProvider } from '@/shared/ui/UiAlert';
 import { UiTooltipProvider } from '@/shared/ui/UiTooltip';
+import { AuthProvider } from '@/features/auth';
 
 const setInitialTheme = `
     (function() {
@@ -57,12 +58,14 @@ export default async function LocaleLayout({
             >
                 <NextIntlClientProvider>
                     <StoreProvider>
-                        <UiTooltipProvider>
-                            <UiAlertProvider>
-                                <Header />
-                                {children}
-                            </UiAlertProvider>
-                        </UiTooltipProvider>
+                        <AuthProvider>
+                            <UiTooltipProvider>
+                                <UiAlertProvider>
+                                    <Header />
+                                    {children}
+                                </UiAlertProvider>
+                            </UiTooltipProvider>
+                        </AuthProvider>
                     </StoreProvider>
                 </NextIntlClientProvider>
             </body>

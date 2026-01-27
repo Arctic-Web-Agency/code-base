@@ -387,5 +387,70 @@
                 "dashboard": "Dashboard pattern:"
             }
         }
+    },
+    "auth": {
+        "login": {
+            "title": "Sign In",
+            "email": "Email",
+            "password": "Password",
+            "rememberMe": "Remember me",
+            "submit": "Sign In",
+            "noAccount": "Don't have an account?",
+            "register": "Sign Up",
+            "forgotPassword": "Forgot password?",
+            "useMagicLink": "Sign in with Magic Link"
+        },
+        "register": {
+            "title": "Create Account",
+            "name": "Name",
+            "email": "Email",
+            "password": "Password",
+            "confirmPassword": "Confirm Password",
+            "terms": "I agree to the Terms of Service",
+            "submit": "Create Account",
+            "hasAccount": "Already have an account?",
+            "login": "Sign In",
+            "passwordHint": "At least 8 characters with uppercase, lowercase, and number",
+            "passwordMismatch": "Passwords do not match",
+            "passwordTooShort": "Password must be at least 8 characters",
+            "passwordRequirements": "Password must contain uppercase, lowercase, and number",
+            "termsRequired": "You must accept the terms of service"
+        },
+        "magicLink": {
+            "title": "Magic Link",
+            "description": "Enter your email and we'll send you a link to sign in",
+            "email": "Email",
+            "submit": "Send Magic Link",
+            "sent": "Magic link sent to {email}",
+            "checkEmail": "Check your email",
+            "backToLogin": "Back to Sign In",
+            "verifying": "Verifying...",
+            "tryAgain": "Try again"
+        },
+        "verifyEmail": {
+            "title": "Verify your email",
+            "description": "We've sent an email to {email}",
+            "resend": "Resend email",
+            "resent": "Email sent!",
+            "success": "Email verified!",
+            "verifying": "Verifying...",
+            "backToLogin": "Back to Sign In"
+        },
+        "errors": {
+            "invalidCredentials": "Invalid email or password",
+            "emailExists": "An account with this email already exists",
+            "emailNotVerified": "Please verify your email to sign in",
+            "invalidToken": "Invalid or expired link",
+            "serverError": "Server error, please try again later"
+        },
+        "google": {
+            "continueWith": "Continue with Google",
+            "error": "Google Sign In Failed",
+            "backToLogin": "Back to Sign In",
+            "processing": "Processing..."
+        },
+        "divider": {
+            "or": "or"
+        }
     }
 }
