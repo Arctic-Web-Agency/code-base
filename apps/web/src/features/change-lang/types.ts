@@ -1,4 +1,4 @@
-export interface IProps {
+export interface ChangeLangProps {
     withoutText?: boolean;
     expandTop?: boolean;
     selectHoverItemBg?: string;

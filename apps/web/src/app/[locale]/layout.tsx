@@ -4,8 +4,11 @@ import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import { Mulish } from 'next/font/google';
 import '@/app/globals.css';
-import { IPageParams } from '@/shared/types/settings';
+import { PageParams } from '@/shared/types/settings';
 import StoreProvider from '@/stores/providers/StoreProvider';
+import { Header } from '@/widgets/header';
+import { UiAlertProvider } from '@/shared/ui/UiAlert';
+import { UiTooltipProvider } from '@/shared/ui/UiTooltip';
 
 const setInitialTheme = `
     (function() {
@@ -27,29 +30,40 @@ const mulish = Mulish({
     weight: ['300', '400', '700'],
 });
 
-interface ILocaleLayoutProps extends IPageParams {
+interface LocaleLayoutProps extends PageParams {
     children: ReactNode;
 }
 
 export default async function LocaleLayout({
     children,
     params,
-}: ILocaleLayoutProps) {
+}: LocaleLayoutProps) {
     const { locale } = await params;
     if (!hasLocale(routing.locales, locale)) {
         notFound();
     }
 
     return (
-        <html lang={locale}>
+        <html lang={locale} suppressHydrationWarning>
             <head>
+                <meta name="darkreader-lock" />
+                <meta name="color-scheme" content="light dark" />
                 <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
                 <script dangerouslySetInnerHTML={{ __html: setInitialTheme }} />
             </head>
 
-            <body className={`${mulish.className} bg-onyx text-snow`}>
+            <body
+                className={`${mulish.className} bg-background text-text-primary`}
+            >
                 <NextIntlClientProvider>
-                    <StoreProvider>{children}</StoreProvider>
+                    <StoreProvider>
+                        <UiTooltipProvider>
+                            <UiAlertProvider>
+                                <Header />
+                                {children}
+                            </UiAlertProvider>
+                        </UiTooltipProvider>
+                    </StoreProvider>
                 </NextIntlClientProvider>
             </body>
         </html>

@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
-import { IMetaProps } from '@/shared/types/settings';
-import { CLang } from '@acw/types';
+import { MetaProps } from '@/shared/types/settings';
+import { LANG } from '@acw/types';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
@@ -13,7 +13,7 @@ export async function fetchMetadata({
     page,
     href,
     meta,
-}: IMetaProps): Promise<Metadata> {
+}: MetaProps): Promise<Metadata> {
     let locale: string;
 
     try {
@@ -22,7 +22,7 @@ export async function fetchMetadata({
         if (!locale) throw new Error('Locale is missing in params');
     } catch (error) {
         console.error('❌ Failed to resolve locale from params:', error);
-        locale = CLang.UK;
+        locale = LANG.UK;
     }
 
     let title = 'Створення та розробка сайтів під ключ – Arctic Web';
@@ -36,16 +36,16 @@ export async function fetchMetadata({
         }
     } else {
         const raw = String(locale ?? '').toLowerCase();
-        const normalized = /^[a-z]{2}(-[a-z]{2})?$/i.test(raw) ? raw : CLang.UK;
+        const normalized = /^[a-z]{2}(-[a-z]{2})?$/i.test(raw) ? raw : LANG.UK;
 
         async function importMessages(loc: string) {
             try {
                 const mod = await import(`../../../messages/${loc}.json`);
                 return (mod as any).default ?? mod;
             } catch {
-                if (loc !== CLang.UK) {
+                if (loc !== LANG.UK) {
                     const modUk = await import(
-                        `../../../messages/${CLang.UK}.json`
+                        `../../../messages/${LANG.UK}.json`
                     );
                     return (modUk as any).default ?? modUk;
                 }

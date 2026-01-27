@@ -1,83 +1,118 @@
-# Arctic Web
+# CodeBase
 
-Цей репозиторій використовує **Turborepo** для організації монорепозиторію з фронтендом, бекендом і спільними пакетами.
+An internal repository of universal components and patterns designed for reuse across real projects.
 
 ---
 
-## 📁 Структура проєкту
+## 🎯 Overview
+
+We are building **CodeBase** — an internal site and repository containing universal components and patterns designed for reuse across real projects. The goal is to standardize development, speed up delivery, and eliminate duplicated logic across teams.
+
+### Component Requirements
+
+#### 1. Maximum Universality
+
+- Suitable for any company project
+- No dependency on specific designs, business logic, or external systems
+
+#### 2. Well-designed, deep logic
+
+- Clean, generic, and stable API
+- Supports common usage variations without code changes
+- Handles typical states, interactions, and edge cases
+
+#### 3. Minimal Styling
+
+- Styles serve only as a basic example
+- All styling can be easily replaced or extended
+- Functionality comes first; UI is not enforced
+
+#### 4. "Building Block" Approach
+
+- Components should be easy to reuse, adapt, or extend without modifying the core
+- Previews in CodeBase show possible variations, not final design
+
+---
+
+## 📁 Project Structure
 
 <pre>
-acw/
-├── apps/                     # Основні застосунки
-│   ├── web/                  # Фронтенд (Next.js)
-│   └── api/                  # Бекенд (NestJS)
+code-base/
+├── apps/                     # Main applications
+│   ├── web/                  # Frontend (Next.js)
+│   └── api/                  # Backend (NestJS)
 │
-├── packages/                 # Спільні пакети
-│   ├── shared/               # Компоненти інтерфейсу
-│   └── types/                # Спільні типи TypeScript
+├── packages/                 # Shared packages
+│   ├── shared/               # Shared utilities
+│   └── types/                # Shared TypeScript types
 │
-├── .env                      # Змінні середовища
+├── .env                      # Environment variables
 │
-├── .gitignore                # Правила ігнорування для Git
-├── .prettierrc               # Конфіг Prettier
-├── .prettierignore           # Ігнор для Prettier
+├── .gitignore                # Git ignore rules
+├── .prettierrc               # Prettier config
+├── .prettierignore           # Prettier ignore
 │
-├── .dockerignore             # Ігнор для Docker
-├── docker-compose.dev.yml    # дев-середовище в Docker
-├── docker-compose.yml        # прод-середовище в Docker
+├── .dockerignore             # Docker ignore
+├── docker-compose.dev.yml    # Dev environment in Docker
+├── docker-compose.yml        # Production environment in Docker
 │
-├── package.json              # Скрипти та загальні залежності
+├── package.json              # Scripts and dependencies
 ├── pnpm-lock.yaml
-├── pnpm-workspace.yaml       # Робоча область для монорепозиторію
-├── tsconfig.json             # Головний конфіг TypeScript з project references
-└── turbo.json                # Конфіг Turborepo
+├── pnpm-workspace.yaml       # Monorepo workspace
+├── tsconfig.json             # TypeScript config with project references
+└── turbo.json                # Turborepo config
 </pre>
 
 ---
 
-## ⚙️ Скрипти
+## ⚙️ Scripts
 
-| Команда       | Опис                             |
-| ------------- | -------------------------------- |
-| `pnpm dev`    | Запуск dev-серверів              |
-| `pnpm build`  | Збірка всіх застосунків          |
-| `pnpm lint`   | Лінтинг коду                     |
-| `pnpm format` | Форматування коду через Prettier |
-
----
-
-## 🧰 Технології
-
-- 🔷 **Next.js** — фронтенд
-- 🟦 **NestJS** — бекенд
-- ✨ **TypeScript** — типізація в усьому проєкті
-- 🚀 **Turborepo** — керування монорепозиторієм
-- 🧹 **Prettier + ESLint** — форматування та перевірка якості коду
-- 📦 **PNPM Workspaces** — керування залежностями
+| Command       | Description                        |
+| ------------- | ---------------------------------- |
+| `pnpm dev`    | Run dev servers                    |
+| `pnpm build`  | Build all applications             |
+| `pnpm lint`   | Lint code                          |
+| `pnpm format` | Format code with Prettier          |
 
 ---
 
-## 🚀 Швидкий старт
+## 🧰 Technologies
 
-### 1️⃣ Завантаження
-
-* Скачай архів цього репозиторію у будь-яку теку.
-* **Не роби `git clone`** — просто розпакуй архів.
-
----
-
-### 2️⃣ Запуск Docker
-
-Переконайся, що встановлено:
-
-* **Docker**
-* **Docker Compose**
+- 🔷 **Next.js 16** — Frontend with App Router and React 19
+- 🟦 **NestJS** — Backend with MongoDB
+- ✨ **TypeScript** — Type safety across the project
+- 🚀 **Turborepo** — Monorepo management
+- 🎨 **TailwindCSS 4** — Utility-first styling
+- 🧹 **Prettier + ESLint** — Code formatting and quality
+- 📦 **PNPM Workspaces** — Dependency management
 
 ---
 
-### 3️⃣ Створи файл `.env` у корені
+## 🚀 Quick Start
 
-Приклад вмісту:
+### 1️⃣ Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/Arctic-Web-Agency/code-base.git
+cd code-base
+```
+
+---
+
+### 2️⃣ Docker Setup
+
+Ensure you have installed:
+
+- **Docker**
+- **Docker Compose**
+
+---
+
+### 3️⃣ Create `.env` file in root
+
+Example content:
 
 ```env
 NODE_ENV=production
@@ -88,7 +123,7 @@ NEXT_PUBLIC_BASE_URL=http://localhost:3000
 NEXT_PUBLIC_API_URL=http://localhost:3001
 ```
 
-> У продакшні потрібно буде вказати реальний Atlas URI:
+> For production, specify a real Atlas URI:
 >
 > ```
 > MONGODB_URI=mongodb+srv://user:pass@cluster.example.mongodb.net/myapp
@@ -96,48 +131,53 @@ NEXT_PUBLIC_API_URL=http://localhost:3001
 
 ---
 
-### 4️⃣ Запуск для розробки (з локальною Mongo)
+### 4️⃣ Run for Development (with local MongoDB)
 
 ```bash
-  docker compose -f docker-compose.dev.yml up --build
+docker compose -f docker-compose.dev.yml up --build
 ```
 
-* Frontend: [http://localhost:3000](http://localhost:3000)
-* Backend: [http://localhost:3001](http://localhost:3001)
-* MongoDB: порт 27017 (для перевірки, якщо потрібно)
+- Frontend: [http://localhost:3000](http://localhost:3000)
+- Backend: [http://localhost:3001](http://localhost:3001)
+- MongoDB: port 27017 (for verification if needed)
 
-Зупинити:
+Stop:
 
 ```bash
-  docker compose -f docker-compose.dev.yml down
+docker compose -f docker-compose.dev.yml down
 ```
 
 ---
 
-### 5️⃣ Запуск для продакшну (Atlas DB)
+### 5️⃣ Run for Production (Atlas DB)
 
-1. У `.env` додай свій Atlas `MONGODB_URI`.
-2. Запусти:
+1. Add your Atlas `MONGODB_URI` to `.env`
+2. Run:
 
     ```bash
     docker compose up --build -d
     ```
-3. Відкрий:
 
-    * Frontend → [http://localhost:3000](http://localhost:3000)
-    * Backend → [http://localhost:3001](http://localhost:3001)
+3. Open:
+    - Frontend → [http://localhost:3000](http://localhost:3000)
+    - Backend → [http://localhost:3001](http://localhost:3001)
 
-Зупинити:
+Stop:
 
 ```bash
-  docker compose down
+docker compose down
 ```
 
 ---
 
-### 6️⃣ Все готово
+### 6️⃣ You're All Set
 
-* Весь код (фронт, бек, спільні пакети) вже зв’язані через **Turborepo**.
-* Нічого додатково встановлювати локально не потрібно.
-* Всі залежності інсталюються всередині контейнерів.
+- All code (frontend, backend, shared packages) is already connected through **Turborepo**
+- No need to install anything locally
+- All dependencies are installed inside containers
 
+---
+
+## 📚 Documentation
+
+For detailed development guidelines, see [CLAUDE.md](./CLAUDE.md)

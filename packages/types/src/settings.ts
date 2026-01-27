@@ -1,6 +1,6 @@
-export const CLang = {
+export const LANG = {
     UK: 'uk',
     EN: 'en',
 } as const;
 
-export type TLang = (typeof CLang)[keyof typeof CLang];
+export type Lang = (typeof LANG)[keyof typeof LANG];

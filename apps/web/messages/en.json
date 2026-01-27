@@ -2,10 +2,390 @@
     "all_pages": {
         "title": "We build digital solutions that grow your business"
     },
+    "universal_components_page": {
+        "head": {
+            "title": "Universal components index — Arctic Web",
+            "description": "Browse reusable Arctic Web components starting with the universal button."
+        },
+        "heading": "Universal components",
+        "intro": "List of shared components with previews and links to source files.",
+        "breadcrumb": {
+            "home": "Home"
+        },
+        "components": {
+            "button": {
+                "name": "Universal button",
+                "description": "Flexible call-to-action with primary, secondary, and ghost styles.",
+                "preview": "Primary action"
+            },
+            "select": {
+                "name": "Universal select",
+                "description": "Accessible dropdown component with multiple variants and sizes.",
+                "options": {
+                    "option1": "First option",
+                    "option2": "Second option",
+                    "option3": "Third option"
+                }
+            },
+            "switch": {
+                "name": "Universal switch",
+                "description": "Interactive toggle component for enabling and disabling options."
+            },
+            "input": {
+                "name": "Universal input",
+                "description": "Text input field for data entry with support for various types and sizes."
+            },
+            "password_input": {
+                "name": "Universal password input",
+                "description": "Password input field with visibility toggle functionality."
+            },
+            "textarea": {
+                "name": "Universal textarea",
+                "description": "Multi-line text input field with support for various sizes and states."
+            },
+            "checkbox": {
+                "name": "Universal checkbox",
+                "description": "Component for selecting one or multiple options with state and validation support."
+            },
+            "checkbox_group": {
+                "name": "Universal checkbox group",
+                "description": "Component for managing a group of checkboxes with shared state and validation."
+            },
+            "radio_group": {
+                "name": "Universal radio group",
+                "description": "Component for managing a group of radio buttons with shared state and validation."
+            },
+            "modal": {
+                "name": "Universal modal",
+                "description": "Accessible dialog component with portal rendering, focus trap, and animations."
+            },
+            "badge": {
+                "name": "Universal badge",
+                "description": "Status indicator component with success, error, and warning variants."
+            },
+            "alert": {
+                "name": "Universal alert",
+                "description": "Toast notification system with multiple statuses, positions, actions, and promise support."
+            },
+            "tooltip": {
+                "name": "Universal tooltip",
+                "description": "Accessible hint popup built on Radix UI with smart positioning and minimal styling."
+            },
+            "breadcrumbs": {
+                "name": "Universal breadcrumbs",
+                "description": "Navigation trail component with Next.js routing, smart collapse, and accessibility support."
+            },
+            "dropdown": {
+                "name": "Universal dropdown",
+                "description": "Accessible dropdown menu with keyboard navigation, focus management, and multiple placement options."
+            },
+            "tabs": {
+                "name": "Universal Tabs",
+                "description": "A flexible component for organizing content into multiple sections, supporting different styles, sizes, and orientations."
+            },
+            "pagination": {
+                "name": "Universal Pagination",
+                "description": "Navigation component for moving between pages with ellipsis support, multiple sizes, and full accessibility."
+            },
+            "accordion": {
+                "name": "Universal Accordion",
+                "description": "Collapsible content panels for showing and hiding sections of related content with keyboard navigation support."
+            }
+        },
+        "github_label": "View on GitHub",
+        "tabs_preview": {
+            "variants": {
+                "heading": "Variants",
+                "description": "Two variants are available: `primary` (default) and `underline`."
+            },
+            "sizes": {
+                "heading": "Sizes"
+            },
+            "size_tabs": {
+                "first": "Tab 1",
+                "second": "Tab 2",
+                "sm_description": "Size `sm` — compact variant for dense interfaces or secondary navigation.",
+                "md_description": "Size `md` — standard size, optimal for most use cases.",
+                "lg_description": "Size `lg` — larger variant for emphasized sections or touch interfaces.",
+                "full_width_description": "The `fullWidth` property stretches tabs to fill the entire container width.",
+                "content_placeholder": "Tab content."
+            },
+            "vertical_orientation": {
+                "heading": "Vertical Orientation"
+            },
+            "composition_api": {
+                "heading": "Composition API"
+            },
+            "custom_styles": {
+                "heading": "Custom Styles with `classNames`",
+                "panel_content_1": "This panel has custom styles applied.",
+                "panel_content_2": "So does this one!"
+            },
+            "account_tab": {
+                "label": "Account",
+                "heading": "Account Settings",
+                "description": "Manage your account details here.",
+                "composition_description": "Manage your account details here (via composition)."
+            },
+            "notifications_tab": {
+                "label": "Notifications",
+                "heading": "Notifications",
+                "description": "Configure your notification preferences.",
+                "composition_description": "Configure your notification preferences (via composition)."
+            },
+            "security_tab": {
+                "label": "Security",
+                "heading": "Security",
+                "description": "Update your password and security settings."
+            }
+        },
+        "accordion_preview": {
+            "basic": {
+                "heading": "Basic Usage",
+                "description": "Single expansion accordion with items array pattern."
+            },
+            "multiple": {
+                "heading": "Multiple Expansion",
+                "description": "Allow multiple items to be expanded simultaneously."
+            },
+            "sizes": {
+                "heading": "Sizes"
+            },
+            "non_collapsible": {
+                "heading": "Non-collapsible",
+                "description": "At least one item must always be expanded."
+            },
+            "custom_styles": {
+                "heading": "Custom Styles with `classNames`"
+            },
+            "items": {
+                "item1": {
+                    "trigger": "What is an accordion?",
+                    "content": "An accordion is a UI component that allows users to show and hide sections of related content on a page."
+                },
+                "item2": {
+                    "trigger": "When should I use an accordion?",
+                    "content": "Use accordions when you need to organize content into collapsible sections, such as FAQs, settings panels, or navigation menus."
+                },
+                "item3": {
+                    "trigger": "Is this item accessible?",
+                    "content": "Yes! This accordion supports full keyboard navigation and ARIA attributes for screen readers."
+                }
+            }
+        }
+    },
     "welcome_page": {
         "head": {
             "title": "Full-Cycle Website Design and Development — Arctic Web",
             "description": "Arctic Web is a leading company in website and web application development. We craft custom, efficient, and reliable digital solutions tailored to your business needs."
+        },
+        "heading": "CodeBase — a shared library of universal components.",
+        "description": "Here you'll find reusable elements and patterns that teams can use across their projects.",
+        "cta": "Browse components"
+    },
+    "components": {
+        "change_lang": {
+            "label": "Change language"
+        }
+    },
+    "previews": {
+        "input": {
+            "placeholder": "Enter text..."
+        },
+        "password": {
+            "placeholder": "Enter password..."
+        },
+        "textarea": {
+            "placeholder": "Enter your message..."
+        },
+        "checkbox": {
+            "label": "Enable option"
+        },
+        "checkbox_group": {
+            "master_label": "Select all",
+            "label": "Choose options",
+            "options": {
+                "option1": "First Option",
+                "option2": "Second Option",
+                "option3": "Third Option"
+            }
+        },
+        "radio_group": {
+            "label": "Choose an option",
+            "options": {
+                "option1": "First Option",
+                "option2": "Second Option",
+                "option3": "Third Option"
+            }
+        },
+        "modal": {
+            "open_button": "Open Modal",
+            "title": "Modal Title",
+            "content": "This is a universal modal component with accessibility features, animations, and portal rendering. Click outside, press ESC, or use the buttons to close.",
+            "cancel_button": "Cancel",
+            "confirm_button": "Confirm"
+        },
+        "badge": {
+            "status_variants": "Status Variants",
+            "visual_variants": "Visual Variants",
+            "size_variants": "Size Variants",
+            "with_dot": "With Dot Indicator",
+            "with_icon": "With Icon",
+            "dismissible": "Dismissible",
+            "reset": "Reset"
+        },
+        "alert": {
+            "button_success": "Success",
+            "button_error": "Error",
+            "button_warning": "Warning",
+            "button_info": "Info",
+            "button_promise": "Promise",
+            "success_title": "Success",
+            "success_message": "Operation completed successfully!",
+            "error_title": "Error",
+            "error_message": "An error occurred while processing your request.",
+            "warning_title": "Warning",
+            "warning_message": "This action requires confirmation.",
+            "info_title": "Information",
+            "info_message": "Here's something you should know.",
+            "promise_loading": "Processing request...",
+            "promise_success": "Request completed successfully!",
+            "promise_error": "Request failed!",
+            "action_confirm": "Confirm",
+            "action_cancel": "Cancel",
+            "action_confirmed": "Action confirmed!"
+        },
+        "tooltip": {
+            "positions": "Positions",
+            "top": "Tooltip on top",
+            "bottom": "Tooltip on bottom",
+            "left": "Tooltip on left",
+            "right": "Tooltip on right",
+            "button_top": "Top",
+            "button_bottom": "Bottom",
+            "button_left": "Left",
+            "button_right": "Right",
+            "size_variants": "Size Variants",
+            "small_hint": "Small tooltip",
+            "medium_hint": "Medium tooltip",
+            "large_hint": "Large tooltip",
+            "button_small": "Small",
+            "button_medium": "Medium",
+            "button_large": "Large",
+            "visual_variants": "Visual Variants",
+            "dark_tooltip": "Dark variant (default)",
+            "light_tooltip": "Light variant",
+            "neutral_tooltip": "Neutral variant",
+            "button_dark": "Dark",
+            "button_light": "Light",
+            "button_neutral": "Neutral",
+            "alignment": "Alignment",
+            "align_start": "Aligned to start",
+            "align_center": "Aligned to center",
+            "align_end": "Aligned to end",
+            "button_start": "Start",
+            "button_center": "Center",
+            "button_end": "End",
+            "without_arrow": "Without Arrow",
+            "no_arrow_hint": "Tooltip without arrow indicator",
+            "button_no_arrow": "No Arrow",
+            "long_content": "Long Content",
+            "long_text": "This is a longer tooltip text that demonstrates text wrapping behavior when content exceeds the width limit.",
+            "very_long_text": "This is an even longer tooltip text with more detailed information. It shows how tooltips handle extensive content while maintaining readability and proper wrapping across multiple lines.",
+            "button_long": "Long Text",
+            "button_very_long": "Very Long Text"
+        },
+        "breadcrumbs": {
+            "view_examples": "View Examples"
+        },
+        "dropdown": {
+            "basic": "Basic Dropdown",
+            "trigger": "Actions",
+            "placements": "Placements",
+            "bottom_start": "Bottom Start",
+            "bottom_end": "Bottom End",
+            "sizes": "Size Variants",
+            "small": "Small",
+            "medium": "Medium",
+            "large": "Large",
+            "items": {
+                "view": "View Details",
+                "approve": "Approve",
+                "warn": "Mark as Warning",
+                "delete": "Delete"
+            }
+        },
+        "pagination": {
+            "basic": "Basic Usage",
+            "basic_description": "Simple pagination control with a fixed page count and controlled state.",
+            "basic_content_title": "Page content",
+            "sizes": "Sizes",
+            "sizes_description": "Same data, different control sizes for dense or spacious layouts.",
+            "sizes_content_title": "Items list",
+            "with_first_last": "With First/Last Buttons",
+            "with_first_last_description": "Extra buttons let users jump to the start or the end.",
+            "with_first_last_content_title": "Search results",
+            "custom_range": "Custom Range",
+            "custom_range_description": "Tune sibling and boundary counts to adjust the visible range.",
+            "custom_range_first_title": "More neighbors",
+            "custom_range_first_description": "Shows more pages around the current one.",
+            "custom_range_second_title": "More boundaries",
+            "custom_range_second_description": "Keeps more edge pages visible.",
+            "showing": "Showing {start}–{end} of {total}",
+            "item_label": "Item {index}"
+        }
+    },
+    "breadcrumbs_page": {
+        "head": {
+            "title": "Universal Breadcrumbs Examples — Arctic Web",
+            "description": "Explore UiBreadcrumbs component examples with various sizes, separators, and use cases."
+        },
+        "back_button": "Back to components",
+        "breadcrumb": {
+            "home": "Home",
+            "universal_components": "Universal Components",
+            "current": "Universal Breadcrumbs"
+        },
+        "heading": "Universal Breadcrumbs",
+        "intro": "Navigation trail component with Next.js routing, smart collapse, and full accessibility support. Explore different configurations and common usage patterns.",
+        "sections": {
+            "sizes": {
+                "heading": "Size Variants",
+                "description": "Three sizes available: small (sm), medium (md), and large (lg). Choose based on your design hierarchy.",
+                "large": "Large (lg):",
+                "medium": "Medium (md):",
+                "small": "Small (sm):"
+            },
+            "separator": {
+                "heading": "Custom Separators",
+                "description": "Replace the default chevron with any ReactNode: text, icons, or custom components.",
+                "slash": "Slash separator:",
+                "dot": "Dot separator:"
+            },
+            "collapse": {
+                "heading": "Smart Collapse",
+                "description": "Automatically collapse long breadcrumb trails using the maxItems prop. First and last items are always visible. Click on \"...\" to see hidden items.",
+                "without": "Without collapse (6 items):",
+                "with": "With collapse (maxItems=4) — click \"...\" to expand:"
+            },
+            "truncation": {
+                "heading": "Label Truncation",
+                "description": "Use the maxLabelLength prop to truncate long labels. Full text is available on hover.",
+                "without": "Without truncation:",
+                "with": "With truncation (maxLabelLength=20):"
+            },
+            "responsive": {
+                "heading": "Responsive Collapse",
+                "description": "Automatically collapse breadcrumbs on mobile devices using the responsiveMaxItems prop. Resize your browser window to see the effect.",
+                "example": "Example (responsiveMaxItems=3) — resize window:"
+            },
+            "patterns": {
+                "heading": "Common Patterns",
+                "description": "Typical breadcrumb structures used across different types of websites and applications.",
+                "ecommerce": "E-commerce pattern:",
+                "documentation": "Documentation pattern:",
+                "dashboard": "Dashboard pattern:"
+            }
         }
     }
 }
