@@ -12,7 +12,6 @@ async function bootstrap() {
 
     await app.listen(ENV.PORT, '0.0.0.0');
 
-    "hello test"
-    "new v"
+    "leave comment for PR"
 }
 bootstrap().finally();

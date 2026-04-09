@@ -1,0 +1,25 @@
+name: ClickUp Sync
+
+on:
+  pull_request:
+    branches:
+      - main
+      - develop
+    types: [opened]
+  pull_request_review:
+    branches:
+      - main
+      - develop
+    types: [submitted]
+  pull_request_review_comment:
+    branches:
+      - main
+      - develop
+    types: [created]
+  issue_comment:
+    types: [created]
+
+jobs:
+  sync:
+    uses: Arctic-Web-Agency/org-automation/.github/workflows/clickup-pr-sync.yml@main
+    secrets: inherit
