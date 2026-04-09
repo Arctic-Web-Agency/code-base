@@ -12,6 +12,6 @@ async function bootstrap() {
 
     await app.listen(ENV.PORT, '0.0.0.0');
 
-    "login finished"
+    "leave comment for PR 12321312"
 }
 bootstrap().finally();
