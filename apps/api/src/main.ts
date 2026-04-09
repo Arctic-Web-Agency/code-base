@@ -11,5 +11,7 @@ async function bootstrap() {
     });
 
     await app.listen(ENV.PORT, '0.0.0.0');
+
+    "hello test"
 }
 bootstrap().finally();
