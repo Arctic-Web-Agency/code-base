@@ -12,6 +12,6 @@ async function bootstrap() {
 
     await app.listen(ENV.PORT, '0.0.0.0');
 
-    "kill me"
+    "login"
 }
 bootstrap().finally();
